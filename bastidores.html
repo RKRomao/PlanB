@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLAN B // OS BASTIDORES (FOUNDERS' HACKER LAB)</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,600;0,700;1,400&family=VT323&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="crt-effect bastidores-page">
+
+    <!-- TOP SECURITY BAR -->
+    <header class="bunker-top-bar">
+        <div>
+            <span class="bunker-status-tag">[SECURITY CLEARANCE: TOP_SECRET // LEVEL 0]</span>
+            <span class="dot-sep">&middot;</span>
+            <span>NODE: <code>BASTIDORES_LAB_COVILHA_01</code></span>
+        </div>
+        <div>
+            <a href="index.html" id="btn-retornar-cafe" class="btn-back-cafe">&lt; VOLTAR AO CYBERCAFÉ PÚBLICO</a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- HERO DOS BASTIDORES -->
+        <section class="bunker-hero">
+            <div class="bunker-tag">// CLASSIFIED ARCHIVE: FOUNDERS_SANCTUARY.DAT</div>
+            <h1>OS BASTIDORES DO PLAN B</h1>
+            <p class="bunker-sub">O laboratório subterrâneo onde os fundadores se reúnem para maratonas de hacking,
+                investigação de vulnerabilidades, formações práticas para a comunidade e para continuar a ser o que
+                sempre foram: hackers.</p>
+
+            <pre class="ascii-art"
+                style="color:var(--amber-bright); font-size: 0.72rem; line-height: 1.15; margin: 1.5rem auto; display: inline-block; text-align: left;">
+//_SYS.OVERRIDE::[0x00_ROOT]  ▒▒▓▓██  NO_CORP_BS  ██▓▓▒▒
+  ===============================================================================
+  
+  ⠀⠀⣸⢀⡾⣝⣯⢟⣽⣻⢿⡿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣝⣯⡻⣝⣚⣆⠀⠀⠀
+⠀⠀⠘⣿⡹⣝⢾⣻⢾⡽⣯⣿⢿⣿⣯⢿⣿⣿⣿⣿⣿⣿⣿⣿⣟⡿⣾⣵⣻⢧⢏⡶⠆⠀⠀
+⠀⠀⣴⣋⢵⣫⠾⣽⣯⢿⣽⣻⣿⣿⢯⣟⡿⣾⣽⣳⣿⣿⣽⡷⣯⣟⡷⣞⣧⣻⠮⡥⠀⠄⠀
+⠀⠀⢹⡯⣎⢷⣻⢷⣾⣟⡾⣷⣿⣯⣿⡿⣽⣳⢿⣿⣿⣿⣿⣿⣷⢯⡿⣝⠶⣭⡛⣴⣾⠁⠀
+⠀⠀⠀⠀⣿⡻⣼⢻⡿⣼⣻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣻⢟⡿⣸⡸⣿⡟⠀⠀
+⠀⠀⠀⢹⣿⣷⣻⣼⣷⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣯⡿⣼⡹⣽⣻⡇⠀⠀             [!] SYSTEM_COMPROMISED
+⠀⠀⠀⣿⣿⣿⣽⣿⢯⣷⠏⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣻⠋⠑⠫⠝⠒⢻⢷⡻⣴⡀⠀             >>> ACCESS: LEVEL_0_ROOT
+⠀⠀⢸⣽⣞⣷⣿⡮⠭⠄⠀⠀⠒⠻⣿⡿⠿⠛⠟⠛⡏⠺⠋⠉⠀⠀⠂⠢⠾⠭⣷⣛⣦⠅              >>> NODE: RED_TEAM_LAB
+⠀⠀⠑⠉⠀⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠁⠀             >>> MODE: JUST_DEV
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢨⣷⣟⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠠
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠄⣼⣿⣿⣌⠀⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣄⡀             ▒▒▓▓██░░░░▓▓▒▒
+⠁⣸⣮⣇⠀⠀⠀⠀⠀⠀⠀⢀⣤⣾⣿⢶⠉⠋⠉⠏⠫⢻⣧⣄⣀⠀⠀⠀⠀⠀⠀⢠⣾⣛⣯             >> BYPASSING_FIREWALL...
+⠀⢻⣯⣿⡿⣶⢶⠶⢶⣶⣿⡿⣏⣿⠋⠀⠀⠀⡀⠀⠀⢹⡟⠷⠿⢿⢿⣷⠳⣶⡿⠟⠛⣾⡯             >> [OK] 127.0.0.1:8080
+⠀⢸⣻⢿⠷⣋⡈⠀⠈⠉⠉⠁⣍⠉⠀⠀⠀⠀⠁⠀⠀⠘⠃⣦⠀⠈⠈⠉⠀⠉⠁⠀⠲⠿⠁
+⠀⠀⠉⠉⠺⠿⠗⠁⠀⠀⠆⠀⠹⠈⡄⠀⠀⠀⠀⠀⠀⢠⢀⠛⡀⠀⠀⠀⠀⠀⠉⠒⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢘⣥⡇⠐⠄⢀⠀⡠⠀⠠⢊⣸⡯⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⡀⣬⣿⣿⣿⣦⣤⣤⣴⣤⣶⣿⢾⣟⢿⢡⠄⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⡰⡿⣼⣿⢿⣿⣿⣿⣿⣿⣿⡿⣾⣿⡯⡝⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢐⣤⣝⣿⠟⣿⡏⣿⣯⣽⣶⣜⣵⡍⣷⡦⡄⡄⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠛⠿⠟⠿⠇⠿⠿⠿⠿⠿⠿⠓⠛⠋⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡄⠀⠀⡄⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⡆⠀⠀⠘⠀⡄⣤⡄⣤⠀⡄⢠⡄⣤⣤⣤⠚⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠠⠀⠀⡀⠀⠀⠁⠿⢙⠿⣙⣇⣹⡊⢟⠀⠟⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠰⠈⢂⠀⠀⠀⠀⠉⠈⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠃⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⣦⡀⠀⠀⠀⢀⠀⣤⠀⣀⠀⠀⣀⣴⠎⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⠿⣶⣲⣞⢻⣭⣶⢿⣟⣷⣿⡟⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ____  __    ___    _   __    ____   __
+   / __ \/ /   /   |  / | / /   / __ ) / /
+  / /_/ / /   / /| | /  |/ /   / __  |/ / 
+ / ____/ /___/ ___ |/ /|  /   / /_/ //_/  
+/_/   /_____/_/  |_/_/ |_/   /_____/(_)   
+                                          
+  ▒▒▓▓██  BASTIDORES  //  HACK OR BE HACKED  ██▓▓▒▒
+  ===============================================================================
+  root@plan-b:~# ./inject.sh --target=ALL --silent --no-mercy _
+            </pre>
+        </section>
+
+        <!-- SECÇÃO: MANIFESTO DOS FUNDADORES -->
+        <section class="section-padding" style="max-width: 1000px; margin: 0 auto;">
+            <div class="manifesto-box">
+                <div class="sec-label">// ORIGIN_STORY.TXT</div>
+                <h3>O PACTO DOS FUNDADORES: "NUNCA DEIXAREMOS DE SER HACKERS"</h3>
+                <p>Durante mais de uma década, trabalhámos como <strong>técnicos de cibersegurança</strong>, analistas
+                    de SOC (Security Operations Center) de Nível 3, pentesters e engenheiros forenses de resposta a
+                    incidentes críticos. Enfrentámos turnos noturnos intermináveis, alertas sob pressão extrema e a
+                    burocracia sufocante das grandes corporações, onde o foco muitas vezes não era aprender ou proteger,
+                    mas preencher relatórios em Excel.</p>
+
+                <p>Percebemos que o mundo corporativo nos estava a roubar a alma que nos fez começar: a curiosidade pura
+                    de desmontar coisas para ver como funcionam, a adrenalina de descobrir uma vulnerabilidade e a
+                    partilha aberta de conhecimento entre pares. O <strong>Plano B</strong> nasceu dessa recusa.</p>
+
+                <p>A cafetaria lá em cima — com os seus espressos arábica tirados com precisão cirúrgica, o Pão de Ló
+                    tradicional fofo do Artur e o Mil-Folhas de café caramelizado — é o nosso sustentáculo económico
+                    independente e a nossa sala de estar pública. Mas <strong>cá em baixo, nos bastidores, está o
+                        verdadeiro motor do Plano B</strong>. Este espaço físico reservado é onde mantemos viva a chama:
+                    um bunker sem chefes, sem métricas corporativas, onde continuamos a programar, a fazer auditorias de
+                    segurança, a treinar em war rooms e a formar a próxima geração de hackers. Aqui existe um lema
+                    sagrado
+                    "nao existe ambiente melhor do que o rial, a etica ficou a porta"</p>
+
+                <div class="hacker-stickers-cluster">
+                    <span class="hacker-sticker tag-crimson">[ HACK THE PLANET ]</span>
+                    <span class="hacker-sticker">[ 0x41414141_NOP_SLED ]</span>
+                    <span class="hacker-sticker tag-lime">[ THERE IS NO CLOUD // JUST OTHER'S COMPUTERS ]</span>
+                    <span class="hacker-sticker">[ SUDO BREW -O BASTIDORES ]</span>
+                    <span class="hacker-sticker tag-crimson">[ RM -RF /CORPORATE_BUREAUCRACY ]</span>
+                    <span class="hacker-sticker">[ GHIDRA &gt; IDA_PRO ]</span>
+                    <span class="hacker-sticker tag-lime">[ 127.0.0.1 SWEET HOME ]</span>
+                    <span class="hacker-sticker">[ ENCRYPT EVERYTHING ]</span>
+                </div>
+            </div>
+
+            <!-- GALERIA VISUAL DOS BASTIDORES: ESTILO INDUSTRIAL & STREET HACKER -->
+            <div class="section-header" style="text-align: left; margin-top: 3.5rem;">
+                <div class="hazard-stripe-bar"></div>
+                <div class="sec-label">// UNDERGROUND_SPACES: INDUSTRIAL_RAW.IMG</div>
+                <h2>O CENTRO HACKER: ESPAÇOS FÍSICOS DOS BASTIDORES</h2>
+                <p class="sec-sub">Estética puramente industrial e urbana: betão aparente, calhas técnicas expostas,
+                    stencils nas paredes e bancadas de eletrónica pesada.</p>
+            </div>
+
+            <div class="bunker-gallery-grid">
+                <!-- Foto 1: War Room -->
+                <div class="bunker-photo-card">
+                    <div class="bunker-photo-img-wrap">
+                        <img src="assets/bastidores_war_room.jpg"
+                            alt="Red Team War Room subterrânea dos bastidores do Plan B com monitores, ThinkPads e estilo industrial"
+                            class="bunker-photo-img">
+                    </div>
+                    <div class="bunker-photo-info">
+                        <span class="street-stencil-tag red">[ RED_TEAM_WAR_ROOM ]</span>
+                        <h4>Red Team War Room &amp; Maratonas CTF</h4>
+                        <p>A mesa central de operações conjuntas: paredes de cimento cru com tags urbanas e autocolantes
+                            de hacking, calhas suspensas com cabos de rede ethernet coloridos, estações ThinkPad ligadas
+                            a múltiplos ecrãs com dashboards de exploração e telemetria.</p>
+                    </div>
+                </div>
+
+                <!-- Foto 2: Hardware Lab -->
+                <div class="bunker-photo-card">
+                    <div class="bunker-photo-img-wrap">
+                        <img src="assets/bastidores_hardware_lab.jpg"
+                            alt="Bancada de hardware hacking industrial com osciloscópio Rigol, HackRF, ferro de soldar e microscópio"
+                            class="bunker-photo-img">
+                    </div>
+                    <div class="bunker-photo-info">
+                        <span class="street-stencil-tag amber">[ HARDWARE_DISSECTION ]</span>
+                        <h4>Bancada Maker &amp; Engenharia Reversa</h4>
+                        <p>Oficina de dissecação de hardware com pegboard industrial de ferramentas: osciloscópio
+                            digital Rigol, analisador lógico de protocolos, microscópio binocular para soldadura de
+                            chips SMD, antenas SDR HackRF One e programadores de memória flash.</p>
+                    </div>
+                </div>
+
+                <!-- Foto 3: Server Vault / Homelab Rack -->
+                <div class="bunker-photo-card">
+                    <div class="bunker-photo-img-wrap">
+                        <img src="assets/bastidores_server_vault.jpg"
+                            alt="Mini-rack homelab de 12U no recanto de betão dos bastidores com switch, mini-PCs e iluminação industrial"
+                            class="bunker-photo-img">
+                    </div>
+                    <div class="bunker-photo-info">
+                        <span class="street-stencil-tag green">[ HOMELAB_NODE ]</span>
+                        <h4>Mini-Rack Homelab &amp; Servidores Locais</h4>
+                        <p>À escala real e realista da cave: um único mini-rack compacto de 12U instalado num recanto de
+                            betão. Abriga um switch gerido de 24 portas, patch panel de cabos curtos, cluster Proxmox
+                            com 3 mini-PCs compactos (estilo ThinkCentre Tiny) para nós Matrix/Tor, e uma UPS
+                            silenciosa.</p>
+                    </div>
+                </div>
+
+                <!-- Foto 4: Estação de Impressão 3D & Prototipagem Maker -->
+                <div class="bunker-photo-card">
+                    <div class="bunker-photo-img-wrap">
+                        <img src="assets/bastidores_impressora_3d.jpg"
+                            alt="Estação de impressão 3D industrial nos bastidores com impressora fechada de alta precisão e protótipos de hardware"
+                            class="bunker-photo-img">
+                    </div>
+                    <div class="bunker-photo-info">
+                        <span class="street-stencil-tag amber">[ 3D_PROTOTYPING ]</span>
+                        <h4>Estação de Impressão 3D &amp; Prototipagem</h4>
+                        <p>Bancada de fabricação aditiva e modelação física: impressora 3D CoreXY fechada de alta
+                            velocidade para fabricar caixas personalizadas para ferramentas hacker (Flipper Zero,
+                            Raspberry Pi), estruturas para teclados mecânicos sob medida e adaptadores de bancada.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GRID: O QUE SE PASSA NOS BASTIDORES -->
+            <div class="section-header" style="text-align: left; margin-top: 3rem;">
+                <div class="sec-label">// LAB_OPERATIONS.JSON</div>
+                <h2>O QUE SE PASSA NOS BASTIDORES DO PLANO B</h2>
+                <p class="sec-sub">As quatro frentes de atividade que decorrem diariamente para além do balcão da
+                    cafetaria:</p>
+            </div>
+
+            <div class="bunker-activities-grid">
+                <!-- Atividade 1 -->
+                <div class="bunker-card">
+                    <span class="bunker-card-badge">[WAR ROOMS &amp; CTF]</span>
+                    <h4>Capture The Flag &amp; War Games</h4>
+                    <p>Sessões noturnas às sextas e sábados com maratonas de hacking competitivo. Participação em
+                        torneios mundiais de CTF (DEF CON Quals, HackTheBox, Google CTF) e desenvolvimento de desafios
+                        próprios para a comunidade portuguesa.</p>
+                    <ul>
+                        <li><strong>Foco:</strong> Binary Exploitation (Pwn), Reverse Engineering, Web &amp; Crypto</li>
+                        <li><strong>Ambiente:</strong> Ecrãs múltiplos com dashboards de pontuação e tráfego em tempo
+                            real</li>
+                        <li><strong>Combustível:</strong> Cold brew concentrado 18h e fatias de Pão de Ló</li>
+                    </ul>
+                </div>
+
+                <!-- Atividade 2 -->
+                <div class="bunker-card">
+                    <span class="bunker-card-badge">[HARDWARE &amp; RF]</span>
+                    <h4>Hardware Hacking &amp; RF Sandbox</h4>
+                    <p>Bancadas com equipamento profissional para dissecação de hardware, dumping de memórias flash
+                        EEPROM/SPI, análise de portas de depuração JTAG/UART e exploração de protocolos de rádio sem
+                        fios.</p>
+                    <ul>
+                        <li><strong>Ferramentas:</strong> Analisadores lógicos Saleae, HackRF One, Flipper Zero,
+                            microscópio SMD</li>
+                        <li><strong>Testes:</strong> IoT doméstico, chaves de automóvel, chips NFC/RFID e medidores
+                            inteligentes</li>
+                        <li><strong>Segurança:</strong> Mini gaiola de Faraday para isolar sinais eletromagnéticos</li>
+                    </ul>
+                </div>
+
+                <!-- Atividade 3 -->
+                <div class="bunker-card">
+                    <span class="bunker-card-badge">[VULN RESEARCH]</span>
+                    <h4>0-Day Research &amp; Responsible Disclosure</h4>
+                    <p>Investigação ética de vulnerabilidades de segurança em software open source, sistemas embebidos e
+                        protocolos de rede. Quando encontramos falhas críticas, reportamos aos autores e colaboramos na
+                        correção.</p>
+                    <ul>
+                        <li><strong>Publicações:</strong> Zines técnicos de autor e advisories de segurança</li>
+                        <li><strong>Ética Estrita:</strong> Hacking 100% defensivo e educativo, em conformidade com as
+                            boas práticas</li>
+                        <li><strong>Bug Bounty:</strong> Os prémios de vulnerabilidades revertem para equipamentos do
+                            laboratório</li>
+                    </ul>
+                </div>
+
+                <!-- Atividade 4 -->
+                <div class="bunker-card">
+                    <span class="bunker-card-badge">[FREE INFRA]</span>
+                    <h4>Servidores Locais &amp; Infraestrutura Livre</h4>
+                    <p>Os bastidores alojam o nosso mini-rack homelab compacto de 12U, operando nós de redes
+                        descentralizadas e garantindo soberania digital para a comunidade do cybercafé.</p>
+                    <ul>
+                        <li><strong>Serviços:</strong> Servidor Matrix/Element próprio, relay Tor de alta velocidade, nó
+                            IPFS</li>
+                        <li><strong>DNS Seguro:</strong> Resolvedores locais DNS-over-HTTPS sem registo de logs</li>
+                        <li><strong>Backups:</strong> Encriptação militar LUKS em armazenamento off-grid</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECÇÃO: FORMAÇÕES E ACADEMIA HACKER -->
+        <section class="section-padding formations-section">
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <div class="section-header" style="text-align: left;">
+                    <div class="sec-label">// KNOWLEDGE_TRANSFER: ACADEMY.SH</div>
+                    <h2>FORMAÇÕES PRÁTICAS &amp; MENTORIAS DOS FUNDADORES</h2>
+                    <p class="sec-sub">Recusamos o formato tradicional de cursos teóricos com apresentações de slides.
+                        As formações dos bastidores do Plano B são 100% práticas, ministradas diretamente pelos
+                        fundadores para estudantes e informáticos que querem aprender a pensar como atacantes e
+                        defensores.</p>
+                </div>
+
+                <div class="formation-list">
+                    <!-- Formação 1 -->
+                    <div class="formation-item">
+                        <div class="formation-info">
+                            <h4>[MOD_01] Engenharia Reversa com Ghidra: Desmontar Binários do Zero</h4>
+                            <p>Aprende a navegar ficheiros ELF e PE compilados em C/C++, decifrar rotinas de assembly
+                                x86_64 e ARM, identificar vulnerabilidades de buffer overflow e reconstruir o fluxo de
+                                lógica original de programas sem código-fonte.</p>
+                            <span class="formation-meta">Duração: 8h (Fim de Semana) &middot; Formador: Ex-Analista
+                                Forense SOC N3 &middot; Max: 8 participantes</span>
+                        </div>
+                        <div class="formation-badge-tag">
+                            <span class="badge-status">&gt; CANDIDATURAS ABERTAS</span>
+                        </div>
+                    </div>
+
+                    <!-- Formação 2 -->
+                    <div class="formation-item">
+                        <div class="formation-info">
+                            <h4>[MOD_02] Hardware Hacking Prático: Soldadura SMD, UART e Dumping de Firmware</h4>
+                            <p>Como conectar com fios a um router doméstico ou dispositivo IoT via pinos UART, obter uma
+                                shell de root na linha de comandos, extrair a imagem de firmware da memória flash com um
+                                programador CH341A e analisar o sistema de ficheiros SquashFS.</p>
+                            <span class="formation-meta">Duração: 6h &middot; Material: Kit de hardware incluído para
+                                levar para casa &middot; Max: 6 participantes</span>
+                        </div>
+                        <div class="formation-badge-tag">
+                            <span class="badge-status">&gt; CANDIDATURAS ABERTAS</span>
+                        </div>
+                    </div>
+
+                    <!-- Formação 3 -->
+                    <div class="formation-item">
+                        <div class="formation-info">
+                            <h4>[MOD_03] Red Team Operations: Evasão de Antivírus e Ataques a Redes Corporativas</h4>
+                            <p>Simulação real de uma intrusão corporativa: reconhecimento OSINT, técnicas de phishing
+                                técnico com bypass de autenticação de dois fatores, exploração de Active Directory
+                                (Kerberoasting, BloodHound) e movimentação lateral.</p>
+                            <span class="formation-meta">Duração: 12h (2 Dias) &middot; Formador: Pentester Sénior
+                                Certificado &middot; Max: 8 participantes</span>
+                        </div>
+                        <div class="formation-badge-tag">
+                            <span class="badge-status">&gt; BREVEMENTE</span>
+                        </div>
+                    </div>
+
+                    <!-- Formação 4 -->
+                    <div class="formation-item">
+                        <div class="formation-info">
+                            <h4>[MOD_04] Rádio Definido por Software (SDR) &amp; Análise de Frequências RF</h4>
+                            <p>Explora o espectro eletromagnético invisível ao nosso redor com RTL-SDR e HackRF. Captura
+                                e descodificação de sinais de telemática automóvel (433 MHz), leitura de telemetria
+                                meteorológica e análise de segurança de comandos sem fios.</p>
+                            <span class="formation-meta">Duração: 6h &middot; Requisitos: Portátil com Linux instalado
+                                &middot; Max: 8 participantes</span>
+                        </div>
+                        <div class="formation-badge-tag">
+                            <span class="badge-status">&gt; BREVEMENTE</span>
+                        </div>
+                    </div>
+
+                    <!-- Formação 5 -->
+                    <div class="formation-item">
+                        <div class="formation-info">
+                            <h4>[MOD_05] Sobrevivência Tecnológica &amp; Foco: O Que Fazer Quando a IA Acelera</h4>
+                            <p>Workshop inspirado diretamente no livro oficial dos fundadores: estratégias práticas de
+                                deep work, filtragem de ruído informativo diário, técnicas de descompressão mental
+                                contra burnout informático e métodos para continuar a aprender e a focar sem ansiedade.
+                            </p>
+                            <span class="formation-meta">Duração: 4h &middot; Inclui exemplar autografado do livro
+                                &middot; Aberto a todos os estudantes de TI</span>
+                        </div>
+                        <div class="formation-badge-tag">
+                            <span class="badge-status">&gt; SESSÃO MENSAL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="manifesto-box" style="margin-top: 2rem; border-left-color: #6ee7b7;">
+                    <h4>// COMO TER ACESSO ÀS FORMAÇÕES E AOS BASTIDORES</h4>
+                    <p style="font-size: 0.88rem; margin-bottom: 0.5rem;">Os bastidores do Plano B não são uma escola
+                        comercial comum. Para participar nas formações especializadas ou ter acesso à bancada do
+                        laboratório, o candidato precisa de demonstrar compromisso e curiosidade:</p>
+                    <p style="font-size: 0.88rem; margin-bottom: 0;"><strong>O Desafio da Flag:</strong> No portal Wi-Fi
+                        local do cybercafé e nos pacotes de cabeçalho HTTP da nossa rede, escondemos pequenas pistas
+                        criptográficas (esteganografia e cifras clássicas). Quem encontrar a <code>FLAG{...}</code> e a
+                        apresentar ao barista tem acesso garantido à lista restrita de alunos dos fundadores com 50% de
+                        desconto simbólico.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECÇÃO: ESPECIFICAÇÕES DO BUNKER FÍSICO -->
+        <section class="section-padding" style="max-width: 1000px; margin: 0 auto;">
+            <div class="section-header" style="text-align: left;">
+                <div class="sec-label">// HARDWARE_SPECIFICATIONS.SYS</div>
+                <h2>ESPECIFICAÇÕES DE ENGENHARIA DO BUNKER</h2>
+                <p class="sec-sub">Infraestrutura física projetada para operações seguras de teste e longas jornadas de
+                    trabalho:</p>
+            </div>
+
+            <table class="bunker-specs-table">
+                <thead>
+                    <tr>
+                        <th>Subsistema</th>
+                        <th>Equipamento / Especificação</th>
+                        <th>Função Operacional</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Controlo de Acesso</strong></td>
+                        <td>Leitor RFID 13.56 MHz (Mifare DESFire EV3) + Teclado TOTP mecânico com rotação a cada 30
+                            segundos.</td>
+                        <td>Garante que apenas fundadores e participantes autorizados em formação acedem à zona de
+                            bastidores.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Proteção Eletromagnética</strong></td>
+                        <td>Caixa blindada RF (Gaiola de Faraday) com atenuação &gt; 70 dB de 100 kHz a 6 GHz.</td>
+                        <td>Permite analisar sinais de dispositivos e chaves inteligentes sem emitir interferência para
+                            a via pública.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Estação Maker &amp; Soldadura</strong></td>
+                        <td>Estações de soldar JBC de precisão, microscópio estéreo com zoom contínuo e exaustor de
+                            fumos com filtro HEPA H13.</td>
+                        <td>Soldadura e retrabalho seguro de chips micro-BGA, QFN e resistências SMD microscópicas.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Prototipagem Rápida &amp; FabLab</strong></td>
+                        <td>Impressora 3D CoreXY fechada com câmara aquecida, bicos de aço endurecido (0.4mm/0.6mm) e
+                            filamentos técnicos (Carbon Fiber PETG, ABS, PLA fosco).</td>
+                        <td>Modelação e impressão rápida de caixas protetoras para ferramentas de hardware hacking,
+                            gabaritos de teste e adaptações mecânicas.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Energia &amp; Redundância</strong></td>
+                        <td>UPS trifásica APC Smart-UPS Online de 6000 VA ligada a banco de baterias de lítio LiFePO4.
+                        </td>
+                        <td>Mantém servidores, estações de soldar e instrumentos de medição alimentados sem interrupções
+                            em caso de falha de rede.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Espresso Privado do Lab</strong></td>
+                        <td>Máquina manual de alavanca Flair 58 com manómetro de pressão e moinho cónico com mó de 71mm.
+                        </td>
+                        <td>Extração de espressos artesanais com perfis de pressão personalizados (pré-infusão longa de
+                            15s) para as madrugadas de CTF.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- SECÇÃO: TELEMETRIA EM TEMPO REAL -->
+            <div class="section-header" style="text-align: left; margin-top: 3rem;">
+                <div class="sec-label">// LIVE_MONITORING: LAB_TELEMETRY.LOG</div>
+                <h3>TELEMETRIA EM TEMPO REAL DOS BASTIDORES</h3>
+                <p class="sec-sub">Stream simulado de logs do sistema de monitorização interna do bunker (IDS, sensores
+                    RF, servidor Matrix e extrações de café):</p>
+            </div>
+
+            <div class="bunker-log-box" id="bunker-live-logs">
+                <div class="bunker-log-line">[INITIALIZING] Bunker internal security daemon v2.4 started...</div>
+                <div class="bunker-log-line">[NETWORK] VLAN_01 (Público) e VLAN_99 (Bunker Lab) estritamente isoladas
+                    via firewall pfSense.</div>
+                <div class="bunker-log-line warn">[SDR_SCAN] Scanner RTL-SDR ativo na banda ISM (433.92 MHz e 868 MHz).
+                </div>
+                <div class="bunker-log-line">[COFFEE_STATION] Temperatura da caldeira da alavanca Flair 58 estabilizada
+                    nos 94.5°C.</div>
+                <div class="bunker-log-line">[CTF_TEAM] Equipas sincronizadas com repositório privado de exploit
+                    scripts.</div>
+            </div>
+        </section>
+
+        <!-- SECÇÃO: BOTÃO RETORNAR AO CAFÉ -->
+        <section style="text-align: center; padding: 2.5rem 1.5rem 4rem;">
+            <p style="color: var(--crema-muted); font-size: 0.85rem; margin-bottom: 1.2rem;">Terminaste a visita aos
+                bastidores? Podes regressar à cafetaria pública a qualquer momento:</p>
+            <a href="index.html" class="btn-backdoor" style="display: inline-flex;"
+                onclick="document.getElementById('btn-retornar-cafe').click(); return false;">
+                <span class="backdoor-glitch-tag">[ RETORNAR // CYBERCAFÉ PÚBLICO ]</span>
+                <span class="backdoor-title">&lt;&lt; VOLTAR AO ESPAÇO PRINCIPAL DO PLAN B &gt;&gt;</span>
+                <span class="backdoor-hint">[ REATIVAR MODO DISCRETO &amp; DEGUSTAR CAFÉ E PÃO DE LÓ ]</span>
+            </a>
+        </section>
+    </main>
+
+    <!-- FOOTER SIMPLES DOS BASTIDORES -->
+    <footer class="cyber-footer">
+        <div class="footer-ascii">
+            <pre class="ascii-art" style="font-size: 0.7rem; color: #ff5555;">
+ ____  _____ ____    _____ _____    _    __  __ 
+|  _ \| ____|  _ \  |_   _| ____|  / \  |  \/  |
+| |_) |  _| | | | |   | | |  _|   / _ \ | |\/| |
+|  _ <| |___| |_| |   | | | |___ / ___ \| |  | |
+|_| \_\_____|____/    |_| |_____/_/   \_\_|  |_|
+ // PLAN B RED TEAM LAB &middot; COVILHÃ &middot; PORTO &middot; LISBOA
+</pre>
+        </div>
+        <div class="footer-links-row">
+            <span>&copy; 2026 PLAN B // OS BASTIDORES</span>
+            <span class="dot-sep">&middot;</span>
+            <span>RESTRICTED ACCESS</span>
+            <span class="dot-sep">&middot;</span>
+            <span>FOREVER HACKERS &middot; OPEN SOURCE &middot; SPECIALTY COFFEE</span>
+        </div>
+    </footer>
+
+    <!-- GLITCH OVERLAY -->
+    <div id="glitch-overlay" class="glitch-overlay"></div>
+
+    <script src="lofi-audio.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

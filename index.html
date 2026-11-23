@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLAN B // Lo-Fi Cybercafé & Hacker Lounge</title>
+    <meta name="description"
+        content="Cybercafé lo-fi, cultura hacker, café de especialidade, pão de ló artesanal tradicional sem recheio e mil-folhas de café com ambiente terminal.">
+    <link rel="preload" href="Loading.mp4" as="video" type="video/mp4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=VT323&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="crt-effect">
+    <!-- Overlay de scanlines e vinheta CRT vintage -->
+    <div class="scanlines-overlay" aria-hidden="true"></div>
+    <div class="vignette-overlay" aria-hidden="true"></div>
+
+    <!-- Barra de Estado do Sistema Superior -->
+    <header class="sys-bar">
+        <div class="sys-bar-left">
+            <span class="status-indicator"></span>
+            <span class="sys-tag">NODE: planb.local</span>
+            <span class="sys-separator">|</span>
+            <span class="sys-info">UPTIME: <span id="uptime-counter">99.98%</span></span>
+            <span class="sys-separator">|</span>
+            <span class="sys-info">LATÊNCIA: <span id="ping-display">12ms</span></span>
+            <span class="sys-separator">|</span>
+            <span class="sys-info">MODO: <span class="accent-text">SINGLE_PAGE_OS</span></span>
+        </div>
+        <div class="sys-bar-right">
+            <!-- Controle Lo-Fi Audio Player -->
+            <!-- Controle Lo-Fi Audio Player com Osciloscópio -->
+            <div class="lofi-player-widget">
+                <button id="toggle-lofi-btn" class="sys-btn" title="Alternar som ambiente Lo-Fi (Web Audio API)">
+                    <span class="btn-icon">▶</span> LO-FI CHILL
+                </button>
+                <canvas id="oscilloscope" width="100" height="22" class="lofi-oscilloscope-canvas"
+                    title="Osciloscópio de áudio em tempo real"></canvas>
+                <div class="volume-container">
+                    <span class="vol-label">VOL</span>
+                    <input type="range" id="lofi-volume" min="0" max="1" step="0.05" value="0.35"
+                        aria-label="Volume do som ambiente">
+                    <input type="range" id="master" min="0" max="1" step="0.05" value="0.8"
+                        aria-label="Volume Master Lo-Fi">
+                    <span id="val-master" style="display:none;">0.8</span>
+                </div>
+            </div>
+            <!-- Alternar Efeito CRT -->
+            <button id="toggle-crt-btn" class="sys-btn sys-btn-outline" title="Ligar/Desligar efeito CRT Scanlines">
+                CRT: <span id="crt-status">ON</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Navegação Monospace Completa -->
+    <nav class="main-nav">
+        <div class="nav-brand">
+            <a href="#hero" class="brand-link">
+                <span class="brand-bracket">[</span>
+                <span class="brand-text">PLAN_B://CYBERCAFÉ</span>
+                <span class="brand-bracket">]</span>
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#hero"><span class="cmd-prefix">01.</span>//home</a></li>
+            <li><a href="#gallery"><span class="cmd-prefix">02.</span>//visuais</a></li>
+            <li><a href="#specialties"><span class="cmd-prefix">03.</span>//especialidades</a></li>
+            <li><a href="#menu"><span class="cmd-prefix">04.</span>//menu</a></li>
+            <li><a href="#rigs"><span class="cmd-prefix">05.</span>//estacoes</a></li>
+            <li><a href="#merch"><span class="cmd-prefix">06.</span>//merch</a></li>
+            <li><a href="#localizacao"><span class="cmd-prefix">07.</span>//localizacao</a></li>
+            <li><a href="#orcamento"><span class="cmd-prefix">08.</span>//orcamento</a></li>
+            <li><a href="#terminal-section"><span class="cmd-prefix">09.</span>//cli</a></li>
+            <li><a href="#contactos" class="nav-highlight"><span class="cmd-prefix">&gt;</span> CONTACTOS_&amp;_INFO</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- HERO SECTION COM ASCII ART -->
+        <section id="hero" class="hero-section">
+            <div class="hero-container">
+                <div class="ascii-wrapper">
+                    <pre class="ascii-art logo-ascii" aria-label="Plan B Cybercafe ASCII Banner">
+ ____  _        _    _   _   ____     __  __
+|  _ \| |      / \  | \ | | | __ )   / / / /
+| |_) | |     / _ \ |  \| | |  _ \  / / / / 
+|  __/| |___ / ___ \| |\  | | |_) |/ / / /  
+|_|   |_____/_/   \_\_| \_| |____//_/ /_/   
+  ____ __   ______  _____ ____   ____    _    _____ _____ 
+ / ___|\ \ / / __ )| ____|  _ \ / ___|  / \  |  ___| ____|
+| |     \ V /|  _ \|  _| | |_) | |     / _ \ | |_  |  _|  
+| |___   | | | |_) | |___|  _ <| |___ / ___ \|  _| | |___ 
+ \____|  |_| |____/|_____|_| \_\____/_/   \_\_|   |_____|
+</pre>
+                    <div class="hero-subtext-box">
+                        <p class="tagline">&gt; Café de especialidade torrado na hora, batidas lo-fi em vinil crepitante
+                            e santuário para hackers, criativos & entusiastas de tecnologia.</p>
+                        <p class="location-stamp"><span class="accent-dot">●</span> Porto &middot; Lisboa &middot; Fibra
+                            Ótica 10Gbps Simétrica &middot; Aberto das 08h00 às 02h00</p>
+                    </div>
+                </div>
+
+                <!-- Painel Dividido: Chávena ASCII Fumegante & Manifesto de Boas-Vindas -->
+                <div class="hero-interactive-grid">
+                    <div class="hero-ascii-coffee-card">
+                        <div class="card-header">
+                            <span class="file-icon">☕</span> spec_brew.raw
+                            <span class="card-badge">ARÁBICA PURA</span>
+                        </div>
+                        <div class="coffee-ascii-stage">
+                            <pre class="ascii-art coffee-ascii" id="steaming-cup">
+       (  )   (   )  )
+        ) (   )  (  (
+        ( )  (    ) )
+       ._____________.
+      <_______________> ===.
+      |               |  | |
+      |   P L A N   B |  | |
+      |   CYBERCAFÉ   |__/_/
+      |   ESPRESSO    |===='
+      \_______________/
+       `-------------'
+</pre>
+                        </div>
+                        <div class="coffee-stats">
+                            <div class="c-stat"><span>ORIGEM:</span> <strong>Etiópia &amp; Brasil</strong></div>
+                            <div class="c-stat"><span>TORRA:</span> <strong>Média Âmbar</strong></div>
+                            <div class="c-stat"><span>PERFIL:</span> <strong>Chocolate, Avelã, Frutas Negras</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hero-manifesto-card">
+                        <div class="card-header">
+                            <span class="file-icon">📜</span> /etc/motd
+                            <span class="card-badge">STATUS: ONLINE</span>
+                        </div>
+                        <div class="manifesto-content">
+                            <h3>// BEM-VINDO AO PLAN B</h3>
+                            <p class="manifesto-p">
+                                Aqui a cultura hacker encontra a calma nostálgica do lo-fi. Esquece os cafés impessoais
+                                e o ruído da cidade:
+                            </p>
+                            <ul class="manifesto-list">
+                                <li><span class="bullet">&gt;</span> <strong>Mesas em Nogueira &amp; Couro:</strong>
+                                    Iluminação quente âmbar e som desenhado para concentração e relaxamento.</li>
+                                <li><span class="bullet">&gt;</span> <strong>Estações Hacker &amp; Maker:</strong>
+                                    Monitores 4K, teclados mecânicos ergonómicos, switches lubrificados e tomadas USB-C
+                                    PD a 100W.</li>
+                                <li><span class="bullet">&gt;</span> <strong>A Dupla Especialidade Doce:</strong> O
+                                    lendário <span class="accent-text">Pão de Ló Húmido Tradicional</span> e o crocante
+                                    <span class="accent-text">Mil-Folhas com Creme de Café Artesanal</span>.
+                                </li>
+                            </ul>
+                            <div class="hero-cta-buttons">
+                                <a href="#specialties" class="btn btn-primary">&gt; CONHECER ESPECIALIDADES</a>
+                                <a href="#localizacao" class="btn btn-outline">&gt; VER LOCALIZAÇÕES &amp; PREÇOS</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: O VISUAL DO ESPAÇO // DESIGN & ARQUITETURA LO-FI -->
+        <section id="gallery" class="section-padding space-visual-section">
+            <div id="visual-space" style="position: relative; top: -70px;"></div>
+            <div class="section-header">
+                <div class="sec-label">// INTERIOR_ARCHITECTURE &amp; VISUAL_IDENTITY</div>
+                <h2>O VISUAL DO ESPAÇO // ARQUITETURA &amp; LO-FI DESIGN</h2>
+                <p class="sec-sub">Concebido ao detalhe para a máxima concentração e serenidade: fusão entre madeira
+                    nobre de nogueira, iluminação circadiana âmbar e estações de programação silenciosas.</p>
+            </div>
+
+            <!-- GRID PRINCIPAL DE ESPAÇOS DO CYBERCAFÉ -->
+            <div class="space-showcase-grid">
+                <!-- Espaço 1: Balcão de Café & Pastelaria -->
+                <div class="space-card">
+                    <div class="space-img-wrapper">
+                        <img src="assets/espaco_cafe_bar.jpg"
+                            alt="Balcão de café de especialidade do Plan B com máquina La Marzocco, nogueira e vitrine doce"
+                            class="space-img">
+                        <span class="space-tag-float">[01] ESPRESSO &amp; PASTELARIA</span>
+                    </div>
+                    <div class="space-card-body">
+                        <h3>☕ Balcão de Café &amp; Vitrine Doce</h3>
+                        <p>O coração sensorial do piso térreo: balcão em nogueira maciça entalhada à mão com remates em
+                            latão envelhecido escovado. Máquina de extração profissional La Marzocco Linea PB em preto
+                            mate texturado, moinhos Mahlkönig de dosagem milimétrica e vitrine temperada iluminada a
+                            2200K onde repousa o nosso Pão de Ló tradicional e os Mil-Folhas acabados de laminar.</p>
+                        <ul class="space-specs-list">
+                            <li><strong>Material:</strong> Nogueira maciça tratada com cera vegetal e latão natural</li>
+                            <li><strong>Equipamento:</strong> La Marzocco 2 Grupos &middot; Mahlkönig E65S GbW</li>
+                            <li><strong>Ambiente:</strong> Aroma permanente a grãos arábica recém-moídos e baunilha</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Espaço 2: Estações Hacker de Trabalho -->
+                <div class="space-card">
+                    <div class="space-img-wrapper">
+                        <img src="assets/espaco_workstations.jpg"
+                            alt="Estações de trabalho hacker com monitores 4K foscos, teclados mecânicos e iluminação âmbar"
+                            class="space-img">
+                        <span class="space-tag-float">[02] HACKER WORKSTATIONS</span>
+                    </div>
+                    <div class="space-card-body">
+                        <h3>💻 Zonas de Programação &amp; Deep Work</h3>
+                        <p>Linhas de secretárias individuais e em ilhas colaborativas desenhadas para longas sessões de
+                            código. Cada posto conta com monitor 4K mate com tratamento anti-reflexo montado em braço
+                            articulado a gás, teclado mecânico com switches lubrificados à mão, desk mat XXL com grelha
+                            de circuitos e iluminação de foco âmbar anti-fadiga ocular.</p>
+                        <ul class="space-specs-list">
+                            <li><strong>Ergonomia:</strong> Monitores Dell UltraSharp 4K &middot; Cadeiras de malha
+                                lombar</li>
+                            <li><strong>Periféricos:</strong> Teclados mecânicos Hot-Swap &middot; Desk Mats terminal
+                            </li>
+                            <li><strong>Alimentação:</strong> Hubs USB-C Power Delivery de 100W embutidos no tampo</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Espaço 3: Lo-Fi Listening & Reading Lounge -->
+                <div class="space-card">
+                    <div class="space-img-wrapper">
+                        <img src="assets/espaco_lofi_lounge.jpg"
+                            alt="Canto de leitura e audição lo-fi com poltronas de couro conhaque, vinil e monitores CRT"
+                            class="space-img">
+                        <span class="space-tag-float">[03] LO-FI VINYL LOUNGE</span>
+                    </div>
+                    <div class="space-card-body">
+                        <h3>🎧 Canto de Vinil, Leitura &amp; Descompressão</h3>
+                        <p>Poltronas clássicas em couro conhaque envelhecido dispostas junto a uma parede revestida a
+                            ripas acústicas de madeira. Gira-discos analógico Pro-Ject com prateleiras de vinil lo-fi
+                            beats, ambient e jazz, fones abertos de alta fidelidade Sennheiser e um monitor CRT
+                            monocromático vintage exibindo visualizações ASCII em tempo real.</p>
+                        <ul class="space-specs-list">
+                            <li><strong>Áudio:</strong> Gira-discos Pro-Ject Debut Carbon &middot; Sennheiser HD600</li>
+                            <li><strong>Conforto:</strong> Poltronas anatómicas em pele genuína e mesas baixas de apoio
+                            </li>
+                            <li><strong>Visual:</strong> Ecrã CRT âmbar monocromático com visualizadores ASCII</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Espaço 4: Atmosfera Global Intimista -->
+                <div class="space-card">
+                    <div class="space-img-wrapper">
+                        <img src="assets/ambiente_cybercafe.jpg"
+                            alt="Visão geral do cybercafé com luz âmbar suave, nogueira e ambiente chuvoso acolhedor"
+                            class="space-img">
+                        <span class="space-tag-float">[04] PANORAMA &amp; ATMOSFERA</span>
+                    </div>
+                    <div class="space-card-body">
+                        <h3>🌿 Atmosfera Biofílica &amp; Silêncio Focado</h3>
+                        <p>A harmonia ideal entre o conforto orgânico de um café nórdico e a utilidade técnica de um
+                            laboratório digital. Plantas pothos suspensas que purificam o ar, luzes pendentes estilo
+                            Edison reguladas para ciclos circadianos e ausência completa de música comercial agressiva
+                            ou ruído de cafeteria tradicional.</p>
+                        <ul class="space-specs-list">
+                            <li><strong>Nível Sonoro:</strong> 45-50 dB estável (grau de ruído branco de estúdio)</li>
+                            <li><strong>Biofilia:</strong> Plantas suspensas com rega por capilaridade e ar filtrado
+                            </li>
+                            <li><strong>Rede:</strong> Wi-Fi 6E Tri-Band simétrico com isolamento de clientes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAINEL DE ESPECIFICAÇÕES ARQUITETÓNICAS E MATERIAIS -->
+            <div class="materials-deepdive-grid">
+                <div class="material-card">
+                    <span class="mat-icon">🪵</span>
+                    <h4>Madeira de Nogueira Maciça &amp; Latão</h4>
+                    <p>Tampos com 40mm de espessura tratados com óleos vegetais atóxicos que resistem a derrames de café
+                        e envelhecem com uma pátina natural irrepetível.</p>
+                </div>
+
+                <div class="material-card">
+                    <span class="mat-icon">💡</span>
+                    <h4>Iluminação Circadiana Âmbar (2200K)</h4>
+                    <p>Sem tubos fluorescentes ou LEDs frios agressivos. Temperatura de cor constante de 2200K com alto
+                        índice CRI (&gt;95) para leitura de ecrãs sem fadiga.</p>
+                </div>
+
+                <div class="material-card">
+                    <span class="mat-icon">🔇</span>
+                    <h4>Engenharia Acústica Fonoabsorvente</h4>
+                    <p>Painéis ripados em madeira com feltro de PET reciclado nas paredes e teto, garantindo um tempo de
+                        reverberação ótimo (RT60 &lt; 0.5s) para foco.</p>
+                </div>
+
+                <div class="material-card">
+                    <span class="mat-icon">⚡</span>
+                    <h4>Zero Cabos à Vista &amp; Conectividade PD</h4>
+                    <p>Calhas técnicas embutidas no mobiliário com 2x USB-C PD 100W e 2x tomadas Schuko por lugar,
+                        eliminando adaptadores e extensões pelo chão.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: AS DUAS GRANDES ESPECIALIDADES DA CASA -->
+        <section id="specialties" class="section-padding section-alt">
+            <div class="section-header">
+                <div class="sec-label">// CHEF_SPECIALS.SH</div>
+                <h2>DUAS ESPECIALIDADES ICÓNICAS</h2>
+                <p class="sec-sub">Pastelaria artesanal elaborada diariamente no nosso laboratório doce, desenhada para
+                    emparelhar com os nossos cafés de infusão lenta e expressos aromáticos.</p>
+            </div>
+
+            <div class="specialties-grid">
+                <!-- Especialidade 1: Pão de Ló -->
+                <article class="specialty-card">
+                    <div class="spec-header">
+                        <span class="spec-id">[SPEC_01]</span>
+                        <span class="spec-flag">FAVORITO DOS DEVS</span>
+                    </div>
+                    <div class="spec-ascii-box">
+                        <pre class="ascii-art pastry-ascii">
+          _.-~~~~~-._          
+        /   .-------.   \        
+       /   /  .---.  \   \       
+      |   |  ( GEMA ) |   |      
+      |   |  |DOCE &| |   |      
+      |   |  (FLUIDA) |   |      
+       \   \  `---`  /   /       
+        \   `-------`   /        
+         ` -._     _.- `         
+      [PÃO DE LÓ DE OVAR TRAD.]  
+</pre>
+                    </div>
+                    <div class="spec-body">
+                        <h3>Pão de Ló Tradicional de Gema Fluida</h3>
+                        <p class="spec-desc">
+                            Receita secular portuguesa aprimorada no nosso forno de convecção. Massa fofa e leve com
+                            coração cremoso de gemas de ovos biológicos frescos, baunilha de Madagáscar e flor de sal.
+                        </p>
+                        <div class="pairing-box">
+                            <span class="pairing-title">&gt; EMPARELHAMENTO RECOMENDADO:</span>
+                            <span class="pairing-item">Terminal Espresso Duplo ou Flat White com leite de aveia
+                                aveludado. A cremosidade corta a acidez do grão etíope na perfeição.</span>
+                        </div>
+                        <div class="spec-meta">
+                            <span class="spec-price">€ 4.20 / porção individual</span>
+                            <span class="spec-batch">Lote fresco a cada 2h</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Especialidade 2: Mil-Folhas de Café -->
+                <article class="specialty-card highlight-border">
+                    <div class="spec-header">
+                        <span class="spec-id">[SPEC_02]</span>
+                        <span class="spec-flag highlight-flag">ASSINATURA PLAN B</span>
+                    </div>
+                    <div class="spec-ascii-box">
+                        <pre class="ascii-art pastry-ascii">
+   .----------------------------.  
+  /  * * * CACAU EM PÓ & AÇÚCAR  \ 
+ |================================| [Massa Folhada]
+ | ~~~~~~   CREME DE CAFÉ   ~~~~~ | [Arábica Infundido]
+ |================================| [Folha Caramelizada]
+ | ~~~~~~ BAUNILHA & CACAU ~~~~~~ | [Creme Sedoso]
+ |================================| [Base Crocante]
+  \______________________________/ 
+       [MIL-FOLHAS DE CAFÉ]        
+</pre>
+                    </div>
+                    <div class="spec-body">
+                        <h3>Mil-Folhas de Café de Especialidade</h3>
+                        <p class="spec-desc">
+                            Massa folhada artesanal com manteiga DOP dos Açores, caramelizada lentamente no forno até ao
+                            ponto máximo de estaladiço. Recheada com camadas generosas de creme pasteleiro infundido
+                            durante 24h em grãos arábica Bourbon Vermelho e cacau cru 80%.
+                        </p>
+                        <div class="pairing-box">
+                            <span class="pairing-title">&gt; EMPARELHAMENTO RECOMENDADO:</span>
+                            <span class="pairing-item">Cold Brew de 18 horas ou Filtro Chemex. O contraste térmico entre
+                                o café frio límpido e a doçura estaladiça é uma experiência memorável.</span>
+                        </div>
+                        <div class="spec-meta">
+                            <span class="spec-price">€ 4.80 / fatia generosa</span>
+                            <span class="spec-batch">Produção artesanal diária limitada</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- SECTION: O MENU COMPLETO DO CYBERCAFÉ -->
+        <section id="menu" class="section-padding">
+            <div class="section-header">
+                <div class="sec-label">// DATABASE: MENU_ITEMS.SQL</div>
+                <h2>CARTA DE BEBIDAS &amp; BITES</h2>
+                <p class="sec-sub">Cafés de origem única, métodos lentos de extração, tônicos energéticos e snacks
+                    saudáveis para sessões longas de código e leitura.</p>
+            </div>
+
+            <!-- Filtros do Menu -->
+            <div class="menu-tabs">
+                <button class="menu-tab-btn active" data-category="all">&gt; ALL_ITEMS</button>
+                <button class="menu-tab-btn" data-category="coffee">&gt; CAFÉS &amp; COLD_BREWS</button>
+                <button class="menu-tab-btn" data-category="pastry">&gt; PASTELARIA &amp; DOCES</button>
+                <button class="menu-tab-btn" data-category="tea">&gt; CHÁS &amp; MATCHA</button>
+                <button class="menu-tab-btn" data-category="bites">&gt; GEEK_SNACKS &amp; SANDWICHES</button>
+            </div>
+
+            <div class="menu-grid" id="menu-items-grid">
+                <!-- Itens gerados via JavaScript -->
+            </div>
+        </section>
+
+        <!-- SECTION: ESTAÇÕES HACKER & AMBIENTE LO-FI -->
+        <section id="rigs" class="section-padding section-alt">
+            <div class="section-header">
+                <div class="sec-label">// WORKSTATION_MATRIX.CFG</div>
+                <h2>ESTAÇÕES DE TRABALHO &amp; LOUNGE</h2>
+                <p class="sec-sub">Concebido para quem precisa de foco ininterrupto, periféricos de topo ou apenas um
+                    recanto confortável para ler zines com fones de estúdio.</p>
+            </div>
+
+            <div class="rigs-showcase">
+                <div class="rig-card">
+                    <div class="rig-header">
+                        <span class="rig-badge">ZONA 01</span>
+                        <h4>Estações Hacker "Root Access"</h4>
+                    </div>
+                    <div class="rig-specs-list">
+                        <div class="spec-row">
+                            <span class="k">Monitores:</span>
+                            <span class="v">Dell UltraSharp 4K 32" Antirreflexo + Braço Articulado</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="k">Teclados:</span>
+                            <span class="v">Mecânicos custom (switches Boba U4T / Gateron Oil Kings)</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="k">Rato:</span>
+                            <span class="v">Logitech MX Master 3S Ergonómico</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="k">Docking:</span>
+                            <span class="v">Thunderbolt 4 / USB-C com entrega de energia de 100W</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="k">Rede:</span>
+                            <span class="v">Porta Ethernet RJ-45 Gigabit + VLAN isolada</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="k">Cadeira:</span>
+                            <span class="v">Herman Miller Aeron / Embody ergonómica</span>
+                        </div>
+                    </div>
+                    <div class="rig-footer">
+                        <span>Preço: <strong>€ 3.50/h</strong> (ou gratuito com consumo de café &amp; doce)</span>
+                    </div>
+                </div>
+
+                <div class="rig-card">
+                    <div class="rig-header">
+                        <span class="rig-badge">ZONA 02</span>
+                        <h4>Lo-Fi Vinyl &amp; Reading Lounge</h4>
+                    </div>
+                    <div class="rig-specs-list">
+                        <div class="spec-row">
+                            <span class="k">Ambiente:</span>
+                            <span class="v">Poltronas de couro conhaque &amp; mesas de nogueira</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="k">Áudio:</span>
+                            <span class="v">Auscultadores Sennheiser HD 600 em cada posto</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="k">Leitura:</span>
+                            <span class="v">Zines de computação, manuais UNIX retro, ficção cyberpunk</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="k">Iluminação:</span>
+                            <span class="v">Lâmpadas de filamento âmbar 2200K de intensidade regulável</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="k">Energia:</span>
+                            <span class="v">Tomadas Schuko e portas de carregamento rápido GaN integradas</span>
+                        </div>
+                    </div>
+                    <div class="rig-footer">
+                        <span>Preço: <strong>Acesso livre</strong> a todos os clientes</span>
+                    </div>
+                </div>
+
+                <div class="rig-card">
+                    <div class="rig-header">
+                        <span class="rig-badge">ZONA 03</span>
+                        <h4>Maker &amp; Hardware Bench</h4>
+                    </div>
+                    <div class="rig-specs-list">
+                        <div class="spec-row">
+                            <span class="k">Ferramentas:</span>
+                            <span class="v">Estações de soldar TS101 / Pinecil, multímetros digitais</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="k">Kits:</span>
+                            <span class="v">Raspberry Pi 5, ESP32, Flipper Zero labs &amp; breadboards</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="k">Exaustão:</span>
+                            <span class="v">Extratores de fumo com filtros de carvão ativo</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="k">Comunidade:</span>
+                            <span class="v">Workshops semanais de eletrónica e firmware livre</span>
+                        </div>
+                    </div>
+                    <div class="rig-footer">
+                        <span>Preço: <strong>€ 5.00/h</strong> com materiais básicos incluídos</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: LINHA DE MERCHANDISING EXCLUSIVA -->
+        <section id="merch" class="section-padding">
+            <div class="section-header">
+                <div class="sec-label">// STORE: MERCHANDISE_INVENTORY.JSON</div>
+                <h2>LINHA DE MERCHANDISING "HARDWARE &amp; APPAREL"</h2>
+                <p class="sec-sub">Coleção completa e oficial do Plan B Cybercafé: vestuário premium em algodão
+                    orgânico, cerâmica artesanal, periféricos de secretária, ferramentas maker, pins esmaltados e
+                    papelaria técnica.</p>
+            </div>
+
+            <!-- Filtros de Merchandising -->
+            <div class="merch-tabs">
+                <button class="merch-tab-btn active" data-merch-cat="all">&gt; TODOS_OS_ITENS (15)</button>
+                <button class="merch-tab-btn" data-merch-cat="vestuario">&gt; VESTUÁRIO (4)</button>
+                <button class="merch-tab-btn" data-merch-cat="gear">&gt; GEAR &amp; DESK (3)</button>
+                <button class="merch-tab-btn" data-merch-cat="pins-stickers">&gt; PINS &amp; AUTOCOLANTES (4)</button>
+                <button class="merch-tab-btn" data-merch-cat="papelaria">&gt; PAPELARIA &amp; LIVROS (3)</button>
+                <button class="merch-tab-btn" data-merch-cat="ceramica">&gt; CERÂMICA (1)</button>
+            </div>
+
+            <div class="merch-grid" id="merch-container">
+                <!-- 1. Hoodie Castanho -->
+                <div class="merch-card" data-category="vestuario">
+                    <div class="merch-badge">[450 GSM]</div>
+                    <div class="merch-thumb-box">
+                        <img src="assets/merch/merch_hoodie_castanho.png"
+                            alt="Hoodie Kernel Panic 450 gsm Castanho Torrado" class="merch-thumb-img">
+                    </div>
+                    <div class="merch-info">
+                        <h4>Hoodie "Kernel Panic" (Castanho Torrado)</h4>
+                        <p class="merch-desc">100% Algodão francês orgânico pesado de 450 gsm em tom café torrado.
+                            Bordado sutil da chávena ASCII no peito e etiqueta em tecido jacquard.</p>
+                        <div class="merch-bottom">
+                            <span class="merch-price">€ 58.00</span>
+                            <span class="merch-stock-tag">&gt; DISPONÍVEL NO BALCÃO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Hoodie Preto -->
+                <div class="merch-card" data-category="vestuario">
+                    <div class="merch-badge">[OBSIDIAN EDITION]</div>
+                    <div class="merch-thumb-box">
+                        <img src="assets/merch/merch_hoodie_preto.png" alt="Hoodie Root Access 450 gsm Preto Obsidiana"
+                            class="merch-thumb-img">
+                    </div>
+                    <div class="merch-info">
+                        <h4>Hoodie "Root Access" (Preto Obsidiana)</h4>
+                        <p class="merch-desc">Edição preta pura em algodão ultra-pesado de 450 gsm com forro cardado
+                            aveludado, ilhoses em latão envelhecido e bolso canguru reforçado.</p>
+                        <div class="merch-bottom">
+                            <span class="merch-price">€ 58.00</span>
+                            <span class="merch-stock-tag">&gt; DISPONÍVEL NO BALCÃO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. T-Shirt 1 -->
+                <div class="merch-card" data-category="vestuario">
+                    <div class="merch-badge">[HEAVYWEIGHT 240G]</div>
+                    <div class="merch-thumb-box">
+                        <img src="assets/merch/merch_tshirt_1.png" alt="T-Shirt HTTP 418 Teapot Edition"
+                            class="merch-thumb-img">
+                    </div>
+                    <div class="merch-info">
+                        <h4>T-Shirt "HTTP 418 // Teapot Edition"</h4>
+                        <p class="merch-desc">Algodão penteado pesado de 240 gsm em tom carvão vintage com serigrafia
+                            artesanal âmbar e ecru do código de status <code>HTTP 418</code>.</p>
+                        <div class="merch-bottom">
+                            <span class="merch-price">€ 28.00</span>
+                            <span class="merch-stock-tag">&gt; DISPONÍVEL NO BALCÃO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. T-Shirt 2 -->
+                <div class="merch-card" data-category="vestuario">
+                    <div class="merch-badge">[TERMINAL CODE]</div>
+                    <div class="merch-thumb-box">
+                        <img src="assets/merch/merch_tshirt_2.png" alt="T-Shirt Stack Overflow & Mil-Folhas"
+                            class="merch-thumb-img">
+                    </div>
+                    <div class="merch-info">
+                        <h4>T-Shirt "Stack Overflow &amp; Mil-Folhas"</h4>
+                        <p class="merch-desc">Algodão pré-lavado com toque sedoso, corte reto contemporâneo e estampa
+                            técnica de pseudocódigo da pastelaria de assinatura.</p>
+                        <div class="merch-bottom">
+                            <span class="merch-price">€ 28.00</span>
+                            <span class="merch-stock-tag">&gt; DISPONÍVEL NO BALCÃO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Caneca Cerâmica -->
+                <div class="merch-card" data-category="ceramica">
+                    <div class="merch-badge">[CRAFT BARCELOS]</div>
+                    <div class="merch-thumb-box">
+                        <img src="assets/merch/merch_caneca.png" alt="Caneca Cerâmica Artesanal Spec Brew"
+                            class="merch-thumb-img">
+                    </div>
+                    <div class="merch-info">
+                        <h4>Caneca Cerâmica Artesanal "Spec Brew" (350ml)</h4>
+                        <p class="merch-desc">Moldada em torno por mestres oleiros de Barcelos. Vidrado fosco duplo
+                            (exterior preto texturado e interior caramelo) com carimbo ASCII entalhado.</p>
+                        <div class="merch-bottom">
+                            <span class="merch-price">€ 19.00</span>
+                            <span class="merch-stock-tag">&gt; DISPONÍVEL NO BALCÃO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Desk Mat XXL Terminal Grid (Visualização Dupla: Vazio / Com Setup) -->
+                <div class="merch-card" data-category="gear" id="card-deskmat">
+                    <div class="merch-badge">[XXL 900x400]</div>
+                    <div class="merch-thumb-box mousepad-box">
+                        <img id="deskmat-preview-img" src="assets/merch/merch_mousepad.png"
+                            alt="Desk Mat XXL 900x400 Terminal Grid Plan B" class="merch-thumb-img">
+                        <div class="pad-view-controls">
+                            <button type="button" class="pad-view-btn active" data-img="assets/merch/merch_mousepad.png"
+                                title="Visualizar tapete sem objetos">&gt; VAZIO</button>
+                            <button type="button" class="pad-view-btn"
+                                data-img="assets/merch/merch_mousepad_objetos.png"
+                                title="Visualizar tapete com setup de trabalho">&gt; C/ SETUP</button>
+                        </div>
+                    </div>
+                    <div class="merch-info">
+                        <h4>Desk Mat XXL "Terminal Grid" (900x400mm)</h4>
+                        <p class="merch-desc">Tapete estendido de alta precisão em microfibra com grelha milimétrica
+                            UNIX e base antiderrapante em borracha natural vulcânica de 4mm. Alterna a visualização
+                            entre a peça limpa e com o setup de trabalho por cima.</p>
+                        <div class="merch-bottom">
+                            <span class="merch-price">€ 32.00</span>
+                            <span class="merch-stock-tag">&gt; DISPONÍVEL NO BALCÃO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. Teclado Mecânico Custom -->
+                <div class="merch-card" data-category="gear">
+                    <div class="merch-badge">[MECHANICAL RIG]</div>
+                    <div class="merch-thumb-box">
+                        <img src="assets/merch/merch_teclado.png" alt="Teclado Mecânico Custom Plan B Edition"
+                            class="merch-thumb-img">
+                    </div>
+                    <div class="merch-info">
+                        <h4>Teclado Mecânico Custom Plan B (Hot-Swap)</h4>
+                        <p class="merch-desc">Chassi em alumínio anodizado CNC preto, switches táteis lubrificados de
+                            fábrica (Boba U4T), iluminação âmbar 2200K e keycaps PBT de duplo disparo.</p>
+                        <div class="merch-bottom">
+                            <span class="merch-price">€ 120.00</span>
+                            <span class="merch-stock-tag">&gt; DISPONÍVEL NO BALCÃO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. Auscultadores Phones Lo-Fi -->
+                <div class="merch-card" data-category="gear">
+                    <div class="merch-badge">[LO-FI AUDIO]</div>
+                    <div class="merch-thumb-box">
+                        <img src="assets/merch/merch_phones.png" alt="Auscultadores Lo-Fi Studio Monitor"
+                            class="merch-thumb-img">
+                    </div>
+                    <div class="merch-info">
+                        <h4>Auscultadores Studio Monitor "Lo-Fi Beats"</h4>
+                        <p class="merch-desc">Drivers de neodímio de 50mm sintonizados para resposta quente, almofadas
+                            em veludo castanho viscoelástico e cabo destacável em espiral com adaptador dourado.</p>
+                        <div class="merch-bottom">
+                            <span class="merch-price">€ 85.00</span>
+                            <span class="merch-stock-tag">&gt; DISPONÍVEL NO BALCÃO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10. Broches Clássicos -->
+                <div class="merch-card" data-category="pins-stickers">
+                    <div class="merch-badge">[HARD ENAMEL]</div>
+                    <div class="merch-thumb-box">
+                        <img src="assets/merch/merch_broches.png" alt="Broches Metálicos Esmaltados Coleção Café"
+                            class="merch-thumb-img">
+                    </div>
+                    <div class="merch-info">
+                        <h4>Broches Metálicos // Coleção Café &amp; Lo-Fi (Pack 3x)</h4>
+                        <p class="merch-desc">Pins em latão dourado polido e esmalte vítreo preto com fechos de
+                            segurança: 1x Chávena fumegante ASCII, 1x Grão de café e 1x Mil-Folhas dourado.</p>
+                        <div class="merch-bottom">
+                            <span class="merch-price">€ 14.00</span>
+                            <span class="merch-stock-tag">&gt; DISPONÍVEL NO BALCÃO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 11. Broches Hacker -->
+                <div class="merch-card" data-category="pins-stickers">
+                    <div class="merch-badge">[HACKER EDITION]</div>
+                    <div class="merch-thumb-box">
+                        <img src="assets/merch/merch_broches_haker.png" alt="Broches Metálicos Hacker Edition"
+                            class="merch-thumb-img">
+                    </div>
+                    <div class="merch-info">
+                        <h4>Broches Metálicos // Hacker &amp; Terminal (Pack 3x)</h4>
+                        <p class="merch-desc">Pins em acabamento gunmetal preto e fósforo âmbar luminescente: 1x Prompt
+                            <code>&gt;_ ROOT</code>, 1x Chip de silício e 1x Logótipo Plan B em bloco ASCII.
+                        </p>
+                        <div class="merch-bottom">
+                            <span class="merch-price">€ 14.00</span>
+                            <span class="merch-stock-tag">&gt; DISPONÍVEL NO BALCÃO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 12. Caderno & Caneta 1 -->
+                <div class="merch-card" data-category="papelaria">
+                    <div class="merch-badge">[HARDCOVER 120G]</div>
+                    <div class="merch-thumb-box">
+                        <img src="assets/merch/merch_caderno_caneta.png"
+                            alt="Caderno de Engenharia de Linho e Caneta de Metal" class="merch-thumb-img">
+                    </div>
+                    <div class="merch-info">
+                        <h4>Caderno de Engenharia &amp; Caneta de Metal</h4>
+                        <p class="merch-desc">Capa dura em linho cor nogueira escura gravada a ouro velho com papel
+                            pontilhado 120 gsm, fita marcadora âmbar e caneta de esfera pesada em latão fosco.</p>
+                        <div class="merch-bottom">
+                            <span class="merch-price">€ 22.00</span>
+                            <span class="merch-stock-tag">&gt; DISPONÍVEL NO BALCÃO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 13. Caderno Técnico Dark -->
+                <div class="merch-card" data-category="papelaria">
+                    <div class="merch-badge">[LAB NOTES]</div>
+                    <div class="merch-thumb-box">
+                        <img src="assets/merch/merch_caderno_caneta_2.png" alt="Caderno Técnico Lab Notes Edição Dark"
+                            class="merch-thumb-img">
+                    </div>
+                    <div class="merch-info">
+                        <h4>Caderno Técnico "Lab Notes" (Edição Dark)</h4>
+                        <p class="merch-desc">Encadernação flexível em couro sintético reciclado castanho escuro,
+                            abertura plana a 180 graus, papel reciclado marfim e caneta técnica micro-ponta 0.5mm.</p>
+                        <div class="merch-bottom">
+                            <span class="merch-price">€ 20.00</span>
+                            <span class="merch-stock-tag">&gt; DISPONÍVEL NO BALCÃO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 13. Livro Oficial: Guia de Sobrevivência Tecnológica & Foco -->
+                <div class="merch-card" data-category="papelaria">
+                    <div class="merch-badge">[LIVRO &amp; MANIFESTO]</div>
+                    <div class="merch-thumb-box">
+                        <img src="assets/merch/merch_survival_book.png"
+                            alt="Livro Oficial dos Fundadores: Guia de Sobrevivência Tecnológica &amp; Foco"
+                            class="merch-thumb-img">
+                    </div>
+                    <div class="merch-info">
+                        <h4>"Plano B: Guia de Sobrevivência Tecnológica &amp; Foco" (Livro Oficial)</h4>
+                        <p class="merch-desc">O manual prático para quando o ritmo acelerado da tecnologia parece
+                            impossível de acompanhar. Métodos de foco profundo, filtragem de ruído cognitivo e
+                            estratégias para continuar a aprender e manter a motivação na área informática. Inclui a
+                            história real dos fundadores do Plano B — ex-técnicos de cibersegurança que deixaram os SOCs
+                            e as redes críticas para criar este refúgio com café de especialidade e cultura hacker.</p>
+                        <div class="merch-bottom">
+                            <span class="merch-price">€ 18.00</span>
+                            <span class="merch-stock-tag">&gt; DISPONÍVEL NO BALCÃO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 15. Autocolantes Lo-Fi -->
+                <div class="merch-card" data-category="pins-stickers">
+                    <div class="merch-badge">[VINYL MATE UV]</div>
+                    <div class="merch-thumb-box">
+                        <img src="assets/merch/merch_autocolantes.png" alt="Pack de Autocolantes Vinil Cafe & Lo-Fi"
+                            class="merch-thumb-img">
+                    </div>
+                    <div class="merch-info">
+                        <h4>Pack 6x Autocolantes // Edição Café &amp; Lo-Fi</h4>
+                        <p class="merch-desc">Vinil die-cut laminado resistente à água e arranhões:
+                            <code>sudo eat-paodelo</code>, <code>milfolhas.overflow()</code>,
+                            <code>localhost:8080/coffee</code> e chávenas ASCII.
+                        </p>
+                        <div class="merch-bottom">
+                            <span class="merch-price">€ 6.00</span>
+                            <span class="merch-stock-tag">&gt; DISPONÍVEL NO BALCÃO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 15. Autocolantes Hacker -->
+                <div class="merch-card" data-category="pins-stickers">
+                    <div class="merch-badge">[CYBER SECURITY]</div>
+                    <div class="merch-thumb-box">
+                        <img src="assets/merch/merch_autocolantes_haker.png"
+                            alt="Pack de Autocolantes Vinil Hacker Edition" class="merch-thumb-img">
+                    </div>
+                    <div class="merch-info">
+                        <h4>Pack 6x Autocolantes // Hacker &amp; Terminal Edition</h4>
+                        <p class="merch-desc">Conjunto especial de autocolantes em preto, âmbar e verde fósforo com
+                            comandos de bash, criptografia PGP, logótipos terminal e atalhos de hacking ético.</p>
+                        <div class="merch-bottom">
+                            <span class="merch-price">€ 6.00</span>
+                            <span class="merch-stock-tag">&gt; DISPONÍVEL NO BALCÃO</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: SECÇÃO DEDICADA DE LOCALIZAÇÃO (PREÇOS & CONDIÇÕES CONTRATUAIS) -->
+        <section id="localizacao" class="section-padding section-alt">
+            <div class="section-header">
+                <div class="sec-label">// REAL_ESTATE_AUDIT: COVILHÃ, PORTO &amp; LISBOA</div>
+                <h2>LOCALIZAÇÕES POSSÍVEIS: PREÇOS &amp; CONDIÇÕES</h2>
+                <p class="sec-sub">Mapeamento detalhado dos espaços ideais disponíveis para alugar na <strong>Covilhã
+                        (Polo Tech &amp; UBI)</strong>, Porto e Lisboa, com valores de renda, condições contratuais,
+                    exigências técnicas e infraestruturas.</p>
+            </div>
+
+            <!-- Critérios Técnicos Essenciais -->
+            <div class="tech-requirements-bar">
+                <div class="req-item">
+                    <span class="req-icon">⚡</span>
+                    <div>
+                        <strong>Eletricidade Trifásica (34.5 kVA)</strong>
+                        <p>Essencial para a máquina La Marzocco e forno convector Unox.</p>
+                    </div>
+                </div>
+                <div class="req-item">
+                    <span class="req-icon">💨</span>
+                    <div>
+                        <strong>Saída de Fumos / Extração</strong>
+                        <p>Conduta certificada ao topo do prédio para assar pastelaria.</p>
+                    </div>
+                </div>
+                <div class="req-item">
+                    <span class="req-icon">🌐</span>
+                    <div>
+                        <strong>Fibra Ótica 10G Simétrica</strong>
+                        <p>Cobertura direta de fibra redundante (Altice / NOS Empresas / Vodafone).</p>
+                    </div>
+                </div>
+                <div class="req-item">
+                    <span class="req-icon">❄️</span>
+                    <div>
+                        <strong>Aquecimento &amp; Climatização</strong>
+                        <p>AVAC de alto rendimento para os invernos frios da Serra da Estrela.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fichas Detalhadas de Cada Localização -->
+            <div class="location-detailed-grid">
+                <!-- Local 1: Covilhã - Polo I UBI (Engenharia Informática & Centro) -->
+                <div class="location-full-card highlight-loc-card">
+                    <div class="loc-badge-top">
+                        <span class="badge-city" style="background-color: #df8d41; color: #080605;">COVILHÃ</span>
+                        <span class="badge-flag">★ HUB UNIVERSITÁRIO TECH UBI (MAIOR RENTABILIDADE)</span>
+                    </div>
+                    <div class="loc-card-main">
+                        <div class="loc-title-group">
+                            <h3>Pólo I UBI / Marquês d'Ávila e Bolama</h3>
+                            <span class="loc-sub">Rua Marquês d'Ávila &middot; A 100m da Reitoria e Dep. de Informática
+                                da UBI</span>
+                            <div class="loc-links-row">
+                                <a href="https://maps.google.com/?q=Rua+Marqu%C3%AAs+d%27%C3%81vila+e+Bolama+Covilh%C3%A3"
+                                    target="_blank" rel="noopener noreferrer" class="btn-map-link"
+                                    title="Abrir localização exata no Google Maps">
+                                    <span class="map-pin">📍</span> VER NO GOOGLE MAPS ↗
+                                </a>
+                            </div>
+                        </div>
+                        <div class="loc-price-banner">
+                            <div class="price-val">€ 750 <small>/ mês</small></div>
+                            <div class="price-sqm">€ 4.68 / m² &middot; Área: 160 m² (Renda 65% mais baixa que
+                                Porto/Lisboa)</div>
+                        </div>
+                    </div>
+                    <div class="loc-details-body">
+                        <p class="loc-summary">
+                            Espaço histórico com paredes de cantaria de granito da Serra da Estrela e vigas de madeira
+                            nobre. Situado em frente ao Pólo I da UBI (onde se concentra a Engenharia Informática,
+                            Matemática, Ciências Exatas e residências). Os invernos rigorosos e a neve na serra criam a
+                            atmosfera perfeita para um refúgio acolhedor com café quente de especialidade, pão de ló com
+                            gema fluida e música lo-fi.
+                        </p>
+
+                        <div class="conditions-grid">
+                            <div class="cond-box">
+                                <span class="cond-title">// CONDIÇÕES DE ARRENDAMENTO (COVILHÃ):</span>
+                                <ul>
+                                    <li><strong>Contrato mínimo:</strong> 3 a 5 anos comerciais renováveis.</li>
+                                    <li><strong>Caução requerida:</strong> Apenas 2 meses de caução (€ 1.500 total).
+                                    </li>
+                                    <li><strong>Carência para obras:</strong> 3 meses de carência integral concedidos
+                                        para adaptação.</li>
+                                    <li><strong>Garantia:</strong> Fiador português comum (sem exigência de garantia
+                                        bancária pesada).</li>
+                                </ul>
+                            </div>
+                            <div class="cond-box">
+                                <span class="cond-title">// INFRAESTRUTURA &amp; TÉCNICA:</span>
+                                <ul>
+                                    <li><strong>Estado do imóvel:</strong> Estrutura sólida em pedra, piso nivelado,
+                                        montra em arco de cantaria.</li>
+                                    <li><strong>Saída de fumos:</strong> Chaminé vertical de alvenaria desobstruída até
+                                        à cobertura.</li>
+                                    <li><strong>Eletricidade:</strong> Ramal trifásico no local (baixa taxa de potência
+                                        contratada).</li>
+                                    <li><strong>Internet / Rede:</strong> Fibra ótica gigabit dedicada da Altice e
+                                        proximidade com backbone RCTS.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="loc-pros-cons">
+                            <div class="pros"><span class="badge-pro">+ VANTAGEM COMPETITIVA:</span> Custos de renda e
+                                custos fixos ultrabaixos, público garantido de milhares de estudantes de programação e
+                                nenhum concorrente com conceito lo-fi hacker na Beira Interior.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Local 2: Covilhã - Goldra / Av. da Universidade -->
+                <div class="location-full-card">
+                    <div class="loc-badge-top">
+                        <span class="badge-city" style="background-color: #df8d41; color: #080605;">COVILHÃ</span>
+                        <span class="badge-flag">VISTA PANORÂMICA &amp; ELEVADOR DA GOLDRA</span>
+                    </div>
+                    <div class="loc-card-main">
+                        <div class="loc-title-group">
+                            <h3>Complexo da Goldra / Av. da Universidade</h3>
+                            <span class="loc-sub">Junto ao Funicular / Elevador da Goldra e Jardim das Artes</span>
+                            <div class="loc-links-row">
+                                <a href="https://maps.google.com/?q=Avenida+da+Universidade+Elevador+da+Goldra+Covilh%C3%A3"
+                                    target="_blank" rel="noopener noreferrer" class="btn-map-link"
+                                    title="Abrir localização exata no Google Maps">
+                                    <span class="map-pin">📍</span> VER NO GOOGLE MAPS ↗
+                                </a>
+                            </div>
+                        </div>
+                        <div class="loc-price-banner">
+                            <div class="price-val">€ 850 <small>/ mês</small></div>
+                            <div class="price-sqm">€ 4.72 / m² &middot; Área: 180 m²</div>
+                        </div>
+                    </div>
+                    <div class="loc-details-body">
+                        <p class="loc-summary">
+                            Espaço comercial moderno de gaveto com fachada panorâmica envidraçada sobre o vale da Cova
+                            da Beira e a encosta da Serra da Estrela. Eixo central de mobilidade urbana da cidade entre
+                            o centro histórico e a zona baixa universitária.
+                        </p>
+
+                        <div class="conditions-grid">
+                            <div class="cond-box">
+                                <span class="cond-title">// CONDIÇÕES DE ARRENDAMENTO (COVILHÃ):</span>
+                                <ul>
+                                    <li><strong>Contrato mínimo:</strong> 3 anos.</li>
+                                    <li><strong>Caução requerida:</strong> 2 meses de caução + 1º mês (€ 2.550 total).
+                                    </li>
+                                    <li><strong>Carência para obras:</strong> 2 meses de carência durante o fit-out.
+                                    </li>
+                                    <li><strong>Garantia:</strong> Fiador ou depósito de garantia de 2 meses.</li>
+                                </ul>
+                            </div>
+                            <div class="cond-box">
+                                <span class="cond-title">// INFRAESTRUTURA &amp; TÉCNICA:</span>
+                                <ul>
+                                    <li><strong>Estado do imóvel:</strong> Pavimento em resina epóxi escura, WC duplo
+                                        completo com acessibilidade.</li>
+                                    <li><strong>Saída de fumos:</strong> Pré-instalação de conduta de exaustão
+                                        certificada.</li>
+                                    <li><strong>Estacionamento:</strong> Parque gratuito contíguo e paragem de autocarro
+                                        Covibus à porta.</li>
+                                    <li><strong>Esplanada:</strong> Possibilidade de esplanada com aquecedores
+                                        exteriores de inverno.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="loc-pros-cons">
+                            <div class="pros"><span class="badge-pro">+ VANTAGEM:</span> Espaço amplo com montra de
+                                vidro contínua, excelente luz natural de dia e visibilidade noturna no principal eixo da
+                                cidade.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Local 3: Bonfim / 24 de Agosto (Porto) -->
+                <div class="location-full-card">
+                    <div class="loc-badge-top">
+                        <span class="badge-city">PORTO</span>
+                        <span class="badge-flag">FLAGSHIP METRÓPOLE NORTE</span>
+                    </div>
+                    <div class="loc-card-main">
+                        <div class="loc-title-group">
+                            <h3>Bonfim / Campo 24 de Agosto</h3>
+                            <span class="loc-sub">Rua do Bonfim / Próx. Metro 24 de Agosto</span>
+                            <div class="loc-links-row">
+                                <a href="https://maps.google.com/?q=Rua+do+Bonfim+Campo+24+de+Agosto+Porto"
+                                    target="_blank" rel="noopener noreferrer" class="btn-map-link"
+                                    title="Abrir localização exata no Google Maps">
+                                    <span class="map-pin">📍</span> VER NO GOOGLE MAPS ↗
+                                </a>
+                            </div>
+                        </div>
+                        <div class="loc-price-banner">
+                            <div class="price-val">€ 2.100 <small>/ mês</small></div>
+                            <div class="price-sqm">€ 12.70 / m² &middot; Área: 165 m²</div>
+                        </div>
+                    </div>
+                    <div class="loc-details-body">
+                        <p class="loc-summary">
+                            Antiga tipografia/armazém comercial com fachada de azulejos, montras amplas para a rua e
+                            tetos altos de 4 metros. Localizada no bairro mais criativo e efervescente do Porto, rodeado
+                            por cafés de especialidade, estúdios de design e devs independentes.
+                        </p>
+
+                        <div class="conditions-grid">
+                            <div class="cond-box">
+                                <span class="cond-title">// CONDIÇÕES DE ARRENDAMENTO:</span>
+                                <ul>
+                                    <li><strong>Contrato mínimo:</strong> 5 anos (renovável por períodos de 3 anos).
+                                    </li>
+                                    <li><strong>Caução requerida:</strong> 2 meses de renda adiantada + 2 meses de
+                                        caução (€ 8.400 total).</li>
+                                    <li><strong>Carência para obras:</strong> 3 meses de carência total concedidos para
+                                        fit-out e licenças.</li>
+                                    <li><strong>Garantia:</strong> Fiador idóneo ou garantia bancária no valor de 3
+                                        meses.</li>
+                                </ul>
+                            </div>
+                            <div class="cond-box">
+                                <span class="cond-title">// INFRAESTRUTURA &amp; TÉCNICA:</span>
+                                <ul>
+                                    <li><strong>Estado do imóvel:</strong> Em tosco recuperado, piso nivelado, pronto a
+                                        receber marcenaria.</li>
+                                    <li><strong>Saída de fumos:</strong> Tubo de extração dedicado existente de 300mm
+                                        até ao telhado.</li>
+                                    <li><strong>Eletricidade:</strong> Ramal trifásico disponível no quadro técnico.
+                                    </li>
+                                    <li><strong>Acessos / Metro:</strong> Estação 24 de Agosto a 180 metros (2 min a
+                                        pé).</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="loc-pros-cons">
+                            <div class="pros"><span class="badge-pro">+ VANTAGEM:</span> Excelente relação
+                                custo/benefício no Porto, comunidade tech nativa e licença de esplanada fácil.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Local 4: Hub Criativo do Beato / Marvila (Lisboa) -->
+                <div class="location-full-card">
+                    <div class="loc-badge-top">
+                        <span class="badge-city">LISBOA</span>
+                        <span class="badge-flag">TECH CLUSTER INTERNACIONAL</span>
+                    </div>
+                    <div class="loc-card-main">
+                        <div class="loc-title-group">
+                            <h3>Hub Criativo do Beato / Marvila</h3>
+                            <span class="loc-sub">Rua da Manutenção / Frente ao Tejo</span>
+                            <div class="loc-links-row">
+                                <a href="https://maps.google.com/?q=Hub+Criativo+do+Beato+Rua+da+Manuten%C3%A7%C3%A3o+Lisboa"
+                                    target="_blank" rel="noopener noreferrer" class="btn-map-link"
+                                    title="Abrir localização exata no Google Maps">
+                                    <span class="map-pin">📍</span> VER NO GOOGLE MAPS ↗
+                                </a>
+                            </div>
+                        </div>
+                        <div class="loc-price-banner">
+                            <div class="price-val">€ 3.200 <small>/ mês</small></div>
+                            <div class="price-sqm">€ 17.70 / m² &middot; Área: 180 m²</div>
+                        </div>
+                    </div>
+                    <div class="loc-details-body">
+                        <p class="loc-summary">
+                            Espaço industrial reconvertido com paredes de pedra exposta, estrutura metálica e iluminação
+                            natural zenital. Inserido no ecossistema das grandes startups da Web Summit, aceleradoras
+                            como a Factory Lisbon e comunidade global de engenheiros de software.
+                        </p>
+
+                        <div class="conditions-grid">
+                            <div class="cond-box">
+                                <span class="cond-title">// CONDIÇÕES DE ARRENDAMENTO:</span>
+                                <ul>
+                                    <li><strong>Contrato mínimo:</strong> 5 a 10 anos comerciais.</li>
+                                    <li><strong>Caução requerida:</strong> 3 meses de renda de caução + 1 mês adiantado
+                                        (€ 12.800).</li>
+                                    <li><strong>Carência para obras:</strong> 2 meses de carência durante as obras de
+                                        ambientação.</li>
+                                    <li><strong>Garantia:</strong> Garantia bancária on-first-demand de 6 meses.</li>
+                                </ul>
+                            </div>
+                            <div class="cond-box">
+                                <span class="cond-title">// INFRAESTRUTURA &amp; TÉCNICA:</span>
+                                <ul>
+                                    <li><strong>Estado do imóvel:</strong> Shell &amp; Core com infraestruturas à porta
+                                        da fração.</li>
+                                    <li><strong>Saída de fumos:</strong> Pré-instalação de extração e ar condicionado
+                                        centralizado.</li>
+                                    <li><strong>Eletricidade:</strong> Potência industrial com posto de transformação
+                                        dedicado ao parque.</li>
+                                    <li><strong>Acessos / Comboio:</strong> Estação Braço de Prata e autocarros diretos
+                                        ao Terreiro do Paço.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="loc-pros-cons">
+                            <div class="pros"><span class="badge-pro">+ VANTAGEM:</span> Máximo poder de compra tech,
+                                clientes corporativos e eventos de tecnologia regulares.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Local 5: Asprela / Paranhos (Porto - Polo FEUP) -->
+                <div class="location-full-card">
+                    <div class="loc-badge-top">
+                        <span class="badge-city">PORTO</span>
+                        <span class="badge-flag">POLO UNIVERSITÁRIO &amp; IA</span>
+                    </div>
+                    <div class="loc-card-main">
+                        <div class="loc-title-group">
+                            <h3>Asprela / Paranhos (Polo FEUP &amp; ISEP)</h3>
+                            <span class="loc-sub">Rua Dr. Roberto Frias / Próx. UPTEC</span>
+                            <div class="loc-links-row">
+                                <a href="https://maps.google.com/?q=Rua+Dr.+Roberto+Frias+Paranhos+Porto"
+                                    target="_blank" rel="noopener noreferrer" class="btn-map-link"
+                                    title="Abrir localização exata no Google Maps">
+                                    <span class="map-pin">📍</span> VER NO GOOGLE MAPS ↗
+                                </a>
+                            </div>
+                        </div>
+                        <div class="loc-price-banner">
+                            <div class="price-val">€ 1.950 <small>/ mês</small></div>
+                            <div class="price-sqm">€ 12.18 / m² &middot; Área: 160 m²</div>
+                        </div>
+                    </div>
+                    <div class="loc-details-body">
+                        <p class="loc-summary">
+                            Espaço comercial moderno de rés-do-chão num edifício recente, com montra em vidro duplo e
+                            excelente visibilidade pedonal. Situado no maior polo de engenharia do Norte, com mais de
+                            30.000 estudantes e investigadores de computação e robótica.
+                        </p>
+
+                        <div class="conditions-grid">
+                            <div class="cond-box">
+                                <span class="cond-title">// CONDIÇÕES DE ARRENDAMENTO:</span>
+                                <ul>
+                                    <li><strong>Contrato mínimo:</strong> 3 anos renováveis.</li>
+                                    <li><strong>Caução requerida:</strong> 2 meses de caução + 1º mês (€ 5.850).</li>
+                                    <li><strong>Carência para obras:</strong> 2 meses de carência total.</li>
+                                    <li><strong>Garantia:</strong> Fiador português ou depósito colateral.</li>
+                                </ul>
+                            </div>
+                            <div class="cond-box">
+                                <span class="cond-title">// INFRAESTRUTURA &amp; TÉCNICA:</span>
+                                <ul>
+                                    <li><strong>Estado do imóvel:</strong> Pavimento em mosaico escuro, WC construído,
+                                        calhas existentes.</li>
+                                    <li><strong>Saída de fumos:</strong> Chaminé independente ligada à cobertura.</li>
+                                    <li><strong>Eletricidade:</strong> Quadro trifásico instalado.</li>
+                                    <li><strong>Acessos / Metro:</strong> Metro Polo Universitário a 3 minutos a pé.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="loc-pros-cons">
+                            <div class="pros"><span class="badge-pro">+ VANTAGEM:</span> Enorme fluxo diário de hackers,
+                                estudantes de programação e utilizadores do Maker lab.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: ORÇAMENTO COMPLETO (MOBÍLIA, MÁQUINAS, DESIGN, OBRAS) -->
+        <section id="orcamento" class="section-padding">
+            <div class="section-header">
+                <div class="sec-label">// FINANCIAL_MATRIX: CAPEX_AND_OPEX.JSON</div>
+                <h2>ORÇAMENTO TOTAL DE MONTAGEM &amp; DESIGN</h2>
+                <p class="sec-sub">Auditoria discriminada de todos os custos para criar o cybercafé: obras, marcenaria
+                    de nogueira, máquinas de café, computadores, redes e previsão de retorno.</p>
+            </div>
+
+            <!-- Dashboard de Indicadores Financeiros -->
+            <div class="finance-metrics-dashboard">
+                <div class="fin-card">
+                    <span class="fin-label">INVESTIMENTO TOTAL (CAPEX)</span>
+                    <span class="fin-value">€ 137.330</span>
+                    <span class="fin-sub">Com fundo de contingência incluído</span>
+                </div>
+                <div class="fin-card">
+                    <span class="fin-label">CUSTO OPERACIONAL / MÊS</span>
+                    <span class="fin-value">€ 10.520</span>
+                    <span class="fin-sub">Renda, salários, energia, fibra, insumos</span>
+                </div>
+                <div class="fin-card">
+                    <span class="fin-label">FATURAÇÃO ESTIMADA / MÊS</span>
+                    <span class="fin-value">€ 26.500</span>
+                    <span class="fin-sub">Média 120 clientes/dia + Merch + Postos</span>
+                </div>
+                <div class="fin-card highlight-fin">
+                    <span class="fin-label">PAYBACK PERIOD</span>
+                    <span class="fin-value">18 - 24 M</span>
+                    <span class="fin-sub">Retorno integral do investimento</span>
+                </div>
+            </div>
+
+            <!-- Tabela Detalhada Item a Item -->
+            <div class="budget-terminal-container">
+                <div class="budget-header">
+                    <h4>// DESCRITIVO DE CUSTOS DE MONTAGEM (ESPAÇO DE 150m²)</h4>
+                    <span class="budget-total-tag">CAPEX TOTAL: € 137.330</span>
+                </div>
+                <div class="budget-table-responsive">
+                    <table class="budget-table">
+                        <thead>
+                            <tr>
+                                <th>CATEGORIA</th>
+                                <th>ESPECIFICAÇÕES &amp; MARCAS SELECIONADAS</th>
+                                <th>VALOR (€)</th>
+                                <th>% TOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1. Obras, Design &amp; Fit-Out</strong></td>
+                                <td>Painéis acústicos ripados em nogueira com lã de rocha, iluminação regulável âmbar
+                                    DALI 2200K, eletricidade trifásica 34.5kVA com calhas técnicas de chão, AVAC oculto
+                                    com renovação de ar forçada, 2 WC acessíveis e projetos de arquitetura/licenciamento
+                                    camarário.</td>
+                                <td class="cost-num">€ 39.700</td>
+                                <td class="pct-num">28.9%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2. Equipamento Cafetaria &amp; Pastelaria</strong></td>
+                                <td>Máquina espresso <em>La Marzocco Linea PB 2 Grupos</em> (€ 11.500), moinhos
+                                    <em>Mahlkönig EK43S</em> e <em>E65S GbW</em>, forno convector com vapor <em>Unox
+                                        Bakerlux</em> (para Pão de Ló e folhados estaladiços), vitrine refrigerada
+                                    horizontal para doces, batedeira <em>KitchenAid 6.9L</em>, descalcificador de água
+                                    por osmose reversa <em>BWT</em> e lava-louças de 90s.
+                                </td>
+                                <td class="cost-num">€ 31.790</td>
+                                <td class="pct-num">23.1%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3. Infraestrutura Tech &amp; Hacker Lab</strong></td>
+                                <td>Gateway e switch 10G <em>Ubiquiti UniFi Dream Machine Pro SE</em>, 3x APs Wi-Fi 7
+                                    <em>UniFi U7 Pro</em>, 8x Monitores 4K <em>Dell UltraSharp 32"</em> com dock USB-C
+                                    90W, 2x Cabines acústicas privadas insonorizadas para chamadas, bancada de soldar
+                                    Maker com estações <em>Pinecil/TS101</em>, exaustores HEPA e aparelhagem de som
+                                    analógica a válvulas com gira-discos de vinil.
+                                </td>
+                                <td class="cost-num">€ 24.480</td>
+                                <td class="pct-num">17.8%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>4. Mobiliário de Design &amp; Lounge</strong></td>
+                                <td>Balcão de atendimento e barista em nogueira maciça sob medida e latão (5m lineares),
+                                    2x sofás Chesterfield em couro castanho conhaque envelhecido, 4x poltronas em veludo
+                                    chocolate, mesas baixas com tomadas embutidas, 12x cadeiras ergonómicas certificadas
+                                    (Sihoo/Herman Miller) e estantes metálicas pretas para zines.</td>
+                                <td class="cost-num">€ 21.040</td>
+                                <td class="pct-num">15.3%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>5. Stock Inicial, Embalagens &amp; Merch</strong></td>
+                                <td>Lote inicial de café verde/torrado de especialidade (80kg Etiópia/Brasil),
+                                    ingredientes biológicos para pastelaria (ovos frescos, manteiga DOP Açores, cacau
+                                    puro), 100 hoodies e t-shirts com bordado ASCII, 50 canecas cerâmicas, desk mats e
+                                    2.000 caixas takeaway kraft carimbadas.</td>
+                                <td class="cost-num">€ 10.150</td>
+                                <td class="pct-num">7.4%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>6. Fundo de Reserva &amp; Imprevistos</strong></td>
+                                <td>Fundo de contingência de tesouraria de segurança para os primeiros meses de arranque
+                                    (8%).</td>
+                                <td class="cost-num">€ 10.170</td>
+                                <td class="pct-num">7.4%</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="2">TOTAL DO INVESTIMENTO DE MONTAGEM E ARRANQUE</th>
+                                <th class="cost-total">€ 137.330</th>
+                                <th class="pct-total">100%</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <!-- Detalhes do OpEx Mensal -->
+                <div class="opex-breakdown-box">
+                    <h5>// DETALHE DO OPEX MENSAL (CUSTOS OPERACIONAIS FIXOS &middot; ~€ 10.520 / MÊS)</h5>
+                    <div class="opex-cols">
+                        <div class="opex-col">
+                            <p>&bull; <strong>Renda comercial (Porto Bonfim):</strong> € 2.100 / mês</p>
+                            <p>&bull; <strong>Chefe Barista de Especialidade:</strong> € 1.800 / mês (custo empresa)</p>
+                            <p>&bull; <strong>Pasteleiro Artesanal (Pão de Ló &amp; Folhados):</strong> € 1.740 / mês
+                                (custo empresa)</p>
+                        </div>
+                        <div class="opex-col">
+                            <p>&bull; <strong>2x Baristas Part-time (Noites/Fim de semana):</strong> € 1.600 / mês</p>
+                            <p>&bull; <strong>Eletricidade Trifásica &amp; Água:</strong> € 750 / mês</p>
+                            <p>&bull; <strong>Fibra Ótica Dedicada Simétrica 10G:</strong> € 180 / mês</p>
+                        </div>
+                        <div class="opex-col">
+                            <p>&bull; <strong>Reposição de Insumos (Café, ovos, manteiga):</strong> € 2.000 / mês</p>
+                            <p>&bull; <strong>Software POS, Licenças &amp; Contabilidade:</strong> € 350 / mês</p>
+                            <p>&bull; <strong>Break-Even Diário:</strong> ~110 clientes / dia (Ticket médio: € 6.80)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: TERMINAL INTERATIVO CLI -->
+        <section id="terminal-section" class="section-padding section-alt">
+            <div class="section-header">
+                <div class="sec-label">// INTERACTIVE_CLI</div>
+                <h2>CONSOLE VIRTUAL DO CYBERCAFÉ</h2>
+                <p class="sec-sub">Experimenta a nossa interface de linha de comandos. Digita <code>help</code> para
+                    explorar a lista de comandos disponíveis.</p>
+            </div>
+
+            <div class="terminal-container">
+                <div class="terminal-titlebar">
+                    <div class="window-controls">
+                        <span class="ctrl-dot dot-red"></span>
+                        <span class="ctrl-dot dot-yellow"></span>
+                        <span class="ctrl-dot dot-green"></span>
+                    </div>
+                    <span class="terminal-title">guest@planb-cybercafe:~ (bash)</span>
+                    <span class="terminal-encoding">UTF-8 // LO-FI TERMINAL</span>
+                </div>
+                <div class="terminal-body" id="terminal-screen">
+                    <div class="terminal-line text-muted">PLAN B OS v2.5.0 (x86_64-cafe-linux-gnu) &middot; SINGLE PAGE
+                        EXPERIENCE</div>
+                    <div class="terminal-line text-muted">Escreve <span class="highlight-cmd">help</span> para comandos
+                        ou clica nos atalhos rápidos abaixo.</div>
+                    <div class="terminal-line">--------------------------------------------------</div>
+                </div>
+                <div class="terminal-quick-cmds">
+                    <span class="quick-label">Atalhos rápidos:</span>
+                    <button class="quick-btn" data-cmd="covilha">&gt; covilha</button>
+                    <button class="quick-btn" data-cmd="specials">&gt; specials</button>
+                    <button class="quick-btn" data-cmd="paodelo">&gt; paodelo</button>
+                    <button class="quick-btn" data-cmd="milfolhas">&gt; milfolhas</button>
+                    <button class="quick-btn" data-cmd="merch">&gt; merch</button>
+                    <button class="quick-btn" data-cmd="locations">&gt; locations</button>
+                    <button class="quick-btn" data-cmd="budget">&gt; budget</button>
+                    <button class="quick-btn" data-cmd="wifi">&gt; wifi</button>
+                    <button class="quick-btn" data-cmd="clear">&gt; clear</button>
+                </div>
+                <form class="terminal-input-row" id="terminal-form">
+                    <span class="prompt-symbol">guest@planb:~$</span>
+                    <input type="text" id="terminal-input" autocomplete="off" spellcheck="false"
+                        placeholder="Digita um comando (ex: help, specials, locations, budget)...">
+                    <button type="submit" class="terminal-submit">RUN</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- SECTION: CONTACTOS & HORÁRIOS -->
+        <section id="contactos" class="section-padding">
+            <div class="section-header">
+                <div class="sec-label">// CONNECT &amp; TELEMETRY</div>
+                <h2>LOCALIZAÇÃO, HORÁRIOS &amp; REDE</h2>
+                <p class="sec-sub">Informações de acesso aos espaços, horários de funcionamento, infraestrutura de rede
+                    e canais diretos da comunidade.</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="info-terminal-card">
+                    <div class="card-header">
+                        <span class="file-icon">📍</span> locations_matrix.txt
+                    </div>
+                    <div class="info-terminal-body">
+                        <pre class="ascii-art map-ascii">
+    +------------------------------------+
+    |      PLAN B // REDE NACIONAL       |
+    |                                    |
+    |  [PORTO]   *----.                  |
+    |                  \  10G Fibra      |
+    |   [COVILHÃ] *-----* [UBI TECH HUB] |
+    |                  /                 |
+    |  [LISBOA]  *----/                  |
+    |                                    |
+    |  STATUS: 3/3 NÓS OPERACIONAIS [●]  |
+    +------------------------------------+
+</pre>
+                        <div class="info-block">
+                            <h4>// POLOS PRINCIPAIS</h4>
+                            <p><strong>Covilhã (Hub UBI Tech):</strong> Rua Marquês d'Ávila &middot; A 100m da
+                                Informática/UBI</p>
+                            <p><strong>Porto:</strong> Rua do Bonfim / Campo 24 de Agosto (Metro a 2 min)</p>
+                            <p><strong>Lisboa:</strong> Hub Criativo do Beato / Marvila (Frente ao Tejo)</p>
+                        </div>
+                        <div class="info-block">
+                            <h4>// HORÁRIO DE FUNCIONAMENTO</h4>
+                            <p><strong>Segunda a Quinta:</strong> 08h30 — 00h00</p>
+                            <p><strong>Sexta &amp; Sábado:</strong> 08h30 — 02h00 (Noites Lo-Fi Synth)</p>
+                            <p><strong>Domingo:</strong> 10h00 — 22h00 (Slow Coffee &amp; Retro Gaming)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-terminal-card">
+                    <div class="card-header">
+                        <span class="file-icon">📡</span> connectivity_and_rules.txt
+                    </div>
+                    <div class="info-terminal-body">
+                        <div class="info-block">
+                            <h4>// REDE E CONEXÃO</h4>
+                            <p><strong>SSID Wi-Fi:</strong> <code>PLAN_B_GUEST_5GHZ</code></p>
+                            <p><strong>Segurança:</strong> WPA3 Enterprise com Client Isolation</p>
+                            <p><strong>Velocidade:</strong> 10 Gbps Simétrica (Fibra Direta)</p>
+                            <p><strong>DNS:</strong> 1.1.1.1 / 9.9.9.9 via DNS over HTTPS (DoH)</p>
+                        </div>
+                        <div class="info-block">
+                            <h4>// CANAIS DA COMUNIDADE &amp; CONTACTO</h4>
+                            <p><strong>Telegram Oficial:</strong> <code>t.me/planb_cybercafe</code></p>
+                            <p><strong>Matrix / Element:</strong> <code>#planb:matrix.org</code></p>
+                            <p><strong>Email:</strong> <code>root@planb.cafe</code></p>
+                            <p><strong>PGP Key Fingerprint:</strong> <code>7F3B 98A2 4C10 D89E 02FA</code></p>
+                        </div>
+                        <div class="info-block">
+                            <h4>// POLÍTICA DE RESPEITO E FOCO</h4>
+                            <p>Chamadas de voz apenas nas 2 cabines acústicas dedicadas. Auscultadores obrigatórios para
+                                áudio de computadores.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER COM ASCII ART E LINKS -->
+    <footer class="cyber-footer">
+        <div class="footer-ascii">
+            <pre class="ascii-art">
+  ____  _        _    _   _   ____     __  __ 
+ |  _ \| |      / \  | \ | | | __ )   / / / / 
+ | |_) | |     / _ \ |  \| | |  _ \  / / / /  
+ |  __/| |___ / ___ \| |\  | | |_) |/ / / /   
+ |_|   |_____/_/   \_\_| \_| |____//_/ /_/    
+</pre>
+        </div>
+        <!-- BACKDOOR / BASTIDORES ACCESS BUTTON -->
+        <div class="footer-backdoor-container">
+            <button id="btn-bastidores" class="btn-backdoor" type="button"
+                title="Acesso reservado ao laboratório secreto dos fundadores">
+                <span class="backdoor-glitch-tag">[ ⚡ ROOT_PRIVILEGES_REQUIRED ]</span>
+                <span class="backdoor-title">&gt;&gt; ACEDER AOS BASTIDORES // THE FOUNDERS' HACKER LAB &lt;&lt;</span>
+                <span class="backdoor-hint">[ CLICA PARA ACEDER AO BUNKER DE HACKING &amp; FORMAÇÕES ]</span>
+            </button>
+        </div>
+
+        <div class="footer-links-row">
+            <span>&copy; 2026 PLAN B // CYBERCAFÉ &middot; ALL-IN-ONE SINGLE PAGE</span>
+            <span class="dot-sep">&middot;</span>
+            <span>POWERED BY LO-FI, SPECIALTY COFFEE &amp; OPEN SOURCE</span>
+            <span class="dot-sep">&middot;</span>
+            <a href="#hero">VOLTAR AO TOPO [^]</a>
+        </div>
+    </footer>
+
+    <!-- GLITCH OVERLAY DE TRANSIÇÃO -->
+    <div id="glitch-overlay" class="glitch-overlay"></div>
+
+    <script src="lofi-audio.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
