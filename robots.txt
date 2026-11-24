@@ -1,9 +1,11 @@
 # Plan B // Lo-Fi Cybercafé & Hacker Lounge
-# Covilhã · Porto · Lisboa
+# (devil Team)
 
 User-agent: *
 Disallow: /bastidores.html
 Disallow: /captive-portal/
 
 # [Wi-Fi Captive Gateway Traffic Dump - 10.42.0.1]
+# O Enigma dos Fundadores:
+# "Ao fim de 63 dias, César colheu 13 maçãs; comeu uma por hora, e quando acabou eram 2 da manhã do dia seguinte... No final foram 64 dias e 13 maçãs."
 # X-Captured-Token: YzQwX3EzX3kwX2Zyel9lcnB1cnZiXzEzMzc=

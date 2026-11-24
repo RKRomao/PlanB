@@ -405,6 +405,7 @@ DNS: 1.1.1.1 / 9.9.9.9 com DNS over HTTPS (DoH)<br><br>
 <span style="color:var(--amber-bright);font-weight:bold;">[!] CAPTIVE PORTAL TRAFFIC CAPTURED:</span><br>
 <code style="color:#6ee7b7;display:block;background:rgba(0,0,0,0.6);padding:0.5rem 0.8rem;border-left:3px solid var(--accent-cyan);margin-top:0.3rem;">
 HTTP/1.1 200 OK &middot; Server: PlanB-Daemon/1.33.7 (Covilhã Hub)<br>
+X-Riddle: <em>"Ao fim de 63 dias, César colheu 13 maçãs; comeu uma por hora e quando acabou eram 2 da manhã do dia seguinte... No total foram 64 dias e 13 maçãs."</em><br>
 Token: <strong>YzQwX3EzX3kwX2Zyel9lcnB1cnZiXzEzMzc=</strong>
 </code><br>
 Valida a tua resposta no terminal com: <span class="highlight-cmd">flag FLAG{...}</span>`;
@@ -901,6 +902,7 @@ function initCtfConsoleBanner() {
         "  ╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝    ╚═════╝ \n\n" +
         "[CAPTIVE PORTAL SNIFFER - 10.42.0.1]\n" +
         "HTTP/1.1 200 OK &middot; Server: PlanB-Daemon/1.33.7 (Covilhã Hub)\n" +
+        "X-Riddle: \"Ao fim de 63 dias, César colheu 13 maçãs; comeu uma por hora e quando acabou eram 2 da manhã do dia seguinte... No total foram 64 dias e 13 maçãs.\"\n" +
         "Captured Token: YzQwX3EzX3kwX2Zyel9lcnB1cnZiXzEzMzc=\n\n" +
         ">> Submete no terminal do site: flag FLAG{...}",
         "color: #ffb454; font-weight: bold; font-family: monospace; font-size: 13px;",
