@@ -3010,9 +3010,13 @@ body.screen-glitching {
 
 
 /* ==========================================================================
-   RESPONSIVIDADE (MOBILE & TABLET)
+   RESPONSIVIDADE (MOBILE & TABLET & SMALL DEVICES)
    ========================================================================== */
 @media (max-width: 950px) {
+    .sys-bar {
+        padding: 0.4rem 0.85rem;
+    }
+
     .main-nav {
         flex-direction: column;
         gap: 0.85rem;
@@ -3034,6 +3038,18 @@ body.screen-glitching {
     }
 
     .specialties-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .space-showcase-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bunker-gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bunker-activities-grid {
         grid-template-columns: 1fr;
     }
 
@@ -3062,7 +3078,155 @@ body.screen-glitching {
     }
 }
 
+@media (max-width: 768px) {
+    .sys-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.45rem;
+        padding: 0.5rem 0.85rem;
+    }
+
+    .sys-bar-left {
+        justify-content: center;
+        font-size: 0.7rem;
+        gap: 0.4rem;
+    }
+
+    .sys-bar-right {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .lofi-player-widget {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero-section {
+        padding: 1.5rem 1rem 2rem;
+    }
+
+    .section-padding {
+        padding: 2.8rem 1rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .section-header .sec-sub {
+        font-size: 0.85rem;
+    }
+
+    .logo-ascii {
+        font-size: clamp(0.32rem, 1.4vw, 0.55rem);
+    }
+
+    .coffee-ascii-stage {
+        padding: 1rem 0.5rem;
+    }
+
+    .coffee-ascii {
+        font-size: 0.78rem;
+    }
+
+    .bunker-hero {
+        padding: 2rem 1rem 1.5rem;
+    }
+
+    .bunker-hero h1 {
+        font-size: 1.65rem;
+    }
+
+    .bunker-hero .bunker-sub {
+        font-size: 0.88rem;
+    }
+
+    .bunker-hero-ascii-wrapper {
+        margin: 1.2rem auto 1rem;
+    }
+
+    .bunker-hero-ascii {
+        font-size: 0.72rem !important;
+        padding: 1rem 0.8rem !important;
+    }
+
+    .menu-tabs, .merch-tabs {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 0.4rem;
+        scrollbar-width: thin;
+    }
+
+    .tab-btn {
+        white-space: nowrap;
+        font-size: 0.72rem;
+        padding: 0.4rem 0.75rem;
+    }
+
+    .budget-table, .bunker-specs-table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+    }
+
+    .budget-table th, .budget-table td,
+    .bunker-specs-table th, .bunker-specs-table td {
+        padding: 0.65rem 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    .terminal-body {
+        padding: 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    .terminal-input-bar {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .terminal-quick-cmds {
+        padding: 0.4rem 0.75rem;
+    }
+
+    .quick-cmd-btn {
+        font-size: 0.68rem;
+        padding: 0.2rem 0.45rem;
+    }
+}
+
 @media (max-width: 600px) {
+    .sys-separator {
+        display: none;
+    }
+
+    .sys-bar-left {
+        gap: 0.5rem;
+        font-size: 0.68rem;
+    }
+
+    .nav-links {
+        gap: 0.4rem 0.8rem;
+    }
+
+    .nav-links a {
+        font-size: 0.74rem;
+    }
+
+    .coffee-stats {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+    }
+
+    .c-stat {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
     .tech-requirements-bar {
         grid-template-columns: 1fr;
     }
@@ -3074,6 +3238,7 @@ body.screen-glitching {
     .loc-card-main {
         flex-direction: column;
         align-items: flex-start;
+        gap: 0.75rem;
     }
 
     .loc-price-banner {
@@ -3093,13 +3258,102 @@ body.screen-glitching {
 
     .bunker-top-bar {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
+        align-items: stretch;
+        gap: 0.6rem;
+        padding: 0.6rem 1rem;
     }
 
-    .bunker-specs-table {
+    .bunker-top-bar > div:last-child {
+        text-align: right;
+    }
+
+    .flag-input-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .flag-text-input {
+        min-width: 0 !important;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .btn-flag-submit {
+        width: 100%;
+        text-align: center;
+        padding: 0.6rem;
+    }
+
+    .flag-terminal-link {
+        text-align: center;
         display: block;
-        overflow-x: auto;
+        margin-top: 0.3rem;
+    }
+
+    .ctf-credential-card {
+        margin: 0.5rem;
+        max-width: 100%;
+    }
+
+    .credential-body {
+        padding: 1.1rem 1rem;
+    }
+
+    .voucher-code {
+        font-size: 1.05rem;
+        word-break: break-all;
+    }
+
+    .credential-footer {
+        flex-direction: column;
+        padding: 0.75rem 1rem;
+    }
+
+    .credential-footer .btn-voucher-action {
+        width: 100%;
+        text-align: center;
+    }
+
+    .hero-cta-buttons {
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+
+    .hero-cta-buttons .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .btn-backdoor {
+        width: 100%;
+        padding: 1rem 0.8rem;
+        box-sizing: border-box;
+    }
+
+    .backdoor-title {
+        font-size: 0.95rem;
+    }
+
+    .backdoor-hint {
+        font-size: 0.7rem;
+    }
+
+    .menu-grid, .merch-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .materials-deepdive-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-links-row {
+        flex-direction: column;
+        gap: 0.4rem;
+        text-align: center;
+    }
+
+    .footer-links-row .dot-sep {
+        display: none;
     }
 }
 
