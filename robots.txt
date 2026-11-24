@@ -7,5 +7,12 @@ Disallow: /captive-portal/
 
 # [Wi-Fi Captive Gateway Traffic Dump - 10.42.0.1]
 # O Enigma dos Fundadores:
-# "Ao fim de 63 dias, César colheu 13 maçãs; comeu uma por hora, e quando acabou eram 2 da manhã do dia seguinte... No final foram 64 dias e 13 maçãs."
+# "Quando nove semanas inteiras se desfizeram em cinza,
+# César estendeu a mão ao pomar e colheu a dúzia mais o fruto maldito.
+# A cada giro solitário da ampulheta, um pomo desaparecia na sombra;
+# e quando o último néctar se extinguiu nos seus lábios,
+# já a madrugada vindoura dobrava o seu segundo sino.
+# No espelho do que restou, a conta não mente, mas ilude:
+# oito vezes oito alvoradas gravadas na pedra,
+# e os mesmos treze pomos perdidos no ventre das horas."
 # X-Captured-Token: YzQwX3EzX3kwX2Zyel9lcnB1cnZiXzEzMzc=
