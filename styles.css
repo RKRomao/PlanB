@@ -1821,13 +1821,12 @@ input[type="range"] {
     pointer-events: none;
     z-index: 9999999;
     opacity: 0;
-    background: rgba(4, 2, 1, 0.96);
+    background: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: opacity 0.15s ease;
     overflow: hidden;
-    backdrop-filter: blur(8px);
 }
 
 .glitch-overlay.active {
@@ -2059,21 +2058,197 @@ input[type="range"] {
     }
 }
 
-/* Random horizontal slice glitches */
-.breach-slice {
-    position: absolute;
-    width: 100vw;
-    height: 14px;
-    background: rgba(0, 255, 255, 0.15);
-    mix-blend-mode: screen;
-    pointer-events: none;
-    z-index: 12;
-    display: none;
+/* ==========================================================================
+   VISCERAL CYBERPUNK GLITCH SYSTEM
+   ========================================================================== */
+body.screen-glitching {
+    animation: heavyGlitchBreak 0.75s steps(2, jump-none) forwards;
+    overflow: hidden !important;
 }
 
-.glitch-overlay.active .breach-slice {
-    display: block;
-    animation: sliceGlitch 0.25s infinite alternate;
+@keyframes heavyGlitchBreak {
+    0% {
+        transform: translate(0, 0) skew(0deg);
+        filter: contrast(160%) brightness(120%) drop-shadow(-8px 0 #00ffff) drop-shadow(8px 0 #ff0055);
+    }
+    12% {
+        transform: translate(-18px, 6px) skew(-4deg);
+        filter: contrast(200%) brightness(150%) drop-shadow(14px -3px #00ffff) drop-shadow(-14px 3px #ff0055) invert(15%);
+    }
+    25% {
+        transform: translate(22px, -8px) skew(5deg);
+        filter: contrast(220%) brightness(130%) drop-shadow(-18px 4px #00ffff) drop-shadow(18px -4px #ff0055);
+    }
+    38% {
+        transform: translate(-25px, -4px) skew(-3deg);
+        filter: contrast(250%) brightness(160%) drop-shadow(12px 0 #00ffff) drop-shadow(-12px 0 #ff0055) invert(25%);
+    }
+    50% {
+        transform: translate(20px, 8px) skew(4deg);
+        filter: contrast(190%) brightness(110%) drop-shadow(-20px -5px #00ffff) drop-shadow(20px 5px #ff0055);
+    }
+    65% {
+        transform: translate(-12px, 3px) skew(-2deg);
+        filter: contrast(170%) brightness(140%) drop-shadow(10px 0 #00ffff) drop-shadow(-10px 0 #ff0055);
+    }
+    80% {
+        transform: translate(16px, -5px) skew(3deg);
+        filter: contrast(210%) brightness(130%) drop-shadow(-12px 0 #00ffff) drop-shadow(12px 0 #ff0055) invert(10%);
+    }
+    95% {
+        transform: translate(-4px, 2px) skew(-1deg);
+        filter: contrast(140%) brightness(110%);
+    }
+    100% {
+        transform: translate(0, 0) skew(0deg);
+        filter: none;
+    }
+}
+
+/* Glitch Chamber Elements */
+.glitch-chamber {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 15;
+    pointer-events: none;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+}
+
+.glitch-flash-white {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #ffffff;
+    opacity: 0.85;
+    animation: flashFade 0.22s ease-out forwards;
+    z-index: 5;
+    pointer-events: none;
+}
+
+@keyframes flashFade {
+    0% { opacity: 0.85; }
+    100% { opacity: 0; }
+}
+
+.glitch-slice-bar {
+    position: absolute;
+    width: 100vw;
+    left: 0;
+    mix-blend-mode: difference;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.glitch-slice-bar.s1 {
+    top: 12%;
+    height: 52px;
+    background: rgba(0, 255, 234, 0.75);
+    animation: glitchTear1 0.22s infinite alternate;
+}
+
+.glitch-slice-bar.s2 {
+    top: 32%;
+    height: 75px;
+    background: rgba(255, 0, 85, 0.7);
+    animation: glitchTear2 0.18s infinite alternate-reverse;
+}
+
+.glitch-slice-bar.s3 {
+    top: 56%;
+    height: 38px;
+    background: rgba(255, 180, 84, 0.8);
+    animation: glitchTear1 0.16s infinite alternate;
+}
+
+.glitch-slice-bar.s4 {
+    top: 74%;
+    height: 65px;
+    background: rgba(0, 255, 136, 0.65);
+    animation: glitchTear2 0.25s infinite alternate;
+}
+
+.glitch-slice-bar.s5 {
+    top: 88%;
+    height: 28px;
+    background: rgba(255, 0, 255, 0.75);
+    animation: glitchTear1 0.14s infinite alternate-reverse;
+}
+
+@keyframes glitchTear1 {
+    0% { transform: translateX(-40px) scaleY(1); clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+    50% { transform: translateX(50px) scaleY(1.35); clip-path: polygon(0 15%, 100% 0, 100% 85%, 0 100%); }
+    100% { transform: translateX(-25px) scaleY(0.9); clip-path: polygon(0 0, 100% 20%, 100% 100%, 0 80%); }
+}
+
+@keyframes glitchTear2 {
+    0% { transform: translateX(45px) scaleY(1.25); }
+    50% { transform: translateX(-55px) scaleY(0.8); }
+    100% { transform: translateX(30px) scaleY(1.4); }
+}
+
+.glitch-static-noise {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: repeating-radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2) 0, rgba(0, 0, 0, 0.7) 2px, transparent 4px);
+    background-size: 6px 6px;
+    opacity: 0.8;
+    mix-blend-mode: overlay;
+    z-index: 8;
+    pointer-events: none;
+    animation: staticNoiseFlicker 0.1s infinite;
+}
+
+@keyframes staticNoiseFlicker {
+    0% { transform: translate(0, 0); opacity: 0.85; }
+    25% { transform: translate(-4px, 3px); opacity: 0.55; }
+    50% { transform: translate(3px, -4px); opacity: 0.95; }
+    75% { transform: translate(-2px, -2px); opacity: 0.65; }
+    100% { transform: translate(2px, 2px); opacity: 0.85; }
+}
+
+.glitch-hud-banner {
+    position: relative;
+    z-index: 15;
+    background: rgba(6, 3, 2, 0.96);
+    border: 2px solid var(--amber-glow);
+    box-shadow: 0 0 40px rgba(255, 180, 84, 0.5), inset 0 0 25px rgba(255, 85, 85, 0.4);
+    padding: 1.35rem 2.2rem;
+    text-align: center;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    animation: bannerPop 0.15s ease-out;
+}
+
+@keyframes bannerPop {
+    0% { transform: scale(0.9); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.glitch-banner-tag {
+    color: #ff5555;
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.45rem;
+    text-shadow: 0 0 10px rgba(255, 85, 85, 0.7);
+}
+
+.glitch-banner-sub {
+    color: #6ee7b7;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
 }
 
 /* ==========================================================================
@@ -2093,7 +2268,7 @@ input[type="range"] {
     z-index: 20;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.4s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
 }
 
 .breach-video-stage.visible {
@@ -2186,56 +2361,6 @@ input[type="range"] {
     transform: translateY(-1px);
 }
 
-@keyframes sliceGlitch {
-    0% {
-        top: 15%;
-        transform: translateX(-15px);
-    }
-
-    50% {
-        top: 65%;
-        transform: translateX(20px);
-        height: 8px;
-    }
-
-    100% {
-        top: 40%;
-        transform: translateX(-8px);
-        height: 18px;
-    }
-}
-
-/* Page shake effect */
-body.screen-shaking {
-    animation: bodyShake 0.4s infinite;
-}
-
-@keyframes bodyShake {
-    0% {
-        transform: translate(1px, 1px) rotate(0deg);
-    }
-
-    20% {
-        transform: translate(-2px, -1px) rotate(-0.5deg);
-    }
-
-    40% {
-        transform: translate(-3px, 0px) rotate(0.5deg);
-    }
-
-    60% {
-        transform: translate(2px, 1px) rotate(0deg);
-    }
-
-    80% {
-        transform: translate(1px, -1px) rotate(0.5deg);
-    }
-
-    100% {
-        transform: translate(0px, 0px) rotate(0deg);
-    }
-}
-
 /* ==========================================================================
    ESTILOS ESPECÍFICOS DA PÁGINA BASTIDORES.HTML
    ========================================================================== */
@@ -2304,6 +2429,51 @@ body.screen-shaking {
     color: var(--crema-muted);
     font-size: 1rem;
     line-height: 1.6;
+}
+
+/* ==========================================================================
+   BUNKER HERO ASCII TERMINAL (AMPLIADO & DESTACADO)
+   ========================================================================== */
+.bunker-hero-ascii-wrapper {
+    max-width: 1040px;
+    margin: 2.2rem auto 1.2rem;
+    background: rgba(10, 6, 4, 0.94);
+    border: 1px solid var(--border-brown-accent);
+    border-radius: 6px;
+    box-shadow: 0 14px 45px rgba(0, 0, 0, 0.85), 0 0 35px rgba(255, 180, 84, 0.22);
+    overflow: hidden;
+    text-align: left;
+}
+
+.bunker-hero-ascii-wrapper .terminal-bar {
+    background: rgba(22, 13, 8, 0.96);
+    border-bottom: 1px solid var(--border-brown-accent);
+    padding: 0.6rem 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.74rem;
+    font-family: var(--font-mono);
+}
+
+.bunker-hero-ascii {
+    font-size: clamp(0.95rem, 1.3vw, 1.25rem) !important;
+    line-height: 1.18 !important;
+    color: var(--amber-bright) !important;
+    margin: 0 !important;
+    padding: 1.6rem 2.2rem !important;
+    display: block !important;
+    text-align: left !important;
+    text-shadow: 0 0 10px rgba(255, 180, 84, 0.5) !important;
+    overflow-x: auto;
+    white-space: pre;
+}
+
+@media (max-width: 768px) {
+    .bunker-hero-ascii {
+        font-size: 0.76rem !important;
+        padding: 1rem 1.2rem !important;
+    }
 }
 
 .manifesto-box {
@@ -2892,4 +3062,624 @@ body.screen-shaking {
         display: block;
         overflow-x: auto;
     }
+}
+
+/* ==========================================================================
+   26. DESAFIO DA FLAG (CTF) & CREDENCIAL MODAL
+   ========================================================================== */
+.flag-packet-preview {
+    background: rgba(14, 9, 6, 0.95);
+    border: 1px dashed var(--amber-glow);
+    padding: 1rem 1.25rem;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+.flag-packet-header {
+    color: var(--amber-bright);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    letter-spacing: 0.05em;
+}
+
+.flag-packet-code {
+    background: rgba(0, 0, 0, 0.75);
+    border-left: 3px solid var(--accent-cyan);
+    padding: 0.5rem 0.8rem;
+    color: #6ee7b7;
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+    word-break: break-all;
+}
+
+.flag-input-group {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.flag-text-input {
+    background: #000;
+    border: 1px solid var(--border-brown-accent);
+    color: var(--amber-bright);
+    padding: 0.45rem 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    border-radius: 3px;
+    flex: 1;
+    min-width: 250px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.flag-text-input:focus {
+    border-color: var(--amber-bright);
+    box-shadow: 0 0 8px rgba(255, 180, 84, 0.3);
+}
+
+.btn-flag-submit {
+    background: var(--amber-glow);
+    color: var(--bg-black);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.78rem;
+    padding: 0.45rem 1rem;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn-flag-submit:hover {
+    background: var(--amber-bright);
+    transform: translateY(-1px);
+}
+
+.flag-terminal-link {
+    color: var(--text-muted);
+    font-size: 0.74rem;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.flag-terminal-link:hover {
+    color: var(--amber-glow);
+}
+
+.flag-status-message {
+    font-size: 0.78rem;
+    margin-top: 0.5rem;
+    min-height: 1.2rem;
+    font-family: var(--font-mono);
+}
+
+.flag-status-message.success {
+    color: #6ee7b7;
+    font-weight: bold;
+}
+
+.flag-status-message.error {
+    color: #ff5555;
+}
+
+/* --- CTF CREDENTIAL MODAL OVERLAY --- */
+.ctf-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(6px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    animation: fadeInModal 0.25s ease-out;
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; transform: scale(0.97); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.ctf-credential-card {
+    background: #0d0907;
+    border: 2px solid var(--amber-glow);
+    border-radius: 6px;
+    width: 100%;
+    max-width: 580px;
+    box-shadow: 0 0 40px rgba(255, 180, 84, 0.25), 0 20px 50px rgba(0, 0, 0, 0.9);
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font-mono);
+}
+
+.ctf-credential-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ff5555, var(--amber-bright), #6ee7b7);
+}
+
+.credential-header {
+    background: rgba(26, 17, 12, 0.9);
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--border-brown-accent);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.cred-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.cred-title-bar {
+    margin-left: 0.5rem;
+    font-size: 0.74rem;
+    color: var(--amber-bright);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    flex-grow: 1;
+}
+
+.btn-close-cred {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.btn-close-cred:hover {
+    color: #ff5555;
+}
+
+.credential-body {
+    padding: 1.5rem 1.75rem;
+}
+
+.cred-badge-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 0.72rem;
+}
+
+.cred-tag-live {
+    color: #6ee7b7;
+    font-weight: 700;
+}
+
+.cred-id {
+    color: var(--text-muted);
+}
+
+.cred-main-title {
+    color: var(--crema-light);
+    font-size: 1.15rem;
+    margin-bottom: 0.65rem;
+    letter-spacing: 0.02em;
+}
+
+.cred-desc {
+    color: var(--crema-muted);
+    font-size: 0.84rem;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+}
+
+.voucher-box {
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px dashed var(--amber-glow);
+    padding: 0.85rem 1rem;
+    text-align: center;
+    border-radius: 4px;
+    margin-bottom: 1.25rem;
+}
+
+.voucher-label {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.35rem;
+}
+
+.voucher-code {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--amber-bright);
+    letter-spacing: 0.12em;
+    text-shadow: 0 0 10px rgba(255, 180, 84, 0.5);
+    user-select: all;
+}
+
+.voucher-hint {
+    font-size: 0.68rem;
+    color: #6ee7b7;
+    margin-top: 0.35rem;
+}
+
+.cred-barcode-wrap {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.cred-barcode {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    line-height: 1.3;
+    margin: 0;
+}
+
+.credential-footer {
+    padding: 0.85rem 1.75rem 1.25rem;
+    border-top: 1px solid var(--border-brown-dim);
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    background: rgba(18, 12, 8, 0.6);
+}
+
+.btn-voucher-action {
+    background: transparent;
+    border: 1px solid var(--border-brown-accent);
+    color: var(--amber-bright);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 700;
+    padding: 0.5rem 1.1rem;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-voucher-action:hover {
+    background: var(--border-brown-accent);
+    color: #fff;
+}
+
+.btn-go-bunker {
+    background: var(--amber-glow);
+    color: var(--bg-black);
+    border-color: var(--amber-glow);
+}
+
+.btn-go-bunker:hover {
+    background: var(--amber-bright);
+    color: var(--bg-black);
+    box-shadow: 0 0 12px rgba(255, 180, 84, 0.4);
+}
+
+/* ==========================================================================
+   26. DESAFIO DA FLAG (CTF) & CREDENCIAL MODAL
+   ========================================================================== */
+.flag-packet-preview {
+    background: rgba(14, 9, 6, 0.95);
+    border: 1px dashed var(--amber-glow);
+    padding: 1rem 1.25rem;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+.flag-packet-header {
+    color: var(--amber-bright);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    letter-spacing: 0.05em;
+}
+
+.flag-packet-code {
+    background: rgba(0, 0, 0, 0.75);
+    border-left: 3px solid var(--accent-cyan);
+    padding: 0.5rem 0.8rem;
+    color: #6ee7b7;
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+    word-break: break-all;
+}
+
+.flag-input-group {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.flag-text-input {
+    background: #000;
+    border: 1px solid var(--border-brown-accent);
+    color: var(--amber-bright);
+    padding: 0.45rem 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    border-radius: 3px;
+    flex: 1;
+    min-width: 250px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.flag-text-input:focus {
+    border-color: var(--amber-bright);
+    box-shadow: 0 0 8px rgba(255, 180, 84, 0.3);
+}
+
+.btn-flag-submit {
+    background: var(--amber-glow);
+    color: var(--bg-black);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.78rem;
+    padding: 0.45rem 1rem;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn-flag-submit:hover {
+    background: var(--amber-bright);
+    transform: translateY(-1px);
+}
+
+.flag-terminal-link {
+    color: var(--text-muted);
+    font-size: 0.74rem;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.flag-terminal-link:hover {
+    color: var(--amber-glow);
+}
+
+.flag-status-message {
+    font-size: 0.78rem;
+    margin-top: 0.5rem;
+    min-height: 1.2rem;
+    font-family: var(--font-mono);
+}
+
+.flag-status-message.success {
+    color: #6ee7b7;
+    font-weight: bold;
+}
+
+.flag-status-message.error {
+    color: #ff5555;
+}
+
+/* --- CTF CREDENTIAL MODAL OVERLAY --- */
+.ctf-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(6px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    animation: fadeInModal 0.25s ease-out;
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; transform: scale(0.97); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.ctf-credential-card {
+    background: #0d0907;
+    border: 2px solid var(--amber-glow);
+    border-radius: 6px;
+    width: 100%;
+    max-width: 580px;
+    box-shadow: 0 0 40px rgba(255, 180, 84, 0.25), 0 20px 50px rgba(0, 0, 0, 0.9);
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font-mono);
+}
+
+.ctf-credential-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ff5555, var(--amber-bright), #6ee7b7);
+}
+
+.credential-header {
+    background: rgba(26, 17, 12, 0.9);
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--border-brown-accent);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.cred-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.cred-title-bar {
+    margin-left: 0.5rem;
+    font-size: 0.74rem;
+    color: var(--amber-bright);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    flex-grow: 1;
+}
+
+.btn-close-cred {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.btn-close-cred:hover {
+    color: #ff5555;
+}
+
+.credential-body {
+    padding: 1.5rem 1.75rem;
+}
+
+.cred-badge-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 0.72rem;
+}
+
+.cred-tag-live {
+    color: #6ee7b7;
+    font-weight: 700;
+}
+
+.cred-id {
+    color: var(--text-muted);
+}
+
+.cred-main-title {
+    color: var(--crema-light);
+    font-size: 1.15rem;
+    margin-bottom: 0.65rem;
+    letter-spacing: 0.02em;
+}
+
+.cred-desc {
+    color: var(--crema-muted);
+    font-size: 0.84rem;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+}
+
+.voucher-box {
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px dashed var(--amber-glow);
+    padding: 0.85rem 1rem;
+    text-align: center;
+    border-radius: 4px;
+    margin-bottom: 1.25rem;
+}
+
+.voucher-label {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.35rem;
+}
+
+.voucher-code {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--amber-bright);
+    letter-spacing: 0.12em;
+    text-shadow: 0 0 10px rgba(255, 180, 84, 0.5);
+    user-select: all;
+}
+
+.voucher-hint {
+    font-size: 0.68rem;
+    color: #6ee7b7;
+    margin-top: 0.35rem;
+}
+
+.cred-barcode-wrap {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.cred-barcode {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    line-height: 1.3;
+    margin: 0;
+}
+
+.credential-footer {
+    padding: 0.85rem 1.75rem 1.25rem;
+    border-top: 1px solid var(--border-brown-dim);
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    background: rgba(18, 12, 8, 0.6);
+}
+
+.btn-voucher-action {
+    background: transparent;
+    border: 1px solid var(--border-brown-accent);
+    color: var(--amber-bright);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 700;
+    padding: 0.5rem 1.1rem;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-voucher-action:hover {
+    background: var(--border-brown-accent);
+    color: #fff;
+}
+
+.btn-go-bunker {
+    background: var(--amber-glow);
+    color: var(--bg-black);
+    border-color: var(--amber-glow);
+}
+
+.btn-go-bunker:hover {
+    background: var(--amber-bright);
+    color: var(--bg-black);
+    box-shadow: 0 0 12px rgba(255, 180, 84, 0.4);
 }

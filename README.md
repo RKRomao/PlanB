@@ -34,7 +34,7 @@ A página foi concebida para ser 100% autónoma e autossuficiente — **não é 
 9. **Orçamento Total de Montagem (CapEx & OpEx):**
    - CapEx Total: **€ 137.330** (Obras/Fit-out €39.700, Cafetaria La Marzocco/Unox €31.790, Tech & Lab €24.480, Mobiliário nogueira/couro €21.040, Stock €10.150, Reserva €10.170).
    - OpEx Mensal: **€ 10.520/mês** &middot; Break-even: ~110 clientes/dia &middot; Payback: 18 a 24 meses.
-10. **Terminal CLI Interativo:** Emulador bash completo com comandos (`help`, `spaces`, `specials`, `paodelo`, `milfolhas`, `merch`, `locations`, `budget`, `wifi`, `lofi`, `bastidores`).
+10. **Terminal CLI Interativo & Desafio da Flag (CTF):** Emulador bash completo com comandos (`help`, `spaces`, `specials`, `paodelo`, `milfolhas`, `merch`, `locations`, `budget`, `wifi`, `ctf`, `flag <CODE>`, `lofi`, `bastidores`). Validador da Flag criptográfica com verificação SHA-256 e emissão de credencial digital com voucher de 50%.
 11. **Módulo de Áudio Autónomo (`lofi-audio.js`):** Sintetizador Web Audio API procedural com progressão de 8 acordes jazz (Fmaj9, Em7, Dm9, G13, Cmaj9, A7b9, G9sus4), bateria suave com swing humano (kick abafado, tarola de fita, hi-hat) e emulador de ruído de vinil.
 
 ---

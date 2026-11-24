@@ -91,3 +91,23 @@ Para aceder ao estudo imobiliário, orçamento completo e manual de marca:
 * `assets/especialidades_doces.jpg`: Fotografia gastronómica de Pão de Ló tradicional sem recheio, Mil-Folhas de café e espresso.
 * `assets/merchandising_planb.jpg`: Mockup oficial da linha de 15 artigos de vestuário e acessórios.
 * `Loading.mp4`: Vídeo cinematográfico hacker de inicialização de sistema executado na transição de invasão para os bastidores.
+
+---
+
+## 🎯 Desafio da Flag (CTF & Acesso aos Bastidores no GitHub Pages)
+
+O acesso às turmas restritas e aos bastidores com 50% de desconto funciona através de um mini-CTF totalmente compatível com o alojamento estático no **GitHub Pages**:
+1. **Simulação de Pacote HTTP do Captive Portal:**
+   - Pacote injectado na consola DevTools (`F12`), comentários HTML e metatags simulando cabeçalhos do gateway `10.42.0.1`.
+   - Comandos no terminal CLI do site: `wifi`, `ctf` e atalhos rápidos.
+2. **Pipeline Criptográfico Clássico:**
+   - Payload encriptado: `YzQwX3EzX3kwX2Zyel9lcnB1cnZiXzEzMzc=`
+   - Etapa 1: Decodificação Base64 $\rightarrow$ `c40_q3_y0_frz_erpurvb_1337`
+   - Etapa 2: Cifra de César ROT13 $\rightarrow$ `p40_d3_l0_sem_recheio_1337`
+   - Flag final: `FLAG{p40_d3_l0_sem_recheio_1337}`
+3. **Validação Segura Client-Side:**
+   - Hash SHA-256 verificado via Web Crypto API (`836c0b5cbf8b1b0dc92a863c7056166418ac2643075c96e3cefe08f7794ac400`).
+4. **Recompensa e Desbloqueio:**
+   - Efeito sonoro arpeggiado Web Audio API.
+   - Desbloqueio do modal com a **Credencial Oficial de Aluno #PB-COV-1337-ROOT** e código de voucher `FLAG-BASTIDORES-1337` para apresentar ao barista.
+

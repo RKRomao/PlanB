@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initTelemetrySimulation();
     initGlitchTransition();
     initBunkerLogs();
+    initCtfConsoleBanner();
+    initCtfChallenge();
 });
 
 /* ==========================================================================
@@ -297,7 +299,9 @@ function initTerminal() {
   - <span class="highlight-cmd">locations</span> : Levantamento de espaços para aluguer (Covilhã, Porto, Lisboa)<br>
   - <span class="highlight-cmd">budget</span>    : Orçamento de investimento inicial (CapEx & OpEx)<br>
   - <span class="highlight-cmd">menu</span>      : Listagem rápida dos destaques da cafetaria<br>
-  - <span class="highlight-cmd">wifi</span>      : Informações de rede e conectividade<br>
+  - <span class="highlight-cmd">wifi</span>      : Informações de rede e cabeçalho HTTP capturado<br>
+  - <span class="highlight-cmd">ctf</span>       : Regras e pistas do Desafio da Flag dos Bastidores<br>
+  - <span class="highlight-cmd">flag &lt;code&gt;</span>: Validação da flag para 50% de desconto e credencial<br>
   - <span class="highlight-cmd">lofi</span>      : Estado e ativação do som ambiente lo-fi<br>
   - <span class="highlight-cmd">matrix</span>    : Visualização de telemetria das estações hacker<br>
   - <span class="highlight-cmd">bastidores</span>: Acesso direto ao bunker de hacking e formações<br>
@@ -395,11 +399,44 @@ Harmonização ideal: Cold brew de 18 horas ou Chemex.`;
         },
         wifi: () => {
             return `[NET_CONFIG]<br>
-SSID: <strong>PLAN_B_GUEST_5GHZ</strong><br>
-Banda: 10 Gbps simétrica fibra óptica direta<br>
-Isolamento: Client Isolation ativo (AP isolation)<br>
-DNS: 1.1.1.1 / 9.9.9.9 com DNS over HTTPS (DoH)`;
+SSID: <strong>PLAN_B_GUEST_5GHZ</strong> (10 Gbps Fibra UBI)<br>
+Gateway: 10.42.0.1 | Portal Cativo com Client Isolation<br>
+DNS: 1.1.1.1 / 9.9.9.9 com DNS over HTTPS (DoH)<br><br>
+<span style="color:var(--amber-bright);font-weight:bold;">[!] PACOTE HTTP INTERCEPTADO NO CABEÇALHO DO GATEWAY:</span><br>
+<code style="color:#6ee7b7;display:block;background:rgba(0,0,0,0.6);padding:0.5rem 0.8rem;border-left:3px solid var(--accent-cyan);margin-top:0.3rem;">
+HTTP/1.1 200 OK<br>
+Server: PlanB-Daemon/1.33.7 (Covilhã Hub)<br>
+X-Challenge: "O Desafio da Flag dos Bastidores"<br>
+X-Cipher-Pipeline: Base64 -&gt; ROT13<br>
+X-Packet-Payload: <strong>YzQwX3EzX3kwX2Zyel9lcnB1cnZiXzEzMzc=</strong>
+</code><br>
+Dica: Decifra o payload acima e valida com: <span class="highlight-cmd">flag FLAG{...}</span>`;
         },
+        ctf: () => {
+            return `=== PLAN B // O DESAFIO DA FLAG (CTF DOS BASTIDORES) ===<br>
+Para entrar nos Bastidores e aceder às turmas restritas com 50% de desconto:<br>
+1. Intercepta o pacote nos cabeçalhos HTTP da rede (executa <span class="highlight-cmd">wifi</span> ou inspeciona a consola F12).<br>
+2. O payload está codificado com uma cifra clássica dupla: <strong>Base64</strong> seguido de <strong>ROT13</strong>.<br>
+3. Quando obtiveres a frase secreta, envia no terminal: <span class="highlight-cmd">flag FLAG{frase_aqui}</span><br>
+4. Se a flag for válida, a tua credencial oficial e voucher de 50% abrem no ecrã!`;
+        },
+        challenge: () => commandRegistry.ctf(),
+        flag: async (argStr) => {
+            if (!argStr) {
+                return `[CTF // DESAFIO DA FLAG]<br>Sintaxe: <span class="highlight-cmd">flag &lt;TUA_FLAG&gt;</span> (Ex: <code>flag FLAG{...}</code>)<br>Executa <span class="highlight-cmd">wifi</span> ou abre a consola do browser (F12) para ver o pacote capturado.`;
+            }
+            const res = await verifyFlagAndUnlock(argStr);
+            if (res.success) {
+                return `<span style="color:#6ee7b7;font-weight:bold;">[★] ACESSO AUTORIZADO // FLAG VÁLIDA: ${res.flag}</span><br>
+Status: Credencial oficial de aluno desbloqueada!<br>
+Benefício: <strong>50% de desconto</strong> na bancada maker e formações.<br>
+<span style="color:var(--amber-bright);">[!] A abrir credencial no ecrã... Voucher: <strong>FLAG-BASTIDORES-1337</strong></span>`;
+            } else {
+                return `<span style="color:#ff5555;font-weight:bold;">[x] ACESSO NEGADO: Flag incorreta ou corrompida.</span><br>
+Dica: Decifra o payload do cabeçalho HTTP: Base64 decode -&gt; ROT13 decode. Formato esperado: <code>FLAG{...}</code>`;
+            }
+        },
+        submit: async (argStr) => commandRegistry.flag(argStr),
         lofi: () => {
             const btn = document.getElementById('toggle-lofi-btn');
             if (btn) btn.click();
@@ -423,14 +460,18 @@ DNS: 1.1.1.1 / 9.9.9.9 com DNS over HTTPS (DoH)`;
         }
     };
 
-    function executeCommand(rawCmd) {
-        const cmd = rawCmd.trim().toLowerCase();
-        if (!cmd) return;
+    async function executeCommand(rawCmd) {
+        const trimmed = rawCmd.trim();
+        if (!trimmed) return;
 
         appendLine(`guest@planb:~$ ${rawCmd}`, 'command');
 
-        if (commandRegistry[cmd]) {
-            const out = commandRegistry[cmd]();
+        const parts = trimmed.split(/\s+/);
+        const baseCmd = parts[0].toLowerCase();
+        const argStr = trimmed.slice(baseCmd.length).trim();
+
+        if (commandRegistry[baseCmd]) {
+            const out = await commandRegistry[baseCmd](argStr, parts.slice(1));
             if (out) appendLine(out, 'output');
         } else {
             appendLine(`Comando não reconhecido: "${rawCmd}". Digita <span class="highlight-cmd">help</span> para ajuda.`, 'output text-muted');
@@ -544,97 +585,96 @@ function initMousepadToggle() {
 /* ==========================================================================
    9. WEB AUDIO CYBER SYNTHESIZER & CINEMATIC BREACH SEQUENCE
    ========================================================================== */
-function playBreachStartAudio() {
+function playCinematicGlitchSound() {
     try {
         const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
         if (!AudioCtxClass) return;
         const ctx = new AudioCtxClass();
         const now = ctx.currentTime;
 
-        // Sub-bass impact
-        const sub = ctx.createOscillator();
+        // 1. Massive Reese Sub-Bass Impact (Dark Cyber Drone)
+        const sub1 = ctx.createOscillator();
+        const sub2 = ctx.createOscillator();
         const subGain = ctx.createGain();
-        sub.type = 'sine';
-        sub.frequency.setValueAtTime(85, now);
-        sub.frequency.exponentialRampToValueAtTime(25, now + 0.65);
-        subGain.gain.setValueAtTime(0.5, now);
-        subGain.gain.exponentialRampToValueAtTime(0.001, now + 0.65);
-        sub.connect(subGain);
+        const subFilter = ctx.createBiquadFilter();
+
+        sub1.type = 'sawtooth';
+        sub2.type = 'sawtooth';
+        // Detune by 4Hz for aggressive beating reese texture
+        sub1.frequency.setValueAtTime(55, now);
+        sub1.frequency.exponentialRampToValueAtTime(18, now + 0.85);
+        sub2.frequency.setValueAtTime(51, now);
+        sub2.frequency.exponentialRampToValueAtTime(17, now + 0.85);
+
+        subFilter.type = 'lowpass';
+        subFilter.frequency.setValueAtTime(450, now);
+        subFilter.frequency.exponentialRampToValueAtTime(80, now + 0.85);
+
+        subGain.gain.setValueAtTime(0.55, now);
+        subGain.gain.exponentialRampToValueAtTime(0.001, now + 0.85);
+
+        sub1.connect(subFilter);
+        sub2.connect(subFilter);
+        subFilter.connect(subGain);
         subGain.connect(ctx.destination);
-        sub.start(now);
-        sub.stop(now + 0.65);
 
-        // Electric burst / static crackle
-        const bufferSize = Math.floor(ctx.sampleRate * 0.35);
-        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-        const data = buffer.getChannelData(0);
+        sub1.start(now);
+        sub2.start(now);
+        sub1.stop(now + 0.9);
+        sub2.stop(now + 0.9);
+
+        // 2. Electric Glitch Discharge / Chopped White Noise Burst (24Hz gating)
+        const bufferSize = Math.floor(ctx.sampleRate * 0.7);
+        const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const data = noiseBuffer.getChannelData(0);
         for (let i = 0; i < bufferSize; i++) {
-            data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.08));
+            const t = i / ctx.sampleRate;
+            const gate = (Math.sin(2 * Math.PI * 24 * t) > -0.2) ? 1.0 : 0.04;
+            data[i] = (Math.random() * 2 - 1) * gate * Math.exp(-t * 2.2);
         }
+
         const noise = ctx.createBufferSource();
-        noise.buffer = buffer;
-        const filter = ctx.createBiquadFilter();
-        filter.type = 'highpass';
-        filter.frequency.setValueAtTime(1400, now);
+        noise.buffer = noiseBuffer;
+
+        const noiseFilter = ctx.createBiquadFilter();
+        noiseFilter.type = 'bandpass';
+        noiseFilter.frequency.setValueAtTime(2800, now);
+        noiseFilter.frequency.exponentialRampToValueAtTime(320, now + 0.65);
+        noiseFilter.Q.value = 1.8;
+
         const noiseGain = ctx.createGain();
-        noiseGain.gain.setValueAtTime(0.35, now);
-        noiseGain.gain.linearRampToValueAtTime(0.001, now + 0.35);
-        noise.connect(filter);
-        filter.connect(noiseGain);
+        noiseGain.gain.setValueAtTime(0.42, now);
+        noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.7);
+
+        noise.connect(noiseFilter);
+        noiseFilter.connect(noiseGain);
         noiseGain.connect(ctx.destination);
+
         noise.start(now);
+
+        // 3. High-Voltage Relay Snap / Mechanical Clunk
+        const clack = ctx.createOscillator();
+        const clackGain = ctx.createGain();
+        clack.type = 'triangle';
+        clack.frequency.setValueAtTime(130, now);
+        clack.frequency.exponentialRampToValueAtTime(35, now + 0.08);
+
+        clackGain.gain.setValueAtTime(0.6, now);
+        clackGain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+
+        clack.connect(clackGain);
+        clackGain.connect(ctx.destination);
+        clack.start(now);
+        clack.stop(now + 0.1);
     } catch (e) { }
 }
 
-function playDataPacketChirp(freq = 1200) {
-    try {
-        const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
-        if (!AudioCtxClass) return;
-        const ctx = new AudioCtxClass();
-        const now = ctx.currentTime;
-
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'square';
-        osc.frequency.setValueAtTime(freq, now);
-        osc.frequency.linearRampToValueAtTime(freq + 400, now + 0.05);
-
-        gain.gain.setValueAtTime(0.12, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
-
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start(now);
-        osc.stop(now + 0.05);
-    } catch (e) { }
-}
-
-function playBreachSuccessAudio() {
-    try {
-        const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
-        if (!AudioCtxClass) return;
-        const ctx = new AudioCtxClass();
-        const now = ctx.currentTime;
-
-        // Heavy relay clunk & sub drop
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(120, now);
-        osc.frequency.exponentialRampToValueAtTime(30, now + 0.55);
-
-        gain.gain.setValueAtTime(0.45, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.55);
-
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start(now);
-        osc.stop(now + 0.55);
-    } catch (e) { }
+function playBreachStartAudio() {
+    playCinematicGlitchSound();
 }
 
 function playGlitchSound() {
-    playBreachStartAudio();
+    playCinematicGlitchSound();
 }
 
 function initGlitchTransition() {
@@ -659,67 +699,56 @@ function initGlitchTransition() {
     if (returnBtn) {
         returnBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            playBreachStartAudio();
-            document.body.classList.add('screen-shaking');
+            playCinematicGlitchSound();
+            document.body.classList.add('screen-glitching');
             overlay.classList.add('active');
+            overlay.innerHTML = `
+                <div class="glitch-chamber">
+                    <div class="glitch-flash-white"></div>
+                    <div class="glitch-static-noise"></div>
+                    <div class="glitch-slice-bar s1"></div>
+                    <div class="glitch-slice-bar s2"></div>
+                    <div class="glitch-slice-bar s3"></div>
+                    <div class="glitch-hud-banner">
+                        <div class="glitch-banner-tag">[ REVERTING TO PUBLIC CYBERCAFÉ SHELL ]</div>
+                        <div class="glitch-banner-sub">DISCONNECTING FROM BUNKER // 10.42.0.1...</div>
+                    </div>
+                </div>
+            `;
 
             setTimeout(() => {
                 window.location.href = 'index.html';
-            }, 650);
+            }, 680);
         });
     }
 }
 
 function startCinematicBreach(overlay) {
-    playBreachStartAudio();
-    document.body.classList.add('screen-shaking');
-
-    // Generate Background Hex Dump
-    let hexDump = '';
-    const hexChars = '0123456789ABCDEF';
-    for (let r = 0; r < 24; r++) {
-        let line = '0x' + (r * 16).toString(16).padStart(4, '0') + '  ';
-        for (let c = 0; c < 8; c++) {
-            line += hexChars[Math.floor(Math.random() * 16)] + hexChars[Math.floor(Math.random() * 16)] + ' ';
-        }
-        hexDump += line + '\n';
+    // 1. Silencia o Lo-Fi se estiver a tocar para não haver conflito de som
+    if (typeof isAudioPlaying !== 'undefined' && isAudioPlaying) {
+        const toggleBtn = document.getElementById('toggle-lofi-btn');
+        if (toggleBtn) toggleBtn.click();
     }
 
-    // Build HUD structure & Loading Video Stage
+    // 2. Dispara o novo som glitch cinematográfico
+    playCinematicGlitchSound();
+
+    // 3. Aplica glitch visual violento a toda a página
+    document.body.classList.add('screen-glitching');
+
+    // 4. Constrói o Glitch Chamber e prepara o Video Stage
     overlay.innerHTML = `
-        <div class="breach-backdrop"></div>
-        <div class="breach-hex-canvas">${hexDump}</div>
-        <div class="breach-slice"></div>
-        <div class="breach-hud-box" id="breach-hud-modal">
-            <div class="breach-header">
-                <span class="breach-alert-badge">[ ⚠ UNAUTHORIZED OVERRIDE DETECTED ]</span>
-                <span class="breach-target">NODE: BASTIDORES_COVILHA_GATEWAY</span>
-            </div>
-
-            <div class="breach-skull-art">
-                <pre class="breach-skull-ascii">
-    .---.
-   /     \\
-  | () () |  [!] BREACHING THE MAINFRAME
-   \\  ^  /
-    |||||    [ SECURITY OVERRIDE IN PROGRESS ]
-                </pre>
-            </div>
-
-            <div class="breach-terminal-logs" id="breach-console"></div>
-
-            <div class="breach-progress-section">
-                <div class="breach-progress-labels">
-                    <span>STATUS: INFILTRATING SECURITY PERIMETER</span>
-                    <span id="breach-pct-num">0%</span>
-                </div>
-                <div class="breach-progress-track">
-                    <div class="breach-progress-bar" id="breach-progress-bar"></div>
-                </div>
-            </div>
-
-            <div class="breach-footer-status">
-                <span class="pulse-dot">●</span> <code>ESCALATING CLEARANCE LEVEL TO ROOT (UID 0)...</code>
+        <div class="glitch-chamber" id="glitch-chamber-layer">
+            <div class="glitch-flash-white"></div>
+            <div class="glitch-static-noise"></div>
+            <div class="glitch-slice-bar s1"></div>
+            <div class="glitch-slice-bar s2"></div>
+            <div class="glitch-slice-bar s3"></div>
+            <div class="glitch-slice-bar s4"></div>
+            <div class="glitch-slice-bar s5"></div>
+            <div class="glitch-hud-banner">
+                <div class="glitch-banner-tag">[ ⚠ UNAUTHORIZED OVERRIDE // SYSTEM CORRUPTION ]</div>
+                <div class="glitch-banner-sub">&gt;&gt; ESTABLISHING VIDEO LINK: BASTIDORES &lt;&lt;</div>
             </div>
         </div>
 
@@ -743,85 +772,49 @@ function startCinematicBreach(overlay) {
 
     overlay.classList.add('active');
 
-    const consoleBox = document.getElementById('breach-console');
-    const progressBar = document.getElementById('breach-progress-bar');
-    const pctNum = document.getElementById('breach-pct-num');
-    const hudModal = document.getElementById('breach-hud-modal');
+    const glitchLayer = document.getElementById('glitch-chamber-layer');
     const videoStage = document.getElementById('breach-video-stage');
     const loadingVid = document.getElementById('breach-loading-vid');
     const skipBtn = document.getElementById('breach-skip-btn');
 
-            let navigated = false;
-            const completeAndNavigate = () => {
-                if (navigated) return;
-                navigated = true;
-                if (loadingVid) {
-                    try { loadingVid.pause(); } catch (e) { }
-                }
-                overlay.classList.add('crt-beam-collapse');
-                setTimeout(() => {
-                    window.location.href = 'bastidores.html';
-                }, 280);
-            };
+    let navigated = false;
+    const completeAndNavigate = () => {
+        if (navigated) return;
+        navigated = true;
+        if (loadingVid) {
+            try { loadingVid.pause(); } catch (e) { }
+        }
+        overlay.classList.add('crt-beam-collapse');
+        setTimeout(() => {
+            window.location.href = 'bastidores.html';
+        }, 280);
+    };
 
-            // Keyboard shortcut to skip anytime
-            const onKeySkip = (e) => {
-                if (e.key === 'Escape' || e.code === 'Space' || e.key === 'Enter') {
-                    document.removeEventListener('keydown', onKeySkip);
-                    completeAndNavigate();
-                }
-};
-document.addEventListener('keydown', onKeySkip);
+    // Keyboard shortcut to skip anytime
+    const onKeySkip = (e) => {
+        if (e.key === 'Escape' || e.code === 'Space' || e.key === 'Enter') {
+            document.removeEventListener('keydown', onKeySkip);
+            completeAndNavigate();
+        }
+    };
+    document.addEventListener('keydown', onKeySkip);
 
-if (skipBtn) {
-    skipBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        completeAndNavigate();
-    });
-}
+    if (skipBtn) {
+        skipBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            completeAndNavigate();
+        });
+    }
 
-const breachStages = [
-    { time: 100, text: "> [!] INITIATING PERIMETER HANDSHAKE... [ESTABLISHED]", pct: 18, type: "normal", freq: 880 },
-    { time: 420, text: "> [*] PROBING RFID / NFC CONTROLLER (MIFARE DESFIRE EV3)... [LOCKED]", pct: 36, type: "warn", freq: 1100 },
-    { time: 820, text: "> [>] INJECTING BUFFER OVERFLOW EXPLOIT (CVE-2026-PLANB)...", pct: 60, type: "normal", freq: 1350 },
-    { time: 1220, text: "> [✔] BYPASSING HARDWARE FIREWALL & REVERSING FIRMWARE... [SUCCESS]", pct: 82, type: "success", freq: 1600 },
-    { time: 1620, text: "> [⚡] ELEVATING PRIVILEGES TO ROOT (UID 0: FOUNDERS)... [GRANTED]", pct: 95, type: "success", freq: 1850 },
-    { time: 1980, text: "> [🔓] DISENGAGING MAGNETIC PERIMETER LOCKS... ACCESSING BUNKER.", pct: 100, type: "alert", freq: 2100 }
-];
-
-breachStages.forEach(stage => {
+    // 5. Após 750ms do glitch intenso na página, revela o vídeo e começa a tocar
     setTimeout(() => {
         if (navigated) return;
-        if (consoleBox) {
-            const line = document.createElement('div');
-            line.className = `breach-log-line ${stage.type}`;
-            line.textContent = stage.text;
-            consoleBox.appendChild(line);
-            consoleBox.scrollTop = consoleBox.scrollHeight;
+        document.body.classList.remove('screen-glitching');
+
+        if (glitchLayer) {
+            glitchLayer.style.opacity = '0';
+            setTimeout(() => { glitchLayer.style.display = 'none'; }, 250);
         }
-
-        if (progressBar) progressBar.style.width = `${stage.pct}%`;
-        if (pctNum) pctNum.textContent = `${stage.pct}%`;
-
-        if (stage.pct === 100) {
-            playBreachSuccessAudio();
-        } else {
-            playDataPacketChirp(stage.freq);
-        }
-    }, stage.time);
-});
-
-// When breach HUD completes, launch the Loading Video
-setTimeout(() => {
-    if (navigated) return;
-    document.body.classList.remove('screen-shaking');
-
-    if (hudModal) {
-        hudModal.classList.add('crt-beam-collapse');
-        setTimeout(() => {
-            hudModal.style.display = 'none';
-        }, 300);
-    }
 
         if (videoStage && loadingVid) {
             videoStage.classList.add('visible');
@@ -842,16 +835,16 @@ setTimeout(() => {
                 });
             }
 
-            // Safety timeout (video is ~10s, redirect at ~11.2s max if stuck)
+            // Safety timeout (video is ~10s, redirect at ~11.5s max if stuck)
             setTimeout(() => {
                 if (!navigated) {
                     completeAndNavigate();
                 }
-            }, 11200);
+            }, 11500);
         } else {
             completeAndNavigate();
         }
-    }, 2300);
+    }, 750);
 }
 
 /* ==========================================================================
@@ -884,6 +877,177 @@ function initBunkerLogs() {
         index++;
     }, 3200);
 }
+
+/* ==========================================================================
+   11. DESAFIO DA FLAG (CTF DOS BASTIDORES & CABEÇALHOS CAPTIVE PORTAL)
+   ========================================================================== */
+function initCtfConsoleBanner() {
+    console.log(
+        "%c[PLAN B // NETWORK CAPTURE DETECTED]\n" +
+        "%c" +
+        "  ██████╗ ██╗      █████╗ ███╗   ██╗    ██████╗ \n" +
+        "  ██╔══██╗██║     ██╔══██╗████╗  ██║    ██╔══██╗\n" +
+        "  ██████╔╝██║     ███████║██╔██╗ ██║    ██████╔╝\n" +
+        "  ██╔═══╝ ██║     ██╔══██║██║╚██╗██║    ██╔══██╗\n" +
+        "  ██║     ███████╗██║  ██║██║ ╚████║    ██████╔╝\n" +
+        "  ╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝    ╚═════╝ \n\n" +
+        "[CAPTIVE PORTAL SNIFFER PACKET - 10.42.0.1]\n" +
+        "HTTP/1.1 200 OK\n" +
+        "Server: PlanB-Daemon/1.33.7 (Covilhã Hub)\n" +
+        "X-Challenge: O Desafio da Flag dos Bastidores\n" +
+        "X-Cipher-Hint: Base64 -> ROT13 (Cifra de César de 13 posições)\n" +
+        "X-Packet-Payload: YzQwX3EzX3kwX2Zyel9lcnB1cnZiXzEzMzc=\n\n" +
+        ">> Submete no terminal do site: flag FLAG{...}",
+        "color: #ffb454; font-weight: bold; font-family: monospace; font-size: 13px;",
+        "color: #6ee7b7; font-family: monospace; font-size: 11px; line-height: 1.25;"
+    );
+}
+
+// SHA-256 da string normalizada em minúsculas "flag{p40_d3_l0_sem_recheio_1337}"
+const EXPECTED_FLAG_HASH = "836c0b5cbf8b1b0dc92a863c7056166418ac2643075c96e3cefe08f7794ac400";
+
+async function computeSha256(str) {
+    if (window.crypto && crypto.subtle) {
+        const msgBuffer = new TextEncoder().encode(str);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+    return "";
+}
+
+async function verifyFlagAndUnlock(input) {
+    if (!input || typeof input !== 'string') return { success: false };
+    let candidate = input.trim();
+    if (!candidate.toLowerCase().startsWith('flag{')) {
+        candidate = `FLAG{${candidate}}`;
+    }
+    const hash = await computeSha256(candidate.toLowerCase());
+    const isCorrect = (hash === EXPECTED_FLAG_HASH) || (candidate.toLowerCase() === "flag{p40_d3_l0_sem_recheio_1337}");
+
+    if (isCorrect) {
+        playSuccessChime();
+        openCtfModal();
+        return { success: true, flag: candidate };
+    }
+    return { success: false, flag: candidate };
+}
+
+function openCtfModal() {
+    const modal = document.getElementById('ctf-modal-overlay');
+    if (modal) {
+        modal.style.display = 'flex';
+        modal.setAttribute('aria-hidden', 'false');
+    }
+}
+
+function closeCtfModal() {
+    const modal = document.getElementById('ctf-modal-overlay');
+    if (modal) {
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+    }
+}
+
+function playSuccessChime() {
+    try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        const now = ctx.currentTime;
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // Arpeggio C5 - E5 - G5 - C6
+        notes.forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+            gain.gain.setValueAtTime(0.18, now + idx * 0.08);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.08 + 0.38);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now + idx * 0.08);
+            osc.stop(now + idx * 0.08 + 0.42);
+        });
+    } catch (e) {
+        // fail-safe
+    }
+}
+
+function initCtfChallenge() {
+    // 1. Modais de Fecho
+    const closeBtn = document.getElementById('btn-close-ctf-modal');
+    const closeBtn2 = document.getElementById('btn-close-voucher-action');
+    const modal = document.getElementById('ctf-modal-overlay');
+
+    if (closeBtn) closeBtn.addEventListener('click', closeCtfModal);
+    if (closeBtn2) closeBtn2.addEventListener('click', closeCtfModal);
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeCtfModal();
+        });
+    }
+
+    // 2. Botão de Copiar Voucher
+    const copyBtn = document.getElementById('btn-copy-voucher');
+    if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+            const code = "FLAG-BASTIDORES-1337";
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(code).then(() => {
+                    copyBtn.textContent = "✔ COPIADO!";
+                    setTimeout(() => { copyBtn.textContent = "📋 COPIAR VOUCHER"; }, 2500);
+                }).catch(() => {
+                    alert(`Voucher: ${code}`);
+                });
+            } else {
+                alert(`Voucher: ${code}`);
+            }
+        });
+    }
+
+    // 3. Validador no bastidores.html
+    const bastidoresBtn = document.getElementById('btn-submit-flag-bastidores');
+    const bastidoresInput = document.getElementById('bastidores-flag-input');
+    const bastidoresStatus = document.getElementById('bastidores-flag-status');
+
+    if (bastidoresBtn && bastidoresInput) {
+        const handleBastidoresSubmit = async () => {
+            const val = bastidoresInput.value.trim();
+            if (!val) {
+                if (bastidoresStatus) {
+                    bastidoresStatus.className = 'flag-status-message error';
+                    bastidoresStatus.textContent = "[!] Insere uma flag no formato FLAG{...}";
+                }
+                return;
+            }
+            if (bastidoresStatus) {
+                bastidoresStatus.className = 'flag-status-message';
+                bastidoresStatus.textContent = "A verificar hash criptográfico...";
+            }
+            const res = await verifyFlagAndUnlock(val);
+            if (res.success) {
+                if (bastidoresStatus) {
+                    bastidoresStatus.className = 'flag-status-message success';
+                    bastidoresStatus.textContent = "★ ACESSO CONCEDIDO! Credencial desbloqueada com 50% de desconto.";
+                }
+            } else {
+                if (bastidoresStatus) {
+                    bastidoresStatus.className = 'flag-status-message error';
+                    bastidoresStatus.textContent = "[x] Flag incorreta. Decifra o payload (Base64 -> ROT13).";
+                }
+            }
+        };
+
+        bastidoresBtn.addEventListener('click', handleBastidoresSubmit);
+        bastidoresInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                handleBastidoresSubmit();
+            }
+        });
+    }
+}
+
 
 
 
