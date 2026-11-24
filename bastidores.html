@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=202611242225">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -41,15 +41,21 @@
                 investigação de vulnerabilidades, formações práticas para a comunidade e para continuar a ser o que
                 sempre foram: hackers.</p>
 
-            <div class="bunker-hero-ascii-wrapper">
-                <div class="terminal-bar">
-                    <span class="dot-red"></span>
-                    <span class="dot-yellow"></span>
-                    <span class="dot-green"></span>
-                    <span class="terminal-title">BASTIDORES // OVERRIDE_TERMINAL.0x00</span>
-                    <span class="terminal-encoding">[ UTF-8 &middot; ROOT_CLEARANCE ]</span>
-                </div>
-                <pre class="ascii-art bunker-hero-ascii">
+            <!-- ESTÁGIO PRINCIPAL COM ASAS DE ASCII INTERATIVAS FLANQUEANDO O TERMINAL -->
+            <div class="terminal-stage-wrapper" id="terminal-stage-wrapper">
+                <!-- Canvas gigante onde as asas de ASCII reagem ao rato -->
+                <canvas id="ascii-wings-interactive-canvas" class="ascii-wings-interactive-canvas" aria-hidden="true"></canvas>
+
+                <div class="bunker-hero-ascii-wrapper" id="bunker-hero-ascii-wrapper">
+                    <div class="terminal-bar">
+                        <span class="dot-red"></span>
+                        <span class="dot-yellow"></span>
+                        <span class="dot-green"></span>
+                        <span class="terminal-title">BASTIDORES // OVERRIDE_TERMINAL.0x00</span>
+                        <span class="terminal-encoding">[ UTF-8 &middot; ROOT_CLEARANCE ]</span>
+                        <span class="bunker-terminal-status-tag" id="bunker-term-status"><span class="blink-dot"></span> <span id="bunker-term-status-text">INITIALIZING...</span></span>
+                    </div>
+                    <pre class="ascii-art bunker-hero-ascii" id="bunker-hero-ascii-pre">
 //_SYS.OVERRIDE::[0x00_ROOT]  ▒▒▓▓██  NO_CORP_BS  ██▓▓▒▒
   ===============================================================================
   
@@ -67,7 +73,7 @@
 ⠁⣸⣮⣇⠀⠀⠀⠀⠀⠀⠀⢀⣤⣾⣿⢶⠉⠋⠉⠏⠫⢻⣧⣄⣀⠀⠀⠀⠀⠀⠀⢠⣾⣛⣯             >> BYPASSING_FIREWALL...
 ⠀⢻⣯⣿⡿⣶⢶⠶⢶⣶⣿⡿⣏⣿⠋⠀⠀⠀⡀⠀⠀⢹⡟⠷⠿⢿⢿⣷⠳⣶⡿⠟⠛⣾⡯             >> [OK] 127.0.0.1:8080
 ⠀⢸⣻⢿⠷⣋⡈⠀⠈⠉⠉⠁⣍⠉⠀⠀⠀⠀⠁⠀⠀⠘⠃⣦⠀⠈⠈⠉⠀⠉⠁⠀⠲⠿⠁
-⠀⠀⠉⠉⠺⠿⠗⠁⠀⠀⠆⠀⠹⠈⡄⠀⠀⠀⠀⠀⠀⢠⢀⠛⡀⠀⠀⠀⠀⠀⠉⠒⠀⠀⠀
+  ⠉⠉⠺⠿⠗⠁⠀⠀⠆⠀⠹⠈⡄⠀⠀⠀⠀⠀⠀⢠⢀⠛⡀⠀⠀⠀⠀⠀⠉⠒⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢘⣥⡇⠐⠄⢀⠀⡠⠀⠠⢊⣸⡯⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⡀⣬⣿⣿⣿⣦⣤⣤⣴⣤⣶⣿⢾⣟⢿⢡⠄⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⡰⡿⣼⣿⢿⣿⣿⣿⣿⣿⣿⡿⣾⣿⡯⡝⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -88,7 +94,8 @@
   ▒▒▓▓██  BASTIDORES  //  HACK OR BE HACKED  ██▓▓▒▒
   ===============================================================================
   root@plan-b:~# ./inject.sh --target=ALL --silent --no-mercy _
-                </pre>
+                    </pre>
+                </div>
             </div>
         </section>
 
@@ -253,10 +260,11 @@
                         correção.</p>
                     <ul>
                         <li><strong>Publicações:</strong> Zines técnicos de autor e advisories de segurança</li>
-                        <li><strong>Ética Estrita:</strong> Hacking 100% defensivo e educativo, em conformidade com as
-                            boas práticas</li>
+                        <li><strong>Ética Estrita:</strong> Hacking 100% livre sobre obescurantismo da identidade, em
+                            conformidade com as
+                            boas práticas em prol da melhoria geral</li>
                         <li><strong>Bug Bounty:</strong> Os prémios de vulnerabilidades revertem para equipamentos do
-                            laboratório</li>
+                            laboratório e salários</li>
                     </ul>
                 </div>
 
@@ -327,7 +335,7 @@
                                 técnico com bypass de autenticação de dois fatores, exploração de Active Directory
                                 (Kerberoasting, BloodHound) e movimentação lateral.</p>
                             <span class="formation-meta">Duração: 12h (2 Dias) &middot; Formador: Pentester Sénior
-                                Certificado &middot; Max: 8 participantes</span>
+                                Certificado &middot; Max: equipas de 4 participantes</span>
                         </div>
                         <div class="formation-badge-tag">
                             <span class="badge-status">&gt; BREVEMENTE</span>
@@ -371,7 +379,8 @@
                     <p style="font-size: 0.88rem; margin-bottom: 0.5rem;">Os bastidores do Plano B não são uma escola
                         comercial comum. Para participar nas formações especializadas ou ter acesso à bancada do
                         laboratório, o candidato precisa de demonstrar compromisso e curiosidade:</p>
-                    <p style="font-size: 0.88rem; margin-bottom: 0.6rem;"><strong>O Desafio da Flag:</strong> No portal Wi-Fi
+                    <p style="font-size: 0.88rem; margin-bottom: 0.6rem;"><strong>O Desafio da Flag:</strong> No portal
+                        Wi-Fi
                         local do cybercafé e nos pacotes de cabeçalho HTTP da nossa rede, escondemos pequenas pistas
                         criptográficas (esteganografia e cifras clássicas). Quem encontrar a <code>FLAG{...}</code> e a
                         apresentar ao barista tem acesso garantido à lista restrita de alunos dos fundadores com 50% de
@@ -384,16 +393,22 @@
                         </div>
                         <div class="flag-packet-code">
                             <div>HTTP/1.1 200 OK &middot; Server: PlanB-Daemon/1.33.7 (Covilhã Hub)</div>
-                            <div>X-Riddle: <em>"Ao fim de 63 dias, César colheu 13 maçãs; comeu uma por hora e quando acabou eram 2 da manhã do dia seguinte... No total foram 64 dias e 13 maçãs."</em></div>
-                            <div style="margin-top: 0.35rem; color: #a3a3a3;">Token: <code>YzQwX3EzX3kwX2Zyel9lcnB1cnZiXzEzMzc=</code></div>
+                            <div>X-Riddle: <em>"Ao fim de 63 dias, César colheu 13 maçãs; comeu uma por hora e quando
+                                    acabou eram 2 da manhã do dia seguinte... No total foram 64 dias e 13 maçãs."</em>
+                            </div>
+                            <div style="margin-top: 0.35rem; color: #a3a3a3;">Token:
+                                <code>YzQwX3EzX3kwX2Zyel9lcnB1cnZiXzEzMzc=</code>
+                            </div>
                         </div>
                         <div class="flag-input-group">
-                            <input type="text" id="bastidores-flag-input" placeholder="Submete a tua flag (ex: FLAG{...})"
-                                autocomplete="off" spellcheck="false" class="flag-text-input">
+                            <input type="text" id="bastidores-flag-input"
+                                placeholder="Submete a tua flag (ex: FLAG{...})" autocomplete="off" spellcheck="false"
+                                class="flag-text-input">
                             <button type="button" id="btn-submit-flag-bastidores" class="btn-flag-submit">
                                 &gt; VALIDAR FLAG
                             </button>
-                            <a href="index.html#terminal" class="flag-terminal-link" title="Testar no terminal CLI">[OU NO TERMINAL CLI &gt;]</a>
+                            <a href="index.html#terminal" class="flag-terminal-link" title="Testar no terminal CLI">[OU
+                                NO TERMINAL CLI &gt;]</a>
                         </div>
                         <div id="bastidores-flag-status" class="flag-status-message"></div>
                     </div>
@@ -525,7 +540,8 @@
                 <span class="cred-dot dot-yellow"></span>
                 <span class="cred-dot dot-green"></span>
                 <span class="cred-title-bar" id="ctf-card-title">[ ★ PLAN B // ACCESS_GRANTED // ROOT CLEARANCE ]</span>
-                <button type="button" class="btn-close-cred" id="btn-close-ctf-modal" aria-label="Fechar">&times;</button>
+                <button type="button" class="btn-close-cred" id="btn-close-ctf-modal"
+                    aria-label="Fechar">&times;</button>
             </div>
             <div class="credential-body">
                 <div class="cred-badge-row">
@@ -534,12 +550,15 @@
                 </div>
                 <h3 class="cred-main-title">CREDENCIAL OFICIAL DE ACESSO AOS BASTIDORES</h3>
                 <p class="cred-desc">
-                    Parabéns! Quebraste a cifra do portal Wi-Fi. Esta credencial digital certifica a tua curiosidade e dá-te acesso à lista restrita de alunos dos fundadores com <strong>50% de desconto</strong> na bancada maker e formações avançadas de Red Team.
+                    Parabéns! Quebraste a cifra do portal Wi-Fi. Esta credencial digital certifica a tua curiosidade e
+                    dá-te acesso à lista restrita de alunos dos fundadores com <strong>50% de desconto</strong> na
+                    bancada maker e formações avançadas de Red Team.
                 </p>
                 <div class="voucher-box">
                     <div class="voucher-label">CÓDIGO DE DESCONTO / VOUCHER DO BARISTA:</div>
                     <div class="voucher-code" id="voucher-code-display">FLAG-BASTIDORES-1337</div>
-                    <div class="voucher-hint">Apresenta este código no balcão do Plan B na Covilhã (ou Porto/Lisboa)</div>
+                    <div class="voucher-hint">Apresenta este código no balcão do Plan B na Covilhã (ou Porto/Lisboa)
+                    </div>
                 </div>
                 <div class="cred-barcode-wrap">
                     <pre class="cred-barcode">||| | ||||| || |||| ||| |||| | ||| ||||| || |||| | ||| ||
@@ -561,7 +580,7 @@
     <div id="glitch-overlay" class="glitch-overlay"></div>
 
     <script src="lofi-audio.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js?v=202611242225"></script>
 </body>
 
 </html>
