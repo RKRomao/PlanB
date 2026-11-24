@@ -5,21 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLAN B // OS BASTIDORES (FOUNDERS' HACKER LAB)</title>
-    <!--
-    ====================================================================
-    [PLAN B // CAPTIVE PORTAL SNIFFER PACKET INTERCEPT]
-    Source: 10.42.0.1 (Plan B Wi-Fi Gateway - UBI Covilhã)
-    HTTP/1.1 200 OK
-    Server: PlanB-Daemon/1.33.7 (Alpine-Edge)
-    X-Challenge: "O Desafio da Flag dos Bastidores"
-    X-Cipher-Pipeline: Base64 -> ROT13 (Cifra de César 13 posições)
-    X-Packet-Payload: YzQwX3EzX3kwX2Zyel9lcnB1cnZiXzEzMzc=
-    
-    Submete a tua flag com: flag FLAG{...}
-    ====================================================================
-    -->
-    <meta name="x-planb-challenge" content="Base64 -> ROT13">
-    <meta name="x-planb-payload" content="YzQwX3EzX3kwX2Zyel9lcnB1cnZiXzEzMzc=">
+    <!-- Favicon Suite -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -393,9 +383,8 @@
                             <span class="pulse-dot">●</span> [📡 PACOTE HTTP CAPTURADO // 10.42.0.1 CAPTIVE PORTAL]
                         </div>
                         <div class="flag-packet-code">
-                            <div>HTTP/1.1 200 OK &middot; Server: PlanB-Daemon/1.33.7</div>
-                            <div>X-Challenge: "Cifra Clássica: Base64 -&gt; ROT13"</div>
-                            <div>X-Packet-Payload: <strong>YzQwX3EzX3kwX2Zyel9lcnB1cnZiXzEzMzc=</strong></div>
+                            <div>HTTP/1.1 200 OK &middot; Server: PlanB-Daemon/1.33.7 (Covilhã Hub)</div>
+                            <div>Gateway: 10.42.0.1 &middot; Pista: Inspeciona os pacotes de rede (ex: <code>captive-portal.json</code>, <code>robots.txt</code>, cookies ou comando <code>wifi</code> no terminal).</div>
                         </div>
                         <div class="flag-input-group">
                             <input type="text" id="bastidores-flag-input" placeholder="Submete a tua flag (ex: FLAG{...})"

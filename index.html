@@ -7,21 +7,11 @@
     <title>PLAN B // Lo-Fi Cybercafé & Hacker Lounge</title>
     <meta name="description"
         content="Cybercafé lo-fi, cultura hacker, café de especialidade, pão de ló artesanal tradicional sem recheio e mil-folhas de café com ambiente terminal.">
-    <!--
-    ====================================================================
-    [PLAN B // CAPTIVE PORTAL SNIFFER PACKET INTERCEPT]
-    Source: 10.42.0.1 (Plan B Wi-Fi Gateway - UBI Covilhã)
-    HTTP/1.1 200 OK
-    Server: PlanB-Daemon/1.33.7 (Alpine-Edge)
-    X-Challenge: "O Desafio da Flag dos Bastidores"
-    X-Cipher-Pipeline: Base64 -> ROT13 (Cifra de César 13 posições)
-    X-Packet-Payload: YzQwX3EzX3kwX2Zyel9lcnB1cnZiXzEzMzc=
-    
-    Submete a tua flag no Terminal do site com: flag FLAG{...}
-    ====================================================================
-    -->
-    <meta name="x-planb-challenge" content="Base64 -> ROT13">
-    <meta name="x-planb-payload" content="YzQwX3EzX3kwX2Zyel9lcnB1cnZiXzEzMzc=">
+    <!-- Favicon Suite -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="preload" href="Loading.mp4" as="video" type="video/mp4">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -61,9 +51,6 @@
                     <span class="vol-label">VOL</span>
                     <input type="range" id="lofi-volume" min="0" max="1" step="0.05" value="0.35"
                         aria-label="Volume do som ambiente">
-                    <input type="range" id="master" min="0" max="1" step="0.05" value="0.8"
-                        aria-label="Volume Master Lo-Fi">
-                    <span id="val-master" style="display:none;">0.8</span>
                 </div>
             </div>
             <!-- Alternar Efeito CRT -->
@@ -170,7 +157,8 @@
                                     Monitores 4K, teclados mecânicos ergonómicos, switches lubrificados e tomadas USB-C
                                     PD a 100W.</li>
                                 <li><span class="bullet">&gt;</span> <strong>A Dupla Especialidade Doce:</strong> O
-                                    lendário <span class="accent-text">Pão de Ló Húmido Tradicional</span> e o crocante
+                                    lendário <span class="accent-text">Pão de Ló Tradicional (Sem Recheio)</span> e o
+                                    crocante
                                     <span class="accent-text">Mil-Folhas com Creme de Café Artesanal</span>.
                                 </li>
                             </ul>
@@ -337,27 +325,23 @@
                         <span class="spec-id">[SPEC_01]</span>
                         <span class="spec-flag">FAVORITO DOS DEVS</span>
                     </div>
-                    <div class="spec-ascii-box">
-                        <pre class="ascii-art pastry-ascii">
-  ⠀⠀⠀⠀⢀⣤⠀⠀
-⠀⠀⠀⣤⢿⣄⡀⠀
-⢀⣴⠾⢿⣦⡏⠻⣆
-⣟⠛⠛⠛⠛⠛⠛⣻
-⡟⠛⠛⠛⠛⠛⠛⢻
-⠛⠛⠛⠛⠛⠛⠛⠛  
-      [PÃO DE LÓ DE OVAR TRAD.]  
-</pre>
+                    <div class="spec-img-box">
+                        <img src="assets/especialidade_paodelo.jpg" alt="Pão de Ló Tradicional Português Sem Recheio"
+                            class="spec-img" loading="lazy">
+                        <div class="spec-img-badge">// FORNADA_08h &middot; 14h &middot; SEM_RECHEIO</div>
                     </div>
                     <div class="spec-body">
-                        <h3>Pão de Ló Tradicional de Gema Fluida</h3>
+                        <h3>Pão de Ló Tradicional</h3>
                         <p class="spec-desc">
-                            Receita secular portuguesa aprimorada no nosso forno de convecção. Massa fofa e leve com
-                            coração cremoso de gemas de ovos biológicos frescos, baunilha de Madagáscar e flor de sal.
+                            Receita clássica secular portuguesa, pura, cozida por inteiro. Uma massa incrivelmente fofa,
+                            dourada, leve e arejada feita exclusivamente com ovos inteiros bem batidos, açúcar fino e
+                            farinha de trigo peneirada.
                         </p>
                         <div class="pairing-box">
                             <span class="pairing-title">&gt; EMPARELHAMENTO RECOMENDADO:</span>
-                            <span class="pairing-item">Terminal Espresso Duplo ou Flat White com leite de aveia
-                                aveludado. A cremosidade corta a acidez do grão etíope na perfeição.</span>
+                            <span class="pairing-item">Terminal Espresso Duplo ou Flat White quente. A textura fofa e
+                                leve da massa arejada absorve e harmoniza com as notas aromáticas do café de
+                                especialidade sem empapar.</span>
                         </div>
                         <div class="spec-meta">
                             <span class="spec-price">€ 4.20 / porção individual</span>
@@ -372,18 +356,10 @@
                         <span class="spec-id">[SPEC_02]</span>
                         <span class="spec-flag highlight-flag">ASSINATURA PLAN B</span>
                     </div>
-                    <div class="spec-ascii-box">
-                        <pre class="ascii-art pastry-ascii">
-   .----------------------------.  
-  /  * * * CACAU EM PÓ & AÇÚCAR  \ 
- |================================| [Massa Folhada]
- | ~~~~~~   CREME DE CAFÉ   ~~~~~ | [Arábica Infundido]
- |================================| [Folha Caramelizada]
- | ~~~~~~ BAUNILHA & CACAU ~~~~~~ | [Creme Sedoso]
- |================================| [Base Crocante]
-  \______________________________/ 
-       [MIL-FOLHAS DE CAFÉ]        
-</pre>
+                    <div class="spec-img-box">
+                        <img src="assets/especialidade_milfolhas.jpg" alt="Mil-Folhas de Café de Especialidade Plan B"
+                            class="spec-img" loading="lazy">
+                        <div class="spec-img-badge">// INFUSÃO_BOURBON_24h &middot; MANTEIGA_DOP</div>
                     </div>
                     <div class="spec-body">
                         <h3>Mil-Folhas de Café de Especialidade</h3>
@@ -919,8 +895,9 @@
                             Espaço histórico com paredes de cantaria de granito da Serra da Estrela e vigas de madeira
                             nobre. Situado em frente ao Pólo I da UBI (onde se concentra a Engenharia Informática,
                             Matemática, Ciências Exatas e residências). Os invernos rigorosos e a neve na serra criam a
-                            atmosfera perfeita para um refúgio acolhedor com café quente de especialidade, pão de ló com
-                            gema fluida e música lo-fi.
+                            atmosfera perfeita para um refúgio acolhedor com café quente de especialidade, pão de ló
+                            tradicional
+                            fofo acabado de cozer e música lo-fi.
                         </p>
 
                         <div class="conditions-grid">

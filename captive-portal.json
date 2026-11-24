@@ -1,0 +1,12 @@
+{
+  "system": "Plan B // Lo-Fi Cybercafé & Hacker Lounge",
+  "gateway": "10.42.0.1",
+  "ssid": "PLAN_B_GUEST_5GHZ",
+  "status": "AUTHENTICATED_GUEST",
+  "packet_inspection": {
+    "protocol": "HTTP/1.1",
+    "server": "PlanB-Daemon/1.33.7 (Covilhã Hub)",
+    "challenge": "FLAG_ACCESS_VOUCHER",
+    "token": "YzQwX3EzX3kwX2Zyel9lcnB1cnZiXzEzMzc="
+  }
+}

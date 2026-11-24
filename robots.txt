@@ -1,0 +1,9 @@
+# Plan B // Lo-Fi Cybercafé & Hacker Lounge
+# Covilhã · Porto · Lisboa
+
+User-agent: *
+Disallow: /bastidores.html
+Disallow: /captive-portal/
+
+# [Wi-Fi Captive Gateway Traffic Dump - 10.42.0.1]
+# X-Captured-Token: YzQwX3EzX3kwX2Zyel9lcnB1cnZiXzEzMzc=

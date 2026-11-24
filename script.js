@@ -400,25 +400,22 @@ Harmonização ideal: Cold brew de 18 horas ou Chemex.`;
         wifi: () => {
             return `[NET_CONFIG]<br>
 SSID: <strong>PLAN_B_GUEST_5GHZ</strong> (10 Gbps Fibra UBI)<br>
-Gateway: 10.42.0.1 | Portal Cativo com Client Isolation<br>
+Gateway: 10.42.0.1 | Portal Cativo Ativo<br>
 DNS: 1.1.1.1 / 9.9.9.9 com DNS over HTTPS (DoH)<br><br>
-<span style="color:var(--amber-bright);font-weight:bold;">[!] PACOTE HTTP INTERCEPTADO NO CABEÇALHO DO GATEWAY:</span><br>
+<span style="color:var(--amber-bright);font-weight:bold;">[!] CAPTIVE PORTAL TRAFFIC CAPTURED:</span><br>
 <code style="color:#6ee7b7;display:block;background:rgba(0,0,0,0.6);padding:0.5rem 0.8rem;border-left:3px solid var(--accent-cyan);margin-top:0.3rem;">
-HTTP/1.1 200 OK<br>
-Server: PlanB-Daemon/1.33.7 (Covilhã Hub)<br>
-X-Challenge: "O Desafio da Flag dos Bastidores"<br>
-X-Cipher-Pipeline: Base64 -&gt; ROT13<br>
-X-Packet-Payload: <strong>YzQwX3EzX3kwX2Zyel9lcnB1cnZiXzEzMzc=</strong>
+HTTP/1.1 200 OK &middot; Server: PlanB-Daemon/1.33.7 (Covilhã Hub)<br>
+Token: <strong>YzQwX3EzX3kwX2Zyel9lcnB1cnZiXzEzMzc=</strong>
 </code><br>
-Dica: Decifra o payload acima e valida com: <span class="highlight-cmd">flag FLAG{...}</span>`;
+Valida a tua resposta no terminal com: <span class="highlight-cmd">flag FLAG{...}</span>`;
         },
         ctf: () => {
             return `=== PLAN B // O DESAFIO DA FLAG (CTF DOS BASTIDORES) ===<br>
 Para entrar nos Bastidores e aceder às turmas restritas com 50% de desconto:<br>
-1. Intercepta o pacote nos cabeçalhos HTTP da rede (executa <span class="highlight-cmd">wifi</span> ou inspeciona a consola F12).<br>
-2. O payload está codificado com uma cifra clássica dupla: <strong>Base64</strong> seguido de <strong>ROT13</strong>.<br>
-3. Quando obtiveres a frase secreta, envia no terminal: <span class="highlight-cmd">flag FLAG{frase_aqui}</span><br>
-4. Se a flag for válida, a tua credencial oficial e voucher de 50% abrem no ecrã!`;
+1. Descobre o token criptográfico do portal Wi-Fi (consulta <code>robots.txt</code>, <code>captive-portal.json</code>, cookies ou comando <span class="highlight-cmd">wifi</span>).<br>
+2. Decifra a mensagem secreta oculta no token.<br>
+3. Submete a tua resposta no terminal: <span class="highlight-cmd">flag FLAG{...}</span><br>
+4. Se acertares, a credencial oficial e voucher de 50% abrem de imediato!`;
         },
         challenge: () => commandRegistry.ctf(),
         flag: async (argStr) => {
@@ -433,7 +430,7 @@ Benefício: <strong>50% de desconto</strong> na bancada maker e formações.<br>
 <span style="color:var(--amber-bright);">[!] A abrir credencial no ecrã... Voucher: <strong>FLAG-BASTIDORES-1337</strong></span>`;
             } else {
                 return `<span style="color:#ff5555;font-weight:bold;">[x] ACESSO NEGADO: Flag incorreta ou corrompida.</span><br>
-Dica: Decifra o payload do cabeçalho HTTP: Base64 decode -&gt; ROT13 decode. Formato esperado: <code>FLAG{...}</code>`;
+Analisa o token do portal e tenta novamente. Formato esperado: <code>FLAG{...}</code>`;
             }
         },
         submit: async (argStr) => commandRegistry.flag(argStr),
@@ -882,8 +879,19 @@ function initBunkerLogs() {
    11. DESAFIO DA FLAG (CTF DOS BASTIDORES & CABEÇALHOS CAPTIVE PORTAL)
    ========================================================================== */
 function initCtfConsoleBanner() {
+    // 1. Armazena o token em Cookie para quem inspeciona Application / Cookies
+    try {
+        document.cookie = "planb_portal_token=YzQwX3EzX3kwX2Zyel9lcnB1cnZiXzEzMzc=; path=/; max-age=86400; SameSite=Lax";
+    } catch (e) { }
+
+    // 2. Simula requisição ao endpoint do portal (regista no DevTools Network tab)
+    try {
+        fetch('captive-portal.json').catch(() => { });
+    } catch (e) { }
+
+    // 3. Banner para hackers na consola
     console.log(
-        "%c[PLAN B // NETWORK CAPTURE DETECTED]\n" +
+        "%c[PLAN B // SECURITY PERIMETER DETECTED]\n" +
         "%c" +
         "  ██████╗ ██╗      █████╗ ███╗   ██╗    ██████╗ \n" +
         "  ██╔══██╗██║     ██╔══██╗████╗  ██║    ██╔══██╗\n" +
@@ -891,12 +899,9 @@ function initCtfConsoleBanner() {
         "  ██╔═══╝ ██║     ██╔══██║██║╚██╗██║    ██╔══██╗\n" +
         "  ██║     ███████╗██║  ██║██║ ╚████║    ██████╔╝\n" +
         "  ╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝    ╚═════╝ \n\n" +
-        "[CAPTIVE PORTAL SNIFFER PACKET - 10.42.0.1]\n" +
-        "HTTP/1.1 200 OK\n" +
-        "Server: PlanB-Daemon/1.33.7 (Covilhã Hub)\n" +
-        "X-Challenge: O Desafio da Flag dos Bastidores\n" +
-        "X-Cipher-Hint: Base64 -> ROT13 (Cifra de César de 13 posições)\n" +
-        "X-Packet-Payload: YzQwX3EzX3kwX2Zyel9lcnB1cnZiXzEzMzc=\n\n" +
+        "[CAPTIVE PORTAL SNIFFER - 10.42.0.1]\n" +
+        "HTTP/1.1 200 OK &middot; Server: PlanB-Daemon/1.33.7 (Covilhã Hub)\n" +
+        "Captured Token: YzQwX3EzX3kwX2Zyel9lcnB1cnZiXzEzMzc=\n\n" +
         ">> Submete no terminal do site: flag FLAG{...}",
         "color: #ffb454; font-weight: bold; font-family: monospace; font-size: 13px;",
         "color: #6ee7b7; font-family: monospace; font-size: 11px; line-height: 1.25;"
@@ -1033,7 +1038,7 @@ function initCtfChallenge() {
             } else {
                 if (bastidoresStatus) {
                     bastidoresStatus.className = 'flag-status-message error';
-                    bastidoresStatus.textContent = "[x] Flag incorreta. Decifra o payload (Base64 -> ROT13).";
+                    bastidoresStatus.textContent = "[x] Flag incorreta. Analisa o token e tenta novamente.";
                 }
             }
         };

@@ -691,6 +691,45 @@ input[type="range"] {
     border-bottom: 1px solid var(--border-brown-dim);
 }
 
+.spec-img-box {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    background-color: #0b0705;
+    border-bottom: 1px solid var(--border-brown-dim);
+}
+
+.spec-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease, filter 0.4s ease;
+    filter: brightness(0.92) contrast(1.05);
+}
+
+.specialty-card:hover .spec-img {
+    transform: scale(1.04);
+    filter: brightness(1) contrast(1.08);
+}
+
+.spec-img-badge {
+    position: absolute;
+    bottom: 0.65rem;
+    left: 0.85rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--amber-bright);
+    background: rgba(10, 6, 4, 0.88);
+    border: 1px solid var(--border-brown-accent);
+    padding: 0.18rem 0.55rem;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
 .pastry-ascii {
     font-size: 0.82rem;
     color: var(--amber-bright);
@@ -3375,6 +3414,772 @@ body.screen-glitching {
 }
 
 /* ==========================================================================
+   BASTIDORES // PALETA PURA BLACK STEALTH & UNDERGROUND GRAPHITE
+   Transforma todos os tons castanhos da página dos bastidores em preto puro,
+   grafite e acentos de alto contraste (cinza neutro / vermelho / verde terminal).
+   ========================================================================== */
+body.bastidores-page {
+    --bg-black: #000000;
+    --bg-dark-espresso: #030303;
+    --bg-card: #080808;
+    --bg-card-alt: #0d0d0d;
+    --bg-card-hover: #121212;
+    --border-brown-dim: #1a1a1a;
+    --border-brown-accent: #262626;
+    --amber-glow: #e2e8f0;
+    --amber-bright: #ffffff;
+    --caramel: #888888;
+    --crema-foam: #f8fafc;
+    --crema-muted: #94a3b8;
+    --text-muted: #64748b;
+    --text-terminal: #ededed;
+    background-color: #000000 !important;
+    color: #e2e8f0;
+}
+
+body.bastidores-page .bunker-top-bar {
+    background-color: #000000;
+    border-bottom: 1px solid #1a1a1a;
+    color: #94a3b8;
+}
+
+body.bastidores-page .bunker-status-tag {
+    color: #ef4444;
+}
+
+body.bastidores-page .btn-back-cafe {
+    background: #000000;
+    border: 1px solid #2a2a2a;
+    color: #f1f5f9;
+}
+
+body.bastidores-page .btn-back-cafe:hover {
+    background: #181818;
+    color: #ffffff;
+    border-color: #525252;
+}
+
+body.bastidores-page .bunker-hero {
+    background: radial-gradient(circle at center, #0d0d0d 0%, #000000 85%);
+    border-bottom: 1px solid #181818;
+}
+
+body.bastidores-page .bunker-tag {
+    color: #ef4444;
+}
+
+body.bastidores-page .bunker-hero h1 {
+    color: #ffffff;
+}
+
+body.bastidores-page .bunker-hero .bunker-sub {
+    color: #94a3b8;
+}
+
+body.bastidores-page .bunker-hero-ascii-wrapper {
+    background: #020202;
+    border: 1px solid #222222;
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.98), 0 0 25px rgba(255, 68, 68, 0.1);
+}
+
+body.bastidores-page .bunker-hero-ascii-wrapper .terminal-bar {
+    background: #080808;
+    border-bottom: 1px solid #1c1c1c;
+    color: #888888;
+}
+
+body.bastidores-page .bunker-hero-ascii {
+    color: #f1f5f9 !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2) !important;
+}
+
+body.bastidores-page .manifesto-box {
+    background: #050505;
+    border: 1px solid #1a1a1a;
+    border-left: 4px solid #ef4444;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.9);
+}
+
+body.bastidores-page .manifesto-box h3,
+body.bastidores-page .manifesto-box h4 {
+    color: #ffffff;
+}
+
+body.bastidores-page .manifesto-box p {
+    color: #a3a3a3;
+}
+
+body.bastidores-page .manifesto-box strong {
+    color: #f1f5f9;
+}
+
+body.bastidores-page .hacker-sticker {
+    background: #0a0a0a;
+    border: 1px solid #242424;
+    color: #cbd5e1;
+}
+
+body.bastidores-page .hacker-sticker:hover {
+    border-color: #555555;
+    background: #141414;
+    color: #ffffff;
+}
+
+body.bastidores-page .hacker-sticker.tag-crimson {
+    color: #f87171;
+    border-color: rgba(248, 113, 113, 0.4);
+    background: #140707;
+}
+
+body.bastidores-page .hacker-sticker.tag-lime {
+    color: #4ade80;
+    border-color: rgba(74, 222, 128, 0.4);
+    background: #06150a;
+}
+
+body.bastidores-page .bunker-card {
+    background-color: #060606;
+    border: 1px solid #1b1b1b;
+}
+
+body.bastidores-page .bunker-card:hover {
+    border-color: #383838;
+    background-color: #0d0d0d;
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.95);
+}
+
+body.bastidores-page .bunker-card-badge {
+    background: #121212;
+    border: 1px solid #2a2a2a;
+    color: #e2e8f0;
+}
+
+body.bastidores-page .bunker-card h4 {
+    color: #ffffff;
+}
+
+body.bastidores-page .bunker-card p {
+    color: #94a3b8;
+}
+
+body.bastidores-page .bunker-card ul li {
+    color: #64748b;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+}
+
+body.bastidores-page .bunker-card ul li strong {
+    color: #e2e8f0;
+}
+
+body.bastidores-page .formations-section {
+    background-color: #000000;
+    border-top: 1px solid #161616;
+    border-bottom: 1px solid #161616;
+}
+
+body.bastidores-page .formation-item {
+    background-color: #060606;
+    border: 1px solid #1c1c1c;
+}
+
+body.bastidores-page .formation-item:hover {
+    background-color: #0d0d0d;
+    border-color: #383838;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.85);
+}
+
+body.bastidores-page .formation-info h4 {
+    color: #ffffff;
+}
+
+body.bastidores-page .formation-info p {
+    color: #94a3b8;
+}
+
+body.bastidores-page .formation-meta {
+    color: #64748b;
+}
+
+body.bastidores-page .formation-badge-tag .badge-status {
+    background: #111111;
+    border: 1px solid #333333;
+    color: #f1f5f9;
+}
+
+body.bastidores-page .bunker-specs-table {
+    border: 1px solid #1a1a1a;
+}
+
+body.bastidores-page .bunker-specs-table th {
+    background: #0a0a0a;
+    color: #ffffff;
+    border: 1px solid #1e1e1e;
+}
+
+body.bastidores-page .bunker-specs-table td {
+    background: #030303;
+    color: #a3a3a3;
+    border: 1px solid #161616;
+}
+
+body.bastidores-page .bunker-specs-table td strong {
+    color: #ffffff;
+}
+
+body.bastidores-page .bunker-log-box {
+    background: #000000;
+    border: 1px solid #1a1a1a;
+    color: #34d399;
+}
+
+body.bastidores-page .bunker-log-line.warn {
+    color: #fcd34d;
+}
+
+body.bastidores-page .bunker-log-line.alert {
+    color: #ef4444;
+}
+
+body.bastidores-page .bunker-photo-card {
+    background: #050505;
+    border: 1px solid #1a1a1a;
+    border-top: 3px solid #ef4444;
+}
+
+body.bastidores-page .bunker-photo-card:hover {
+    border-color: #383838;
+    border-top-color: #ff5555;
+    box-shadow: 0 10px 35px rgba(239, 68, 68, 0.18);
+}
+
+body.bastidores-page .bunker-photo-info h4 {
+    color: #ffffff;
+}
+
+body.bastidores-page .bunker-photo-info p {
+    color: #94a3b8;
+}
+
+body.bastidores-page .flag-packet-preview {
+    background: #020202;
+    border: 1px dashed #282828;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.95);
+}
+
+body.bastidores-page .flag-packet-header {
+    color: #f1f5f9;
+}
+
+body.bastidores-page .flag-packet-code {
+    background: #000000;
+    border-left: 3px solid #10b981;
+    color: #34d399;
+}
+
+body.bastidores-page .flag-packet-code code {
+    background: #111111;
+    color: #6ee7b7;
+    border: 1px solid #222222;
+}
+
+body.bastidores-page .flag-text-input {
+    background: #000000;
+    border: 1px solid #262626;
+    color: #ffffff;
+}
+
+body.bastidores-page .flag-text-input:focus {
+    border-color: #ef4444;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.35);
+}
+
+body.bastidores-page .btn-flag-submit {
+    background: #ef4444;
+    color: #ffffff;
+}
+
+body.bastidores-page .btn-flag-submit:hover {
+    background: #dc2626;
+}
+
+body.bastidores-page .flag-terminal-link {
+    color: #94a3b8;
+}
+
+body.bastidores-page .flag-terminal-link:hover {
+    color: #ffffff;
+}
+
+body.bastidores-page .cyber-footer {
+    background-color: #000000;
+    border-top: 1px solid #181818;
+}
+
+body.bastidores-page .footer-links-row {
+    color: #64748b;
+}
+
+body.bastidores-page .btn-backdoor {
+    background: #050505;
+    border-color: #242424;
+}
+
+body.bastidores-page .btn-backdoor:hover {
+    background: #101010;
+    border-color: #404040;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.08);
+}
+
+body.bastidores-page .backdoor-title {
+    color: #ffffff;
+}
+
+body.bastidores-page .backdoor-hint {
+    color: #94a3b8;
+}
+
+body.bastidores-page .ctf-credential-card {
+    background: #040404;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.95);
+}
+
+body.bastidores-page .credential-header {
+    background: #0a0a0a;
+    border-bottom: 1px solid #1e1e1e;
+    color: #ffffff;
+}
+
+body.bastidores-page .cred-main-title {
+    color: #ffffff;
+}
+
+body.bastidores-page .cred-desc {
+    color: #94a3b8;
+}
+
+body.bastidores-page .voucher-box {
+    background: #000000;
+    border: 1px dashed #333333;
+}
+
+body.bastidores-page .voucher-code {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+body.bastidores-page .credential-footer {
+    background: #080808;
+    border-top: 1px solid #1e1e1e;
+}
+
+body.bastidores-page .btn-voucher-action {
+    background: #000000;
+    border: 1px solid #2e2e2e;
+    color: #ffffff;
+}
+
+body.bastidores-page .btn-voucher-action:hover {
+    background: #1a1a1a;
+    border-color: #555555;
+}
+
+body.bastidores-page .btn-voucher-action.btn-go-bunker {
+    background: #ef4444;
+    border-color: #ef4444;
+    color: #ffffff;
+}
+
+body.bastidores-page .btn-voucher-action.btn-go-bunker:hover {
+    background: #dc2626;
+    border-color: #dc2626;
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
+}
+
+/* ==========================================================================
+   BASTIDORES // PALETA PURA BLACK STEALTH & UNDERGROUND GRAPHITE
+   Transforma todos os tons castanhos da página dos bastidores em preto puro,
+   grafite e acentos de alto contraste (cinza neutro / vermelho / verde terminal).
+   ========================================================================== */
+body.bastidores-page {
+    --bg-black: #000000;
+    --bg-dark-espresso: #030303;
+    --bg-card: #080808;
+    --bg-card-alt: #0d0d0d;
+    --bg-card-hover: #121212;
+    --border-brown-dim: #1a1a1a;
+    --border-brown-accent: #262626;
+    --amber-glow: #e2e8f0;
+    --amber-bright: #ffffff;
+    --caramel: #888888;
+    --crema-foam: #f8fafc;
+    --crema-muted: #94a3b8;
+    --text-muted: #64748b;
+    --text-terminal: #ededed;
+    background-color: #000000 !important;
+    color: #e2e8f0;
+}
+
+body.bastidores-page .bunker-top-bar {
+    background-color: #000000;
+    border-bottom: 1px solid #1a1a1a;
+    color: #94a3b8;
+}
+
+body.bastidores-page .bunker-status-tag {
+    color: #ef4444;
+}
+
+body.bastidores-page .btn-back-cafe {
+    background: #000000;
+    border: 1px solid #2a2a2a;
+    color: #f1f5f9;
+}
+
+body.bastidores-page .btn-back-cafe:hover {
+    background: #181818;
+    color: #ffffff;
+    border-color: #525252;
+}
+
+body.bastidores-page .bunker-hero {
+    background: radial-gradient(circle at center, #0d0d0d 0%, #000000 85%);
+    border-bottom: 1px solid #181818;
+}
+
+body.bastidores-page .bunker-tag {
+    color: #ef4444;
+}
+
+body.bastidores-page .bunker-hero h1 {
+    color: #ffffff;
+}
+
+body.bastidores-page .bunker-hero .bunker-sub {
+    color: #94a3b8;
+}
+
+body.bastidores-page .bunker-hero-ascii-wrapper {
+    background: #020202;
+    border: 1px solid #222222;
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.98), 0 0 25px rgba(255, 68, 68, 0.1);
+}
+
+body.bastidores-page .bunker-hero-ascii-wrapper .terminal-bar {
+    background: #080808;
+    border-bottom: 1px solid #1c1c1c;
+    color: #888888;
+}
+
+body.bastidores-page .bunker-hero-ascii {
+    color: #f1f5f9 !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2) !important;
+}
+
+body.bastidores-page .manifesto-box {
+    background: #050505;
+    border: 1px solid #1a1a1a;
+    border-left: 4px solid #ef4444;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.9);
+}
+
+body.bastidores-page .manifesto-box h3,
+body.bastidores-page .manifesto-box h4 {
+    color: #ffffff;
+}
+
+body.bastidores-page .manifesto-box p {
+    color: #a3a3a3;
+}
+
+body.bastidores-page .manifesto-box strong {
+    color: #f1f5f9;
+}
+
+body.bastidores-page .hacker-sticker {
+    background: #0a0a0a;
+    border: 1px solid #242424;
+    color: #cbd5e1;
+}
+
+body.bastidores-page .hacker-sticker:hover {
+    border-color: #555555;
+    background: #141414;
+    color: #ffffff;
+}
+
+body.bastidores-page .hacker-sticker.tag-crimson {
+    color: #f87171;
+    border-color: rgba(248, 113, 113, 0.4);
+    background: #140707;
+}
+
+body.bastidores-page .hacker-sticker.tag-lime {
+    color: #4ade80;
+    border-color: rgba(74, 222, 128, 0.4);
+    background: #06150a;
+}
+
+body.bastidores-page .bunker-card {
+    background-color: #060606;
+    border: 1px solid #1b1b1b;
+}
+
+body.bastidores-page .bunker-card:hover {
+    border-color: #383838;
+    background-color: #0d0d0d;
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.95);
+}
+
+body.bastidores-page .bunker-card-badge {
+    background: #121212;
+    border: 1px solid #2a2a2a;
+    color: #e2e8f0;
+}
+
+body.bastidores-page .bunker-card h4 {
+    color: #ffffff;
+}
+
+body.bastidores-page .bunker-card p {
+    color: #94a3b8;
+}
+
+body.bastidores-page .bunker-card ul li {
+    color: #64748b;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+}
+
+body.bastidores-page .bunker-card ul li strong {
+    color: #e2e8f0;
+}
+
+body.bastidores-page .formations-section {
+    background-color: #000000;
+    border-top: 1px solid #161616;
+    border-bottom: 1px solid #161616;
+}
+
+body.bastidores-page .formation-item {
+    background-color: #060606;
+    border: 1px solid #1c1c1c;
+}
+
+body.bastidores-page .formation-item:hover {
+    background-color: #0d0d0d;
+    border-color: #383838;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.85);
+}
+
+body.bastidores-page .formation-info h4 {
+    color: #ffffff;
+}
+
+body.bastidores-page .formation-info p {
+    color: #94a3b8;
+}
+
+body.bastidores-page .formation-meta {
+    color: #64748b;
+}
+
+body.bastidores-page .formation-badge-tag .badge-status {
+    background: #111111;
+    border: 1px solid #333333;
+    color: #f1f5f9;
+}
+
+body.bastidores-page .bunker-specs-table {
+    border: 1px solid #1a1a1a;
+}
+
+body.bastidores-page .bunker-specs-table th {
+    background: #0a0a0a;
+    color: #ffffff;
+    border: 1px solid #1e1e1e;
+}
+
+body.bastidores-page .bunker-specs-table td {
+    background: #030303;
+    color: #a3a3a3;
+    border: 1px solid #161616;
+}
+
+body.bastidores-page .bunker-specs-table td strong {
+    color: #ffffff;
+}
+
+body.bastidores-page .bunker-log-box {
+    background: #000000;
+    border: 1px solid #1a1a1a;
+    color: #34d399;
+}
+
+body.bastidores-page .bunker-log-line.warn {
+    color: #fcd34d;
+}
+
+body.bastidores-page .bunker-log-line.alert {
+    color: #ef4444;
+}
+
+body.bastidores-page .bunker-photo-card {
+    background: #050505;
+    border: 1px solid #1a1a1a;
+    border-top: 3px solid #ef4444;
+}
+
+body.bastidores-page .bunker-photo-card:hover {
+    border-color: #383838;
+    border-top-color: #ff5555;
+    box-shadow: 0 10px 35px rgba(239, 68, 68, 0.18);
+}
+
+body.bastidores-page .bunker-photo-info h4 {
+    color: #ffffff;
+}
+
+body.bastidores-page .bunker-photo-info p {
+    color: #94a3b8;
+}
+
+body.bastidores-page .flag-packet-preview {
+    background: #020202;
+    border: 1px dashed #282828;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.95);
+}
+
+body.bastidores-page .flag-packet-header {
+    color: #f1f5f9;
+}
+
+body.bastidores-page .flag-packet-code {
+    background: #000000;
+    border-left: 3px solid #10b981;
+    color: #34d399;
+}
+
+body.bastidores-page .flag-packet-code code {
+    background: #111111;
+    color: #6ee7b7;
+    border: 1px solid #222222;
+}
+
+body.bastidores-page .flag-text-input {
+    background: #000000;
+    border: 1px solid #262626;
+    color: #ffffff;
+}
+
+body.bastidores-page .flag-text-input:focus {
+    border-color: #ef4444;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.35);
+}
+
+body.bastidores-page .btn-flag-submit {
+    background: #ef4444;
+    color: #ffffff;
+}
+
+body.bastidores-page .btn-flag-submit:hover {
+    background: #dc2626;
+}
+
+body.bastidores-page .flag-terminal-link {
+    color: #94a3b8;
+}
+
+body.bastidores-page .flag-terminal-link:hover {
+    color: #ffffff;
+}
+
+body.bastidores-page .cyber-footer {
+    background-color: #000000;
+    border-top: 1px solid #181818;
+}
+
+body.bastidores-page .footer-links-row {
+    color: #64748b;
+}
+
+body.bastidores-page .btn-backdoor {
+    background: #050505;
+    border-color: #242424;
+}
+
+body.bastidores-page .btn-backdoor:hover {
+    background: #101010;
+    border-color: #404040;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.08);
+}
+
+body.bastidores-page .backdoor-title {
+    color: #ffffff;
+}
+
+body.bastidores-page .backdoor-hint {
+    color: #94a3b8;
+}
+
+body.bastidores-page .ctf-credential-card {
+    background: #040404;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.95);
+}
+
+body.bastidores-page .credential-header {
+    background: #0a0a0a;
+    border-bottom: 1px solid #1e1e1e;
+    color: #ffffff;
+}
+
+body.bastidores-page .cred-main-title {
+    color: #ffffff;
+}
+
+body.bastidores-page .cred-desc {
+    color: #94a3b8;
+}
+
+body.bastidores-page .voucher-box {
+    background: #000000;
+    border: 1px dashed #333333;
+}
+
+body.bastidores-page .voucher-code {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+body.bastidores-page .credential-footer {
+    background: #080808;
+    border-top: 1px solid #1e1e1e;
+}
+
+body.bastidores-page .btn-voucher-action {
+    background: #000000;
+    border: 1px solid #2e2e2e;
+    color: #ffffff;
+}
+
+body.bastidores-page .btn-voucher-action:hover {
+    background: #1a1a1a;
+    border-color: #555555;
+}
+
+body.bastidores-page .btn-voucher-action.btn-go-bunker {
+    background: #ef4444;
+    border-color: #ef4444;
+    color: #ffffff;
+}
+
+body.bastidores-page .btn-voucher-action.btn-go-bunker:hover {
+    background: #dc2626;
+    border-color: #dc2626;
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
+}
+
+/* ==========================================================================
    26. DESAFIO DA FLAG (CTF) & CREDENCIAL MODAL
    ========================================================================== */
 .flag-packet-preview {
@@ -3682,4 +4487,387 @@ body.screen-glitching {
     background: var(--amber-bright);
     color: var(--bg-black);
     box-shadow: 0 0 12px rgba(255, 180, 84, 0.4);
+}
+
+/* ==========================================================================
+   BASTIDORES // PALETA PURA BLACK STEALTH & UNDERGROUND GRAPHITE
+   Transforma todos os tons castanhos da página dos bastidores em preto puro,
+   grafite e acentos de alto contraste (cinza neutro / vermelho / verde terminal).
+   ========================================================================== */
+body.bastidores-page {
+    --bg-black: #000000;
+    --bg-dark-espresso: #030303;
+    --bg-card: #080808;
+    --bg-card-alt: #0d0d0d;
+    --bg-card-hover: #121212;
+    --border-brown-dim: #1a1a1a;
+    --border-brown-accent: #262626;
+    --amber-glow: #e2e8f0;
+    --amber-bright: #ffffff;
+    --caramel: #888888;
+    --crema-foam: #f8fafc;
+    --crema-muted: #94a3b8;
+    --text-muted: #64748b;
+    --text-terminal: #ededed;
+    background-color: #000000 !important;
+    color: #e2e8f0;
+}
+
+body.bastidores-page .bunker-top-bar {
+    background-color: #000000;
+    border-bottom: 1px solid #1a1a1a;
+    color: #94a3b8;
+}
+
+body.bastidores-page .bunker-status-tag {
+    color: #ef4444;
+}
+
+body.bastidores-page .btn-back-cafe {
+    background: #000000;
+    border: 1px solid #2a2a2a;
+    color: #f1f5f9;
+}
+
+body.bastidores-page .btn-back-cafe:hover {
+    background: #181818;
+    color: #ffffff;
+    border-color: #525252;
+}
+
+body.bastidores-page .bunker-hero {
+    background: radial-gradient(circle at center, #0d0d0d 0%, #000000 85%);
+    border-bottom: 1px solid #181818;
+}
+
+body.bastidores-page .bunker-tag {
+    color: #ef4444;
+}
+
+body.bastidores-page .bunker-hero h1 {
+    color: #ffffff;
+}
+
+body.bastidores-page .bunker-hero .bunker-sub {
+    color: #94a3b8;
+}
+
+body.bastidores-page .bunker-hero-ascii-wrapper {
+    background: #020202;
+    border: 1px solid #222222;
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.98), 0 0 25px rgba(255, 68, 68, 0.1);
+}
+
+body.bastidores-page .bunker-hero-ascii-wrapper .terminal-bar {
+    background: #080808;
+    border-bottom: 1px solid #1c1c1c;
+    color: #888888;
+}
+
+body.bastidores-page .bunker-hero-ascii {
+    color: #f1f5f9 !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2) !important;
+}
+
+body.bastidores-page .manifesto-box {
+    background: #050505;
+    border: 1px solid #1a1a1a;
+    border-left: 4px solid #ef4444;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.9);
+}
+
+body.bastidores-page .manifesto-box h3,
+body.bastidores-page .manifesto-box h4 {
+    color: #ffffff;
+}
+
+body.bastidores-page .manifesto-box p {
+    color: #a3a3a3;
+}
+
+body.bastidores-page .manifesto-box strong {
+    color: #f1f5f9;
+}
+
+body.bastidores-page .hacker-sticker {
+    background: #0a0a0a;
+    border: 1px solid #242424;
+    color: #cbd5e1;
+}
+
+body.bastidores-page .hacker-sticker:hover {
+    border-color: #555555;
+    background: #141414;
+    color: #ffffff;
+}
+
+body.bastidores-page .hacker-sticker.tag-crimson {
+    color: #f87171;
+    border-color: rgba(248, 113, 113, 0.4);
+    background: #140707;
+}
+
+body.bastidores-page .hacker-sticker.tag-lime {
+    color: #4ade80;
+    border-color: rgba(74, 222, 128, 0.4);
+    background: #06150a;
+}
+
+body.bastidores-page .bunker-card {
+    background-color: #060606;
+    border: 1px solid #1b1b1b;
+}
+
+body.bastidores-page .bunker-card:hover {
+    border-color: #383838;
+    background-color: #0d0d0d;
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.95);
+}
+
+body.bastidores-page .bunker-card-badge {
+    background: #121212;
+    border: 1px solid #2a2a2a;
+    color: #e2e8f0;
+}
+
+body.bastidores-page .bunker-card h4 {
+    color: #ffffff;
+}
+
+body.bastidores-page .bunker-card p {
+    color: #94a3b8;
+}
+
+body.bastidores-page .bunker-card ul li {
+    color: #64748b;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+}
+
+body.bastidores-page .bunker-card ul li strong {
+    color: #e2e8f0;
+}
+
+body.bastidores-page .formations-section {
+    background-color: #000000;
+    border-top: 1px solid #161616;
+    border-bottom: 1px solid #161616;
+}
+
+body.bastidores-page .formation-item {
+    background-color: #060606;
+    border: 1px solid #1c1c1c;
+}
+
+body.bastidores-page .formation-item:hover {
+    background-color: #0d0d0d;
+    border-color: #383838;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.85);
+}
+
+body.bastidores-page .formation-info h4 {
+    color: #ffffff;
+}
+
+body.bastidores-page .formation-info p {
+    color: #94a3b8;
+}
+
+body.bastidores-page .formation-meta {
+    color: #64748b;
+}
+
+body.bastidores-page .formation-badge-tag .badge-status {
+    background: #111111;
+    border: 1px solid #333333;
+    color: #f1f5f9;
+}
+
+body.bastidores-page .bunker-specs-table {
+    border: 1px solid #1a1a1a;
+}
+
+body.bastidores-page .bunker-specs-table th {
+    background: #0a0a0a;
+    color: #ffffff;
+    border: 1px solid #1e1e1e;
+}
+
+body.bastidores-page .bunker-specs-table td {
+    background: #030303;
+    color: #a3a3a3;
+    border: 1px solid #161616;
+}
+
+body.bastidores-page .bunker-specs-table td strong {
+    color: #ffffff;
+}
+
+body.bastidores-page .bunker-log-box {
+    background: #000000;
+    border: 1px solid #1a1a1a;
+    color: #34d399;
+}
+
+body.bastidores-page .bunker-log-line.warn {
+    color: #fcd34d;
+}
+
+body.bastidores-page .bunker-log-line.alert {
+    color: #ef4444;
+}
+
+body.bastidores-page .bunker-photo-card {
+    background: #050505;
+    border: 1px solid #1a1a1a;
+    border-top: 3px solid #ef4444;
+}
+
+body.bastidores-page .bunker-photo-card:hover {
+    border-color: #383838;
+    border-top-color: #ff5555;
+    box-shadow: 0 10px 35px rgba(239, 68, 68, 0.18);
+}
+
+body.bastidores-page .bunker-photo-info h4 {
+    color: #ffffff;
+}
+
+body.bastidores-page .bunker-photo-info p {
+    color: #94a3b8;
+}
+
+body.bastidores-page .flag-packet-preview {
+    background: #020202;
+    border: 1px dashed #282828;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.95);
+}
+
+body.bastidores-page .flag-packet-header {
+    color: #f1f5f9;
+}
+
+body.bastidores-page .flag-packet-code {
+    background: #000000;
+    border-left: 3px solid #10b981;
+    color: #34d399;
+}
+
+body.bastidores-page .flag-packet-code code {
+    background: #111111;
+    color: #6ee7b7;
+    border: 1px solid #222222;
+}
+
+body.bastidores-page .flag-text-input {
+    background: #000000;
+    border: 1px solid #262626;
+    color: #ffffff;
+}
+
+body.bastidores-page .flag-text-input:focus {
+    border-color: #ef4444;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.35);
+}
+
+body.bastidores-page .btn-flag-submit {
+    background: #ef4444;
+    color: #ffffff;
+}
+
+body.bastidores-page .btn-flag-submit:hover {
+    background: #dc2626;
+}
+
+body.bastidores-page .flag-terminal-link {
+    color: #94a3b8;
+}
+
+body.bastidores-page .flag-terminal-link:hover {
+    color: #ffffff;
+}
+
+body.bastidores-page .cyber-footer {
+    background-color: #000000;
+    border-top: 1px solid #181818;
+}
+
+body.bastidores-page .footer-links-row {
+    color: #64748b;
+}
+
+body.bastidores-page .btn-backdoor {
+    background: #050505;
+    border-color: #242424;
+}
+
+body.bastidores-page .btn-backdoor:hover {
+    background: #101010;
+    border-color: #404040;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.08);
+}
+
+body.bastidores-page .backdoor-title {
+    color: #ffffff;
+}
+
+body.bastidores-page .backdoor-hint {
+    color: #94a3b8;
+}
+
+body.bastidores-page .ctf-credential-card {
+    background: #040404;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.95);
+}
+
+body.bastidores-page .credential-header {
+    background: #0a0a0a;
+    border-bottom: 1px solid #1e1e1e;
+    color: #ffffff;
+}
+
+body.bastidores-page .cred-main-title {
+    color: #ffffff;
+}
+
+body.bastidores-page .cred-desc {
+    color: #94a3b8;
+}
+
+body.bastidores-page .voucher-box {
+    background: #000000;
+    border: 1px dashed #333333;
+}
+
+body.bastidores-page .voucher-code {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+body.bastidores-page .credential-footer {
+    background: #080808;
+    border-top: 1px solid #1e1e1e;
+}
+
+body.bastidores-page .btn-voucher-action {
+    background: #000000;
+    border: 1px solid #2e2e2e;
+    color: #ffffff;
+}
+
+body.bastidores-page .btn-voucher-action:hover {
+    background: #1a1a1a;
+    border-color: #555555;
+}
+
+body.bastidores-page .btn-voucher-action.btn-go-bunker {
+    background: #ef4444;
+    border-color: #ef4444;
+    color: #ffffff;
+}
+
+body.bastidores-page .btn-voucher-action.btn-go-bunker:hover {
+    background: #dc2626;
+    border-color: #dc2626;
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
 }
