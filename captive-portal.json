@@ -1,13 +1,12 @@
 {
   "system": "Plan B // Lo-Fi Cybercafé & Hacker Lounge",
-  "gateway": "10.42.0.1",
+  "gateway": "[IP_ADDRESS]",
   "ssid": "PLAN_B_GUEST_5GHZ",
   "status": "AUTHENTICATED_GUEST",
   "packet_inspection": {
     "protocol": "HTTP/1.1",
-    "server": "PlanB-Daemon/1.33.7 (Covilhã Hub)",
+    "server": "PlanB-Daemon/1.33.7",
     "challenge": "FLAG_ACCESS_VOUCHER",
-    "poetic_riddle": "Ao fim de 63 dias, César colheu 13 maçãs; comeu uma por hora e quando acabou já eram 2 da manhã do dia seguinte... No total foram 64 dias e 13 maçãs.",
     "token": "YzQwX3EzX3kwX2Zyel9lcnB1cnZiXzEzMzc="
   }
 }

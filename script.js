@@ -118,28 +118,21 @@ function initSteamAnimation() {
    3. BASE DE DADOS E RENDERIZAÇÃO DO MENU
    ========================================================================== */
 const menuData = [
+    // -------------------------------------------------------------
+    // GRUPO 1: CAFÉS & COLD BREW (Extrações quentes e a frio)
+    // -------------------------------------------------------------
     {
-        id: "m1",
-        category: "pastry",
-        title: "Pão de Ló Tradicional (Sem Recheio)",
-        price: "€ 1.80",
-        desc: "Massa pura, incrivelmente fofa, leve e arejada, sem qualquer recheio. Receita clássica secular com ovos inteiros, açúcar e farinha.",
-        badge: "ESPECIALIDADE",
-        tech: "BAKED_DAILY: 08h | 14h",
-        img: "assets/especialidade_paodelo.jpg"
+        id: "c1",
+        category: "coffee",
+        title: "Café Expresso Simples",
+        price: "€ 0.65",
+        desc: "O clássico café expresso tirado curto ou normal, com crema espessa e sabor equilibrado. Preço acessível para o dia a dia universitário.",
+        badge: "CLÁSSICO",
+        tech: "DOSE: 7g / 9 bar / 25s",
+        img: "assets/menu_expresso_simples.jpg"
     },
     {
-        id: "m2",
-        category: "pastry",
-        title: "Mil-Folhas de Café Especial",
-        price: "€ 2.20",
-        desc: "Camadas ultracrocantes caramelizadas com creme pasteleiro de infusão arábica e cacau 80%. Especialidade da casa.",
-        badge: "ASSINATURA",
-        tech: "INFUSÃO: 24h cold-steep",
-        img: "assets/especialidade_milfolhas.jpg"
-    },
-    {
-        id: "m3",
+        id: "c2",
         category: "coffee",
         title: "Terminal Espresso (Single Origin)",
         price: "€ 0.80",
@@ -149,17 +142,7 @@ const menuData = [
         img: "assets/menu_espresso.jpg"
     },
     {
-        id: "m4",
-        category: "coffee",
-        title: "Cold Brew [DAEMON] 18h",
-        price: "€ 1.90",
-        desc: "Café extraído lentamente em água filtrada a frio. Doce, sedoso, corpo denso sem amargor.",
-        badge: "SLOW BREW",
-        tech: "SLOW_PROCESS: 18 HORAS",
-        img: "assets/menu_coldbrew.jpg"
-    },
-    {
-        id: "m5",
+        id: "c3",
         category: "coffee",
         title: "Lo-Fi Flat White (127.0.0.1)",
         price: "€ 1.60",
@@ -169,7 +152,27 @@ const menuData = [
         img: "assets/menu_flatwhite.jpg"
     },
     {
-        id: "m6",
+        id: "c4",
+        category: "coffee",
+        title: "Cappuccino de Especialidade",
+        price: "€ 1.70",
+        desc: "Espresso duplo coberto com densa e sedosa camada de microespuma de leite vaporizado, arte latte e leve toque de cacau puro.",
+        badge: "MICROFOAM",
+        tech: "RATIO: 1:1:1 / 65°C",
+        img: "assets/menu_cappuccino.jpg"
+    },
+    {
+        id: "c5",
+        category: "coffee",
+        title: "Cold Brew [DAEMON] 18h",
+        price: "€ 1.90",
+        desc: "Café extraído lentamente em água filtrada a frio. Doce, sedoso, corpo denso sem amargor.",
+        badge: "SLOW BREW",
+        tech: "SLOW_PROCESS: 18 HORAS",
+        img: "assets/menu_coldbrew.jpg"
+    },
+    {
+        id: "c6",
         category: "coffee",
         title: "Chemex / V60 Pour Over",
         price: "€ 2.00",
@@ -178,28 +181,66 @@ const menuData = [
         tech: "RATIO: 1:16 / 93°C",
         img: "assets/menu_pourover.jpg"
     },
+
+    // -------------------------------------------------------------
+    // GRUPO 2: CROISSANTS FOLHADOS (Franceses, doces e salgados)
+    // -------------------------------------------------------------
     {
-        id: "m7",
-        category: "tea",
-        title: "Matcha Matrix Cerimonial",
-        price: "€ 2.40",
-        desc: "Matcha biológico de Uji batido com chasen tradicional e servido com leite de aveia aveludado.",
-        badge: "UJI JAPAN",
-        tech: "ANTIOXIDANT: MAX",
-        img: "assets/menu_matcha.jpg"
+        id: "cr1",
+        category: "croissant",
+        title: "Croissant Artesanal de Manteiga",
+        price: "€ 1.30",
+        desc: "Folhado clássico de receita francesa com manteiga pura, textura exterior ultracrocante e miolo fofo e aerado.",
+        badge: "FOLHADO PURO",
+        tech: "LAMINADO: 27 CAMADAS",
+        img: "assets/menu_croissant.jpg"
     },
     {
-        id: "m8",
-        category: "tea",
-        title: "Earl Grey & Lavanda [ROOT]",
-        price: "€ 1.40",
-        desc: "Chá preto encorpado perfumado com óleo natural de bergamota da Calábria e botões de alfazema.",
-        badge: "INFUSÃO",
-        tech: "STEEP_TIME: 4 MIN",
-        img: "assets/menu_earlgrey.jpg"
+        id: "cr2",
+        category: "croissant",
+        title: "Croissant Misto Prensado",
+        price: "€ 2.10",
+        desc: "Croissant folhado francês prensado a quente com queijo derretido a esticar e fiambre de qualidade. Crosta dourada amanteigada.",
+        badge: "HOT CROISSANT",
+        tech: "PRENSADO: 200°C / 2 MIN",
+        img: "assets/menu_croissant_misto.jpg"
     },
     {
-        id: "m9",
+        id: "cr3",
+        category: "croissant",
+        title: "Croissant Recheado com Nutella",
+        price: "€ 2.20",
+        desc: "Croissant folhado artesanal com recheio abundante de creme de chocolate e avelã Nutella, fios de chocolate e avelãs tostadas picadas.",
+        badge: "NUTELLA",
+        tech: "CREME: AVELÃ & CACAU",
+        img: "assets/menu_croissant_nutella.jpg"
+    },
+    {
+        id: "cr4",
+        category: "croissant",
+        title: "Croissant de Doce de Maçã & Canela",
+        price: "€ 2.30",
+        desc: "Folhado estaladiço recheado generosamente com compota artesanal de maçã caramelizada em pedaços e canela do Ceilão.",
+        badge: "COMPOTA",
+        tech: "SLOW_COOK: MAÇÃ CARAMELIZADA",
+        img: "assets/menu_croissant_maca.jpg"
+    },
+    {
+        id: "cr5",
+        category: "croissant",
+        title: "Croissant Especial Kinder Bueno",
+        price: "€ 2.50",
+        desc: "Croissant folhado de autor coberto com ganache marmoreada de chocolate branco e de leite, pedaços crocantes de Kinder Bueno e creme de avelã.",
+        badge: "ESPECIAL",
+        tech: "TOPPING: CROCANTE KINDER",
+        img: "assets/menu_croissant_kinder.jpg"
+    },
+
+    // -------------------------------------------------------------
+    // GRUPO 3: PASTELARIA TRADICIONAL & DE AUTOR
+    // -------------------------------------------------------------
+    {
+        id: "p1",
         category: "pastry",
         title: "Biscoitos ASCII Cardamomo",
         price: "€ 1.10",
@@ -209,7 +250,71 @@ const menuData = [
         img: "assets/menu_biscoitos.jpg"
     },
     {
-        id: "m10",
+        id: "p2",
+        category: "pastry",
+        title: "Brownie Fudge Café & Nozes",
+        price: "€ 1.60",
+        desc: "Chocolate belga 70%, infusão de café expresso e nozes tostadas com textura húmida e rica.",
+        badge: "CHOCOLATE",
+        tech: "CACAO: 70% PUR",
+        img: "assets/menu_brownie.jpg"
+    },
+    {
+        id: "p3",
+        category: "pastry",
+        title: "Pão de Ló Tradicional (Sem Recheio)",
+        price: "€ 1.80",
+        desc: "Massa pura, incrivelmente fofa, leve e arejada, sem qualquer recheio. Receita clássica secular com ovos inteiros, açúcar e farinha.",
+        badge: "ESPECIALIDADE",
+        tech: "BAKED_DAILY: 08h | 14h",
+        img: "assets/especialidade_paodelo.jpg"
+    },
+    {
+        id: "p4",
+        category: "pastry",
+        title: "Mil-Folhas de Café Especial",
+        price: "€ 2.20",
+        desc: "Camadas ultracrocantes caramelizadas com creme pasteleiro de infusão arábica e cacau 80%. Especialidade da casa.",
+        badge: "ASSINATURA",
+        tech: "INFUSÃO: 24h cold-steep",
+        img: "assets/especialidade_milfolhas.jpg"
+    },
+
+    // -------------------------------------------------------------
+    // GRUPO 4: TOSTAS & SALGADOS (Pães de fermentação lenta)
+    // -------------------------------------------------------------
+    {
+        id: "b1",
+        category: "bites",
+        title: "Tosta Mista em Pão Sourdough",
+        price: "€ 2.60",
+        desc: "Pão de fermentação natural tostado na prensa com queijo flamengo derretido e fiambre da perna extra. Manteiga na crosta dourada.",
+        badge: "HOT TOAST",
+        tech: "GRILL_TEMP: 220°C",
+        img: "assets/menu_tosta_mista.jpg"
+    },
+    {
+        id: "b2",
+        category: "bites",
+        title: "Tosta de Atum & Cebola Roxa",
+        price: "€ 3.10",
+        desc: "Pão rústico tostado recheado com pasta cremosa de atum, cebola roxa finamente picada, salsa fresca e queijo gratinado na borda.",
+        badge: "SPECIAL BITE",
+        tech: "SERVIDO: QUENTE",
+        img: "assets/menu_tosta_atum.jpg"
+    },
+    {
+        id: "b3",
+        category: "bites",
+        title: "Tosta de Frango Grelhado & Ervas",
+        price: "€ 3.20",
+        desc: "Pão rústico artesanal com frango desfiado suculento marinado em ervas finas, queijo ligeiramente derretido, rúcula fresca e azeite virgem.",
+        badge: "PROTEIN",
+        tech: "MARINADA: 12H ERVAS",
+        img: "assets/menu_tosta_frango.jpg"
+    },
+    {
+        id: "b4",
         category: "bites",
         title: "Tosta Hacker Sourdough & Avocado",
         price: "€ 3.60",
@@ -219,7 +324,7 @@ const menuData = [
         img: "assets/menu_tosta.jpg"
     },
     {
-        id: "m11",
+        id: "b5",
         category: "bites",
         title: "Sandwich Focaccia & Queijo da Serra",
         price: "€ 3.80",
@@ -228,15 +333,29 @@ const menuData = [
         tech: "SERVIDO: QUENTE",
         img: "assets/menu_focaccia.jpg"
     },
+
+    // -------------------------------------------------------------
+    // GRUPO 5: CHÁS & MATCHA CERIMONIAL
+    // -------------------------------------------------------------
     {
-        id: "m12",
-        category: "pastry",
-        title: "Brownie Fudge Café & Nozes",
-        price: "€ 1.60",
-        desc: "Chocolate belga 70%, infusão de café expresso e nozes tostadas com textura húmida e rica.",
-        badge: "CHOCOLATE",
-        tech: "CACAO: 70% PUR",
-        img: "assets/menu_brownie.jpg"
+        id: "t1",
+        category: "tea",
+        title: "Earl Grey & Lavanda [ROOT]",
+        price: "€ 1.40",
+        desc: "Chá preto encorpado perfumado com óleo natural de bergamota da Calábria e botões de alfazema.",
+        badge: "INFUSÃO",
+        tech: "STEEP_TIME: 4 MIN",
+        img: "assets/menu_earlgrey.jpg"
+    },
+    {
+        id: "t2",
+        category: "tea",
+        title: "Matcha Matrix Cerimonial",
+        price: "€ 2.40",
+        desc: "Matcha biológico de Uji batido com chasen tradicional e servido com leite de aveia aveludado.",
+        badge: "UJI JAPAN",
+        tech: "ANTIOXIDANT: MAX",
+        img: "assets/menu_matcha.jpg"
     }
 ];
 

@@ -177,40 +177,83 @@ flowchart LR
 
 ```mermaid
 graph LR
-    subgraph Pastelaria["Pastelaria de Autor"]
-        P1["Pão de Ló Tradicional<br/>(Sem recheio) € 1.80"]
-        P2["Mil-Folhas de Café<br/>(Bourbon 24h) € 2.20"]
-        P3["Biscoitos ASCII<br/>(Cardamomo) € 1.10"]
-        P4["Brownie Fudge<br/>(Cacau 70%) € 1.60"]
+    subgraph Cafetaria["1. Cafés de Especialidade & Cold Brew"]
+        C1["Expresso Simples · € 0.65"]
+        C2["Terminal Espresso Single-Origin · € 0.80"]
+        C3["Lo-Fi Flat White · € 1.60"]
+        C4["Cappuccino Especialidade · € 1.70"]
+        C5["Cold Brew 18h · € 1.90"]
+        C6["Pour Over V60/Chemex · € 2.00"]
     end
-    subgraph Cafetaria["Café de Especialidade"]
-        C1["Terminal Espresso<br/>€ 0.80"]
-        C2["Lo-Fi Flat White<br/>€ 1.60"]
-        C3["Cold Brew 18h<br/>€ 1.90"]
-        C4["Pour Over V60/Chemex<br/>€ 2.00"]
+    subgraph Croissants["2. Croissants Folhados Franceses"]
+        CR1["Croissant Manteiga · € 1.30"]
+        CR2["Croissant Misto Prensado · € 2.10"]
+        CR3["Croissant Nutella & Avelã · € 2.20"]
+        CR4["Croissant Maçã & Canela · € 2.30"]
+        CR5["Croissant Kinder Bueno · € 2.50"]
     end
-    subgraph Salgados["Tostas & Bites"]
-        S1["Tosta Sourdough Avocado<br/>€ 3.60"]
-        S2["Focaccia Queijo da Serra<br/>€ 3.80"]
+    subgraph Pastelaria["3. Pastelaria de Assinatura"]
+        P1["Biscoitos ASCII · € 1.10"]
+        P2["Brownie Fudge 70% · € 1.60"]
+        P3["Pão de Ló Tradicional · € 1.80"]
+        P4["Mil-Folhas de Café · € 2.20"]
+    end
+    subgraph Salgados["4. Tostas Sourdough & Focaccia"]
+        S1["Tosta Mista Sourdough · € 2.60"]
+        S2["Tosta Atum & Cebola Roxa · € 3.10"]
+        S3["Tosta Frango Grelhado · € 3.20"]
+        S4["Tosta Avocado Dukkah · € 3.60"]
+        S5["Sandwich Focaccia Serra · € 3.80"]
+    end
+    subgraph Chas["5. Infusões & Chás Cerimoniais"]
+        T1["Earl Grey & Lavanda · € 1.40"]
+        T2["Matcha Matrix Uji · € 2.40"]
     end
 ```
 
-### Menu Completo dos 12 Itens com Fotografia e Especificação Técnica
+### Menu Completo dos 22 Itens Estruturado por Categorias
 
-| ID | Item | Categoria | Preço | Especificação Técnica / Método | Imagem no Catálogo |
-| :---: | :--- | :---: | :---: | :--- | :--- |
-| **m1** | **Pão de Ló Tradicional (Sem Recheio)** | Pastry | **€ 1.80** | Cozido a 180°C, massa pura, ovos inteiros e farinha | `assets/especialidade_paodelo.jpg` |
-| **m2** | **Mil-Folhas de Café Especial** | Pastry | **€ 2.20** | Massa folhada laminada, infusão cold-steep 24h | `assets/especialidade_milfolhas.jpg` |
-| **m3** | **Terminal Espresso (Single Origin)** | Coffee | **€ 0.80** | Extração 9 bar / 27s / 18g in - 36g out | `assets/menu_espresso.jpg` |
-| **m4** | **Cold Brew [DAEMON] 18h** | Coffee | **€ 1.90** | Maceração a frio 18 horas, filtro triplo de papel | `assets/menu_coldbrew.jpg` |
-| **m5** | **Lo-Fi Flat White (127.0.0.1)** | Coffee | **€ 1.60** | Ristretto duplo, microespuma a vapor 62°C | `assets/menu_flatwhite.jpg` |
-| **m6** | **Chemex / V60 Pour Over** | Coffee | **€ 2.00** | Rácio 1:16, água a 93°C, moagem uniforme EK43S | `assets/menu_pourover.jpg` |
-| **m7** | **Matcha Matrix Cerimonial** | Tea | **€ 2.40** | Grau cerimonial de Uji, batido com chasen tradicional | `assets/menu_matcha.jpg` |
-| **m8** | **Earl Grey & Lavanda [ROOT]** | Tea | **€ 1.40** | Bergamota natural da Calábria, infusão 4 min | `assets/menu_earlgrey.jpg` |
-| **m9** | **Biscoitos ASCII Cardamomo** | Pastry | **€ 1.10** | Manteiga, cardamomo moído, carimbo ASCII em relevo | `assets/menu_biscoitos.jpg` |
-| **m10**| **Tosta Hacker Sourdough & Avocado** | Bites | **€ 3.60** | Fermentação lenta 48h, dukkah artesanal, azeite | `assets/menu_tosta.jpg` |
-| **m11**| **Sandwich Focaccia & Queijo da Serra** | Bites | **€ 3.80** | Focaccia de alecrim grelhada com Queijo da Serra DOP | `assets/menu_focaccia.jpg` |
-| **m12**| **Brownie Fudge Café & Nozes** | Pastry | **€ 1.60** | Chocolate 70% belga, nozes tostadas e dose de ristretto | `assets/menu_brownie.jpg` |
+#### ☕ Cafés & Cold Brew (Extrações Quentes e a Frio)
+| ID | Item | Preço | Especificação Técnica / Método | Imagem no Catálogo |
+| :---: | :--- | :---: | :--- | :--- |
+| **c1** | **Café Expresso Simples** | **€ 0.65** | Extração tradicional 7g / 9 bar / 25s, crema aveludada | `assets/menu_expresso_simples.jpg` |
+| **c2** | **Terminal Espresso (Single Origin)** | **€ 0.80** | Lote arábica selecionado moído na hora (18g in - 36g out) | `assets/menu_espresso.jpg` |
+| **c3** | **Lo-Fi Flat White (127.0.0.1)** | **€ 1.60** | Ristretto duplo com microespuma vaporizada a 62°C | `assets/menu_flatwhite.jpg` |
+| **c4** | **Cappuccino de Especialidade** | **€ 1.70** | Espresso duplo, leite vaporizado aveludado e cacau 80% | `assets/menu_cappuccino.jpg` |
+| **c5** | **Cold Brew [DAEMON] 18h** | **€ 1.90** | Maceração a frio 18 horas em água filtrada | `assets/menu_coldbrew.jpg` |
+| **c6** | **Chemex / V60 Pour Over** | **€ 2.00** | Rácio 1:16, água a 93°C, moagem uniforme EK43S | `assets/menu_pourover.jpg` |
+
+#### 🥐 Croissants Folhados Artesanais (Doces & Salgados)
+| ID | Item | Preço | Especificação Técnica / Método | Imagem no Catálogo |
+| :---: | :--- | :---: | :--- | :--- |
+| **cr1**| **Croissant Artesanal de Manteiga** | **€ 1.30** | Massa folhada laminada com 27 camadas de manteiga pura | `assets/menu_croissant.jpg` |
+| **cr2**| **Croissant Misto Prensado** | **€ 2.10** | Prensado a quente (200°C), queijo derretido e fiambre | `assets/menu_croissant_misto.jpg` |
+| **cr3**| **Croissant Recheado com Nutella** | **€ 2.20** | Recheio farto de Nutella, fios de cacau e avelãs tostadas | `assets/menu_croissant_nutella.jpg` |
+| **cr4**| **Croissant de Doce de Maçã & Canela** | **€ 2.30** | Compota artesanal com pedaços caramelizados e canela | `assets/menu_croissant_maca.jpg` |
+| **cr5**| **Croissant Especial Kinder Bueno** | **€ 2.50** | Ganache marmoreada, pedaços Kinder Bueno e creme de avelã | `assets/menu_croissant_kinder.jpg` |
+
+#### 🍰 Pastelaria Tradicional & De Autor
+| ID | Item | Preço | Especificação Técnica / Método | Imagem no Catálogo |
+| :---: | :--- | :---: | :--- | :--- |
+| **p1** | **Biscoitos ASCII Cardamomo** | **€ 1.10** | Manteiga, cardamomo moído, carimbo ASCII em relevo | `assets/menu_biscoitos.jpg` |
+| **p2** | **Brownie Fudge Café & Nozes** | **€ 1.60** | Chocolate 70% belga, nozes tostadas e dose de ristretto | `assets/menu_brownie.jpg` |
+| **p3** | **Pão de Ló Tradicional (Sem Recheio)** | **€ 1.80** | Cozido a 180°C, massa pura, ovos inteiros e farinha | `assets/especialidade_paodelo.jpg` |
+| **p4** | **Mil-Folhas de Café Especial** | **€ 2.20** | Massa folhada laminada, infusão cold-steep 24h | `assets/especialidade_milfolhas.jpg` |
+
+#### 🥪 Tostas Sourdough & Sandwiches (Pão de Fermentação Lenta)
+| ID | Item | Preço | Especificação Técnica / Método | Imagem no Catálogo |
+| :---: | :--- | :---: | :--- | :--- |
+| **b1** | **Tosta Mista em Pão Sourdough** | **€ 2.60** | Pão fermentação lenta, queijo derretido e fiambre perna | `assets/menu_tosta_mista.jpg` |
+| **b2** | **Tosta de Atum & Cebola Roxa** | **€ 3.10** | Pasta cremosa de atum, cebola roxa, salsa e queijo | `assets/menu_tosta_atum.jpg` |
+| **b3** | **Tosta de Frango Grelhado & Ervas** | **€ 3.20** | Frango desfiado marinado, queijo, rúcula e azeite | `assets/menu_tosta_frango.jpg` |
+| **b4** | **Tosta Hacker Sourdough & Avocado** | **€ 3.60** | Fermentação lenta 48h, dukkah artesanal, azeite | `assets/menu_tosta.jpg` |
+| **b5** | **Sandwich Focaccia & Queijo da Serra** | **€ 3.80** | Focaccia de alecrim grelhada com Queijo da Serra DOP | `assets/menu_focaccia.jpg` |
+
+#### 🍵 Chás & Matcha Cerimonial
+| ID | Item | Preço | Especificação Técnica / Método | Imagem no Catálogo |
+| :---: | :--- | :---: | :--- | :--- |
+| **t1** | **Earl Grey & Lavanda [ROOT]** | **€ 1.40** | Bergamota natural da Calábria, infusão 4 min | `assets/menu_earlgrey.jpg` |
+| **t2** | **Matcha Matrix Cerimonial** | **€ 2.40** | Grau cerimonial de Uji, batido com chasen tradicional | `assets/menu_matcha.jpg` |
 
 ---
 
@@ -221,6 +264,8 @@ pie title Distribuição de Preços do Merchandising (€)
     "Hoodie Kernel Panic (34€)" : 34
     "T-Shirt Stack Overflow (16€)" : 16
     "Boné Root Access (12€)" : 12
+    "Gorro Beanie Preto (12€)" : 12
+    "Gorro Beanie Castanho (12€)" : 12
     "Desk Mat XXL (10€)" : 10
     "Keycaps Artisan (10€)" : 10
     "Livro Oficial dos Fundadores (10€)" : 10
@@ -237,6 +282,8 @@ pie title Distribuição de Preços do Merchandising (€)
 | **Hoodie "Kernel Panic"** | 100% Algodão francês 450 gsm orgânico escuro | Bordado tonal na frente; costas com `curl https://planb.cafe/coffee.sh` e receita em pseudocódigo. | **€ 34.00** |
 | **T-Shirt "Stack Overflow"** | Algodão cru pré-lavado 240 gsm | Tipografia âmbar com código `HTTP 418: I'm a teapot (and I need coffee)`. | **€ 16.00** |
 | **Boné "Root Access"** | Sarja de algodão escuro com fivela de latão | Patch bordado `[PLAN_B]` em relevo discreto. | **€ 12.00** |
+| **Gorro Beanie // Preto Obsidiana** | Malha grossa canelada em 100% lã merino preta | Patch frontal bordado com `[PLAN_B]` em fio âmbar suave. | **€ 12.00** |
+| **Gorro Beanie // Castanho Café** | Malha canelada premium castanho torrado espresso | Etiqueta tecida minimalista com pormenores âmbar e nogueira. | **€ 12.00** |
 | **Desk Mat XXL "Terminal Grid"** | Microfibra rápida (900x400x4mm) + borracha natural | Blueprint PCB com atalhos de terminal e Vim gravados no canto. | **€ 10.00** |
 | **Keycaps Artisan (Pack 2)** | Resina PBT bicolor castanho café e âmbar translúcido | Tecla `ESC` com relevo Pão de Ló; tecla `ENTER` com `[EXEC_BREW]`. | **€ 10.00** |
 | **Livro // "Plano B: Guia Foco"** | Impressão em papel reciclado kraft encadernado | Manual prático de carreira tech, foco profundo e relato dos fundadores ex-SOC. | **€ 10.00** |

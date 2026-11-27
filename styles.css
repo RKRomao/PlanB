@@ -285,18 +285,18 @@ input[type="range"] {
     font-size: 0.72rem;
     line-height: 1.15;
     color: var(--amber-glow);
-    overflow-x: auto;
+    overflow: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     white-space: pre;
     text-shadow: 0 0 6px rgba(224, 139, 62, 0.35);
     user-select: none;
 }
 
 .ascii-art::-webkit-scrollbar {
-    height: 4px;
-}
-
-.ascii-art::-webkit-scrollbar-thumb {
-    background: var(--border-brown-accent);
+    display: none;
+    width: 0;
+    height: 0;
 }
 
 /* ==========================================================================
@@ -2421,9 +2421,17 @@ body.screen-glitching {
     display: block !important;
     text-align: left !important;
     text-shadow: 0 0 10px rgba(255, 180, 84, 0.5) !important;
-    overflow-x: auto;
+    overflow: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     white-space: pre;
     font-family: var(--font-mono);
+}
+
+.bunker-hero-ascii::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
 }
 
 /* Character Scramble / Decryption States */
@@ -3574,6 +3582,16 @@ body.bastidores-page .bunker-hero-ascii .scramble-c[data-state="clean"] {
     letter-spacing: 0.15em;
     line-height: 1.3;
     margin: 0;
+    overflow: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.cred-barcode::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
 }
 
 .credential-footer {
